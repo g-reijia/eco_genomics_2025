@@ -53,4 +53,6 @@ Then, we created a new file called "process_stats_wrapped.sh" which combines the
 
 -   `~/projects/eco_genomics_2025/population_genomics/myscripts/`
 
-My files began running on the VACC during the end of class time. Once I get an email confirming my files were processed, I will run the "process_stats_wrapped.sh" file which will run the wrapper.
+My files began running on the VACC during the end of class time. Once I get an email confirming my files were processed, I will run the "process_stats_wrapped.sh" file which will run the wrapper using the following code:
+
+-   `sbatch ~/projects/eco_genomics_2025/population_genomics/myscripts/process_stats_wrapped.sh`
