@@ -6,7 +6,7 @@
 
 This will keep my notes on population genomics coding sessions!
 
-#### [September 11, 2025 - [Cleaning fastq reads of red spruce](During this class, we wrote a bash script called "fastp.sh" located within my GitHub repo: \~/projects/eco_genomics_2025/population_genomics/myscripts. We used this to trim the adapters out of our red spruce fastq sequence files. The raw fastq files we accessed are on the class share space: /gpfs1/cl/ecogen/pbio6800/PopulationGenomics/fastq/red_spruce)]{.underline}
+#### [September 11, 2025 - [Cleaning fastq reads of red spruce](https://pespenilab.github.io/Ecological-Genomics/Fall2025/tutorials/EcoGen2025_PopGenomics2_trimreads.html)]{.underline}
 
 During this class, we wrote a bash script called "fastp.sh" located within my GitHub repo:
 
