@@ -1,4 +1,4 @@
-## [Population Genomics Notebook]{.underline}
+## Population Genomics Notebook
 
 ##### **Fall 2025 Ecological Genomics - [Class website & tutorials.](https://pespenilab.github.io/Ecological-Genomics/)**
 
@@ -6,7 +6,7 @@
 
 This will keep my notes on population genomics coding sessions!
 
-#### [September 11, 2025 - [Cleaning fastq reads of red spruce](https://pespenilab.github.io/Ecological-Genomics/Fall2025/tutorials/EcoGen2025_PopGenomics2_trimreads.html)]{.underline}
+#### September 11, 2025 - [Cleaning fastq reads of red spruce](https://pespenilab.github.io/Ecological-Genomics/Fall2025/tutorials/EcoGen2025_PopGenomics2_trimreads.html)
 
 During this class, we wrote a bash script called "fastp.sh" located within my GitHub repo:
 
@@ -30,7 +30,7 @@ The results showed high quality sequence, with most Q-scores being \>\> 20, and 
 
 Cleaned reads are now ready to proceed to the next step in our pipeline: mapping to the reference genome!!!
 
-#### [September 16, 2025 - [Mapping cleaned reads to reference genome](https://pespenilab.github.io/Ecological-Genomics/Fall2025/tutorials/EcoGen2025_PopGenomics3_mapping.html)]{.underline}
+#### September 16, 2025 - [Mapping cleaned reads to reference genome](https://pespenilab.github.io/Ecological-Genomics/Fall2025/tutorials/EcoGen2025_PopGenomics3_mapping.html)
 
 We copied the scripts from the shared space and put them into our own repo using the following UNIX code:
 
