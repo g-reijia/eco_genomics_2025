@@ -23,7 +23,7 @@ for FILE in ${MYPOP}*.sam
 do
 	NAME=${FILE/.sam/}
 	sambamba view -S -t 10 --format=bam ${FILE} -o ${NAME}.bam
-	sambamba sort -t 10 --tmpdir=/users/x/x/xxxx/scratch ${NAME}.bam -o ${NAME}.sorted.bam
+	sambamba sort -t 10 --tmpdir=/users/g/j/gjia/scratch ${NAME}.bam -o ${NAME}.sorted.bam
 done
 
 

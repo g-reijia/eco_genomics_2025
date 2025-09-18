@@ -56,3 +56,21 @@ Then, we created a new file called "process_stats_wrapped.sh" which combines the
 My files began running on the VACC during the end of class time. Once I get an email confirming my files were processed, I will run the "process_stats_wrapped.sh" file which will run the wrapper using the following code:
 
 -   `sbatch ~/projects/eco_genomics_2025/population_genomics/myscripts/process_stats_wrapped.sh`
+
+The next day, I ran the sbatch script above and the files were saved into my `myscripts` folder.
+
+#### September 18, 2025 - Review bamstats and set up [nucleotide diversity estimation using ANGSD](https://pespenilab.github.io/Ecological-Genomics/Fall2025/tutorials/EcoGen2025_PopGenomics4_Diversity.html)
+
+-   Wrote a short script called "bamstats_review.r" located in `myscripts` to evaluate the mapping success
+
+    -   Saw roughly % of reads mapped in proper pairs
+
+    -   Obtained depth of coverage between 2-3x -\> suggests we need to use a probabilistic framework for analyzing the genotype data.
+
+We then created a bash script to set up ANGSD to estimate nucleotide diversity, which is saved in `myscripts/` folder titled "ANGSD.sh". This script created a folder in `mydata/` which is populated by a file called "2100_bam.list". The bash script was run using the following code:
+
+-   `bash ANGSD.sh`
+
+Then, we added another chunk of code in the "ANGSD.sh" file in order to run the ANGSD portion of the script.
+
+We then made a wrapper script to begin analyzing nucleotide diversity. This filed is called "ANGSD_doThetas.sh" located in `myscripts/` folder. We sent this script to the VACC and the output file is stored in `mylogs/`.
