@@ -63,7 +63,7 @@ The next day, I ran the sbatch script above and the files were saved into my `my
 
 -   Wrote a short script called "bamstats_review.r" located in `myscripts` to evaluate the mapping success
 
-    -   Saw roughly % of reads mapped in proper pairs
+    -   Saw roughly 60% of reads mapped in proper pairs
 
     -   Obtained depth of coverage between 2-3x -\> suggests we need to use a probabilistic framework for analyzing the genotype data.
 
