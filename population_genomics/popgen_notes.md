@@ -87,7 +87,7 @@ During today's class, we estimated the Fst and wrote a bash script called "ANGSD
 
 Then, we ran PCAngsd using all samples (not just our population). The files that we are going to use to store the genoytpe likelihoods can be found using this path:
 
-`/gpfs1/cl/ecogen/pbio6800/PopulationGenomics/scripts/ANGSD_RSBS_poly.sh`
+-   `/gpfs1/cl/ecogen/pbio6800/PopulationGenomics/scripts/ANGSD_RSBS_poly.sh`
 
 We then made a batch script called "PCAngsd_RSBS.sh", which can be found in `myscripts/` folder and sent it to the VACC.
 
