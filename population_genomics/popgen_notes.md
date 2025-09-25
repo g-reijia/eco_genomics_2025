@@ -77,7 +77,7 @@ We then made a wrapper script to begin analyzing nucleotide diversity. This file
 
 #### September 23, 2025 - [Visualizing genomic diversity and intro to population structure](https://pespenilab.github.io/Ecological-Genomics/Fall2025/tutorials/EcoGen2025_PopGenomics5_PopStructure.html)
 
-During this class, we made a RMarkdown document that has theta results from ANGSD. The script we used for this is called "Nucleotide_Diversity.Rmd" which is located in `mydocs/` folder. In this document, we plotted nSites, theta-W, Pi,
+During this class, we made a RMarkdown document that has theta results from ANGSD. The script we used for this is called "Nucleotide_Diversity.Rmd" which is located in `mydocs/` folder. In this document, we plotted nSites, Tajima's D, and theta-W and pi.
 
 We then populated a spreadsheet with the classes' results [here](https://docs.google.com/spreadsheets/d/1SLwhW3OgQiX2z1rxH-ske236NYxjDXCvUu0l8XFeS_w/edit?gid=0#gid=0).
 
