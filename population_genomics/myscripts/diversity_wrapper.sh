@@ -41,4 +41,3 @@ bash ANGSD.sh
 bash ANGSD_doTheta.sh
 
 
-
