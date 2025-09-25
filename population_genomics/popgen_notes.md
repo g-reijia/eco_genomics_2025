@@ -83,7 +83,7 @@ We then populated a spreadsheet with the classes' results [here](https://docs.go
 
 #### September 25, 2025 - [Visualizing genomic diversity and intro to population structure](https://pespenilab.github.io/Ecological-Genomics/Fall2025/tutorials/EcoGen2025_PopGenomics5_PopStructure.html)
 
-During today's class, we are estimating Fst and wrote a bash script for that called "ANGSD_FST.sh" that is locate in `myscripts/` folder. We then sent that to the VACC and it ran. My Fst value was 0.307832.
+During today's class, we estimated the Fst and wrote a bash script called "ANGSD_FST.sh" that is locate in `myscripts/` folder. We then sent that to the VACC and it ran. My Fst value was 0.307832.
 
 Then, we ran PCAngsd using all samples (not just our population). The files that we are going to use to store the genoytpe likelihoods can be found using this path:
 
