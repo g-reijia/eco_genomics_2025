@@ -74,3 +74,21 @@ We then created a bash script to set up ANGSD to estimate nucleotide diversity, 
 Then, we added another chunk of code in the "ANGSD.sh" file in order to run the ANGSD portion of the script.
 
 We then made a wrapper script to begin analyzing nucleotide diversity. This filed is called "ANGSD_doThetas.sh" located in `myscripts/` folder. We sent this script to the VACC and the output file is stored in `mylogs/`.
+
+#### September 23, 2025 - [Visualizing genomic diversity and intro to population structure](https://pespenilab.github.io/Ecological-Genomics/Fall2025/tutorials/EcoGen2025_PopGenomics5_PopStructure.html)
+
+During this class, we made a RMarkdown document that has theta results from ANGSD. The script we used for this is called "Nucleotide_Diversity.Rmd" which is located in `mydocs/` folder. In this document, we plotted nSites, theta-W, Pi,
+
+We then populated a spreadsheet with the classes' results [here](https://docs.google.com/spreadsheets/d/1SLwhW3OgQiX2z1rxH-ske236NYxjDXCvUu0l8XFeS_w/edit?gid=0#gid=0).
+
+#### September 25, 2025 - [Visualizing genomic diversity and intro to population structure](https://pespenilab.github.io/Ecological-Genomics/Fall2025/tutorials/EcoGen2025_PopGenomics5_PopStructure.html)
+
+During today's class, we are estimating Fst and wrote a bash script for that called "ANGSD_FST.sh" that is locate in `myscripts/` folder. We then sent that to the VACC and it ran. My Fst value was 0.307832.
+
+Then, we ran PCAngsd using all samples (not just our population). The files that we are going to use to store the genoytpe likelihoods can be found using this path:
+
+`/gpfs1/cl/ecogen/pbio6800/PopulationGenomics/scripts/ANGSD_RSBS_poly.sh`
+
+We then made a batch script called "PCAngsd_RSBS.sh", which can be found in `myscripts/` folder and sent it to the VACC.
+
+Then, we made an RMarkdown document plotting the red spruce-black spruce genetic PCAs and admixture analysis. This document is called `PCA_Admix.Rmd` and can be found in in `/mydocs`.

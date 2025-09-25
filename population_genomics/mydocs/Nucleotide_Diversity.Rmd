@@ -9,11 +9,10 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = "~/projects/eco_genomics_2025/population_genomics/myresults/ANGSD/diversity/")
 ```
 
-Import our libraries for plotting
+Import our libraries
 
 ```{r}
 library(ggplot2)
-
 library(tidyverse)
 ```
 
@@ -21,10 +20,9 @@ Read in our theta outputs
 
 ```{r}
 theta <- read.table("~/projects/eco_genomics_2025/population_genomics/myresults/ANGSD/diversity/2100_ALL_win50000_step50000.thetas", sep="\t", header=T)
-
 head(theta)
 ```
-First, we need to scale our thetas by nSites:
+Scale our thetas by nSites:
   
 ```{r}
 
@@ -43,10 +41,8 @@ theta2 <- theta %>%
   filter(nSites>100)
 
 summary(theta2)
-
-
 ```
-Let's plot a histogram of how many sites are in each window that got sequenced
+Histogram of how many sites are in each window that got sequenced
 
 ```{r}
 ggplot(theta2, aes(nSites)) +
@@ -54,12 +50,12 @@ ggplot(theta2, aes(nSites)) +
   geom_vline(xintercept = median(theta2$nSites), color="red", linetype="dashed") +
   labs(title = "Distribution of windows with data", x="Number of sites in 50 kb windows", y="Frequency")
 ```
-Let's plot nucleotide diversity as Pi
+Plotting nucleotide diversity as Pi
 ```{r}
 ggplot(theta2, aes(x=Chr, y=tPsite, color=Chr)) +
   geom_point(size=0.75, shape=1, show.legend=F) +
   ylim(0,0.07) +
-  labs(title="Nucleotide diversity in 50 kb windows for population 2030", x="Scaffold", y="Theta-Pi")
+  labs(title="Nucleotide diversity in 50 kb windows for population 2100", x="Scaffold", y="Theta-Pi")
 ```
 ```{r}
 # compare pi and theta-W together and look for deviation
