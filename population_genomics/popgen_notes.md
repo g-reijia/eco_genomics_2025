@@ -91,4 +91,4 @@ Then, we ran PCAngsd using all samples (not just our population). The files that
 
 We then made a batch script called "PCAngsd_RSBS.sh", which can be found in `myscripts/` folder and sent it to the VACC.
 
-Then, we made an RMarkdown document plotting the red spruce-black spruce genetic PCAs and admixture analysis. This document is called `PCA_Admix.Rmd` and can be found in in `/mydocs`.
+Then, we made an RMarkdown document plotting the red spruce-black spruce genetic PCAs and admixture analysis. This document is called "PCA_Admix.Rmd" and can be found in in `/mydocs`.
