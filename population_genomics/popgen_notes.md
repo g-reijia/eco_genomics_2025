@@ -77,7 +77,7 @@ We then made a wrapper script to begin analyzing nucleotide diversity. This file
 
 #### September 23, 2025 - [Visualizing genomic diversity and intro to population structure](https://pespenilab.github.io/Ecological-Genomics/Fall2025/tutorials/EcoGen2025_PopGenomics5_PopStructure.html)
 
-During this class, we made a RMarkdown document that has theta results from ANGSD. The script we used for this is called "Nucleotide_Diversity.Rmd" which is located in `mydocs/` folder. In this document, we plotted nSites, Tajima's D, and theta-W and pi.
+During this class, we made a RMarkdown document that has theta results from ANGSD. The script we used for this is called "Nucleotide_Diversity.Rmd" which is located in `mydocs/` folder. Here, we plotted nSites, Tajima's D, and theta-W and pi.
 
 We then populated a spreadsheet with the classes' results [here](https://docs.google.com/spreadsheets/d/1SLwhW3OgQiX2z1rxH-ske236NYxjDXCvUu0l8XFeS_w/edit?gid=0#gid=0).
 
@@ -93,4 +93,20 @@ We then made a batch script called "PCAngsd_RSBS.sh", which can be found in `mys
 
 Then, we made an RMarkdown document plotting the red spruce-black spruce genetic PCAs and admixture analysis. This document is called `PCA_Admix.Rmd` and can be found in in `/mydocs`.
 
-#### September 30, 2025 - 
+#### September 30, 2025 - [Genome scan for selection](https://pespenilab.github.io/Ecological-Genomics/Fall2025/tutorials/EcoGen2025_PopGenomics6_Selection.html)
+
+Today, we reviewed the script from last class looking at the PCA_Admixture (`PCA_Admix.html`).
+
+[General notes:]{.underline}
+
+-   PCA attemps to find axes (eigenvalues) through the data that summarize the maximum amount of variance.
+
+-   Calculating the distance of individuals between each and trying to figure out how to minimize this distance
+
+    -   PC1, 1st eigenvalue, explains the most genetic variance in data matrix
+
+        -   Each SNP has some sort of correlation with axis
+
+    -   PCA2, 2nd eigenvalue, explains the 2nd most genetic variance in data matrix
+
+-   
