@@ -101,14 +101,14 @@ Today, we reviewed the script from last class looking at the PCA_Admixture (`PCA
 
 During last week's class, we made a file called `PCAngsd_RSBS.sh`, where k=2. Today, we created a new file by only including rdata from ed spruce to test for selection. This is file, titled `PCAngst_allRS_selection.sh` is an updated version of the `PCAngsd_RSBS.sh` file, where we set k=3 and included the following options at the end of this script (below). This new script is located in `/myscripts`.
 
--   --selection-eig \$E
-
--   --selection
-
--   --sites-save
-
--   --maf-save
-
--   --snp-weights
+    -   --selection-eig \$E
+    
+    -   --selection
+    
+    -   --sites-save
+    
+    -   --maf-save
+    
+    -   --snp-weights
 
 Once we ran the above bash script, we made a new RMarkdown file titled `RedSpruce_Selection.Rmd` and created scree, PCA, and Manhattan plot swith red spruce ONLY. This file can be found in `mydocs/`. Notes on each of the plots and the analysis are embedded in the RMarkdown file.
