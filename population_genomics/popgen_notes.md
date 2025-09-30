@@ -77,20 +77,28 @@ We then made a wrapper script to begin analyzing nucleotide diversity. This file
 
 #### September 23, 2025 - [Visualizing genomic diversity and intro to population structure](https://pespenilab.github.io/Ecological-Genomics/Fall2025/tutorials/EcoGen2025_PopGenomics5_PopStructure.html)
 
+<<<<<<< HEAD
 During this class, we made a RMarkdown document that has theta results from ANGSD. The script we used for this is called "Nucleotide_Diversity.Rmd" which is located in `mydocs/` folder. We then plotted nSites, theta-W and Pi, and Tajima's D.
+=======
+During this class, we made a RMarkdown document that has theta results from ANGSD. The script we used for this is called "Nucleotide_Diversity.Rmd" which is located in `mydocs/` folder. In this document, we plotted nSites, Tajima's D, and theta-W and pi.
+>>>>>>> 396baa8446ab7d0206cca1c2b85699835b08d8c4
 
 We then populated a spreadsheet with the classes' results [here](https://docs.google.com/spreadsheets/d/1SLwhW3OgQiX2z1rxH-ske236NYxjDXCvUu0l8XFeS_w/edit?gid=0#gid=0).
 
 #### September 25, 2025 - [Visualizing genomic diversity and intro to population structure](https://pespenilab.github.io/Ecological-Genomics/Fall2025/tutorials/EcoGen2025_PopGenomics5_PopStructure.html)
 
-During today's class, we are estimating Fst and wrote a bash script for that called "ANGSD_FST.sh" that is locate in `myscripts/` folder. We then sent that to the VACC and it ran. My Fst value was 0.307832.
+During today's class, we estimated the Fst and wrote a bash script called "ANGSD_FST.sh" that is locate in `myscripts/` folder. We then sent that to the VACC and it ran. My Fst value was 0.307832.
 
 Then, we ran PCAngsd using all samples (not just our population). The files that we are going to use to store the genoytpe likelihoods can be found using this path:
 
-`/gpfs1/cl/ecogen/pbio6800/PopulationGenomics/scripts/ANGSD_RSBS_poly.sh`
+-   `/gpfs1/cl/ecogen/pbio6800/PopulationGenomics/scripts/ANGSD_RSBS_poly.sh`
 
 We then made a batch script called "PCAngsd_RSBS.sh", which can be found in `myscripts/` folder and sent it to the VACC.
 
+<<<<<<< HEAD
 Then, we made an RMarkdown document plotting the red spruce-black spruce genetic PCAs and admixture analysis. This document is called `PCA_Admix.Rmd` and can be found in in `/mydocs`.
 
 #### September 30, 2025 - 
+=======
+Then, we made an RMarkdown document plotting the red spruce-black spruce genetic PCAs and admixture analysis. This document is called "PCA_Admix.Rmd" and can be found in in `/mydocs`.
+
