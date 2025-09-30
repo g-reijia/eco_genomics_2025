@@ -1,6 +1,6 @@
 ---
 title: "PCA_Admix"
-author: "Rei Jia"
+author: "G. Rei Jia"
 date: "2025-09-25"
 output: html_document
 ---

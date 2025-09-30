@@ -95,18 +95,20 @@ Then, we made an RMarkdown document plotting the red spruce-black spruce genetic
 
 #### September 30, 2025 - [Genome scan for selection](https://pespenilab.github.io/Ecological-Genomics/Fall2025/tutorials/EcoGen2025_PopGenomics6_Selection.html)
 
-Today, we reviewed the script from last class looking at the PCA_Admixture (`PCA_Admix.html`).
+Today, we reviewed the script from last class looking at the PCA_Admixture (`PCA_Admix.html`) and made a Principal component analysis (PCA) with the 95 red spruce and 18 black spruce samples (N=113 total). We used the beagle file in the class datashare with the genotype likelihoods already computed. This file can be found at:
 
-[General notes:]{.underline}
+`/gpfs1/cl/ecogen/pbio6800/PopulationGenomics/ANGSD/RSBS_poly.beagle.gz`
 
--   PCA attemps to find axes (eigenvalues) through the data that summarize the maximum amount of variance.
+During last week's class, we made a file called `PCAngsd_RSBS.sh`, where k=2. Today, we created a new file by only including rdata from ed spruce to test for selection. This is file, titled `PCAngst_allRS_selection.sh` is an updated version of the `PCAngsd_RSBS.sh` file, where we set k=3 and included the following options at the end of this script (below). This new script is located in `/myscripts`.
 
--   Calculating the distance of individuals between each and trying to figure out how to minimize this distance
+-   --selection-eig \$E
 
-    -   PC1, 1st eigenvalue, explains the most genetic variance in data matrix
+-   --selection
 
-        -   Each SNP has some sort of correlation with axis
+-   --sites-save
 
-    -   PCA2, 2nd eigenvalue, explains the 2nd most genetic variance in data matrix
+-   --maf-save
 
--   
+-   --snp-weights
+
+Once we ran the above bash script, we made a new RMarkdown file titled `RedSpruce_Selection.Rmd` and created scree, PCA, and Manhattan plot swith red spruce ONLY. This file can be found in `mydocs/`. Notes on each of the plots and the analysis are embedded in the RMarkdown file.
