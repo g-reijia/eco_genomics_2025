@@ -57,11 +57,11 @@ My files began running on the VACC during the end of class time. Once I get an e
 
 -   `sbatch ~/projects/eco_genomics_2025/population_genomics/myscripts/process_stats_wrapped.sh`
 
-The next day, I ran the sbatch script above and the files were saved into my `myscripts` folder.
+The next day, I ran the sbatch script above and the files were saved into my `myscripts/` folder.
 
 #### September 18, 2025 - Review bamstats and set up [nucleotide diversity estimation using ANGSD](https://pespenilab.github.io/Ecological-Genomics/Fall2025/tutorials/EcoGen2025_PopGenomics4_Diversity.html)
 
--   Wrote a short script called "bamstats_review.r" located in `myscripts` to evaluate the mapping success
+-   Wrote a short script called "bamstats_review.r" located in `myscripts/` to evaluate the mapping success
 
     -   Saw roughly 60% of reads mapped in proper pairs
 
@@ -91,15 +91,15 @@ Then, we ran PCAngsd using all samples (not just our population). The files that
 
 We then made a batch script called "PCAngsd_RSBS.sh", which can be found in `myscripts/` folder and sent it to the VACC.
 
-Then, we made an RMarkdown document plotting the red spruce-black spruce genetic PCAs and admixture analysis. This document is called `PCA_Admix.Rmd` and can be found in in `/mydocs`.
+Then, we made an RMarkdown document plotting the red spruce-black spruce genetic PCAs and admixture analysis. This document is called `PCA_Admix.Rmd` and can be found in in `mydocs/`.
 
 #### September 30, 2025 - [Genome scan for selection](https://pespenilab.github.io/Ecological-Genomics/Fall2025/tutorials/EcoGen2025_PopGenomics6_Selection.html)
 
 Today, we reviewed the script from last class looking at the PCA_Admixture (`PCA_Admix.html`) and made a Principal component analysis (PCA) with the 95 red spruce and 18 black spruce samples (N=113 total). We used the beagle file in the class datashare with the genotype likelihoods already computed. This file can be found at:
 
-`/gpfs1/cl/ecogen/pbio6800/PopulationGenomics/ANGSD/RSBS_poly.beagle.gz`
+-   `/gpfs1/cl/ecogen/pbio6800/PopulationGenomics/ANGSD/RSBS_poly.beagle.gz`
 
-During last week's class, we made a file called `PCAngsd_RSBS.sh`, where k=2. Today, we created a new file by only including rdata from ed spruce to test for selection. This is file, titled `PCAngst_allRS_selection.sh` is an updated version of the `PCAngsd_RSBS.sh` file, where we set k=3 and included the following options at the end of this script (below). This new script is located in `/myscripts`.
+During last week's class, we made a file called `PCAngsd_RSBS.sh`, where K=2. Today, we created a new file by only including rdata from ed spruce to test for selection. This is file, titled `PCAngst_allRS_selection.sh` is an updated version of the `PCAngsd_RSBS.sh` file, where we set K=3 and included the following options at the end of this script (below). This new script is located in `myscripts/`.
 
 -   --selection-eigen \\\$E
 
@@ -109,4 +109,6 @@ During last week's class, we made a file called `PCAngsd_RSBS.sh`, where k=2. To
 
 -   --snp-weights
 
-Once we ran the above bash script, we made a new RMarkdown file titled `RedSpruce_Selection.Rmd` and created scree, PCA, and Manhattan plot swith red spruce ONLY. This file can be found in `mydocs/`. Notes on each of the plots and the analysis are embedded in the RMarkdown file.
+Once we ran the above bash script, we made a new RMarkdown file titled `RedSpruce_Selection.Rmd` and created scree, PCA, and Manhattan plot with red spruce ONLY. This file can be found in `mydocs/`. Notes on each of the plots and the analysis are embedded in the RMarkdown file.
+
+**October 9, 2025 - Homework 1, Population Genomics**
