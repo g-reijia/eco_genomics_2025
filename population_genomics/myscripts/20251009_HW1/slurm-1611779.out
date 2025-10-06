@@ -1,0 +1,31 @@
+	-> angsd version: 0.935 (htslib: 1.19.1) build(Dec 18 2024 17:12:57)
+	-> angsd -b /users/g/j/gjia/projects/eco_genomics_2025/population_genomics/mydata/ANGSD_HW1/_bam.list -ref /gpfs1/cl/ecogen/pbio6800/PopulationGenomics/ref_genome/Pmariana/Pmariana1.0-genome_reduced.fa -anc /gpfs1/cl/ecogen/pbio6800/PopulationGenomics/ref_genome/Pmariana/Pmariana1.0-genome_reduced.fa -out /users/g/j/gjia/projects/eco_genomics_2025/population_genomics/mydata/ANGSD_HW1/_ALL -nThreads 10 -remove_bads 1 -C 50 -baq 1 -minMapQ 20 -minQ 20 -GL 2 -doSaf 1 -doCounts 1 -minInd 4 -setMinDepthInd 1 -setMaxDepthInd 40 -setMinDepth 10 -skipTriallelic 1 -doMajorMinor 4 
+	-> Inputtype is BAM/CRAM
+[multiReader] 113 samples in 113 input files
+	-> Reading fasta: /gpfs1/cl/ecogen/pbio6800/PopulationGenomics/ref_genome/Pmariana/Pmariana1.0-genome_reduced.fa
+	-> Reading fasta: /gpfs1/cl/ecogen/pbio6800/PopulationGenomics/ref_genome/Pmariana/Pmariana1.0-genome_reduced.fa
+	-> Parsing 113 number of samples 
+
+	-> Allocated ~ 10 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 20 million nodes to the nodepool, this is not an estimate of the memory usage
+	-> Printing at chr: JASDQU010007432.1 pos:4597 chunknumber 100 contains 314 sites
+
+	-> Allocated ~ 30 million nodes to the nodepool, this is not an estimate of the memory usage
+PROBS at: JASDQU010010013.1	231162
+
+	-> Allocated ~ 40 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 50 million nodes to the nodepool, this is not an estimate of the memory usage
+	-> Printing at chr: JASDQU010010034.1 pos:208438 chunknumber 200 contains 972 sites
+
+	-> Allocated ~ 60 million nodes to the nodepool, this is not an estimate of the memory usage
+	-> Printing at chr: JASDQU010010095.1 pos:110 chunknumber 300 contains 43389 sites
+
+	-> Allocated ~ 70 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 80 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 90 million nodes to the nodepool, this is not an estimate of the memory usage
+/var/spool/slurm/d/job1611779/slurm_script: line 52: 3159503 Killed                  angsd -b ${OUT}/${MYPOP}_bam.list -ref ${REF} -anc ${REF} -out ${OUT}/${MYPOP}_${SUFFIX} -nThreads 10 -remove_bads 1 -C 50 -baq 1 -minMapQ 20 -minQ 20 -GL 2 -doSaf 1 -doCounts 1 -minInd 4 -setMinDepthInd 1 -setMaxDepthInd 40 -setMinDepth 10 -skipTriallelic 1 -doMajorMinor 4
+[2025-10-05T15:54:07.271] error: Detected 1 oom_kill event in StepId=1611779.batch. Some of the step tasks have been OOM Killed.

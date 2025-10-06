@@ -111,4 +111,12 @@ During last week's class, we made a file called `PCAngsd_RSBS.sh`, where K=2. To
 
 Once we ran the above bash script, we made a new RMarkdown file titled `RedSpruce_Selection.Rmd` and created scree, PCA, and Manhattan plot with red spruce ONLY. This file can be found in `mydocs/`. Notes on each of the plots and the analysis are embedded in the RMarkdown file.
 
+**October 7, 2025 -**
+
 **October 9, 2025 - Homework 1, Population Genomics**
+
+-   Scripts for this homework assignment (listed below) can be found in `myscripts/20251009_HW1/` :
+
+    -   
+
+-   The RMarkdown workflow, `20251009_HW1.Rmd`, for this homework assignment can be found in `mydocs/`.
