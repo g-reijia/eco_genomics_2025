@@ -1084,3 +1084,36 @@ Or it could be problem with this program regSize=0 notDone=7
 	-> Printing at chr: JASDQU010946718.1 pos:31749 chunknumber 66500 contains 138 sites
 	-> Printing at chr: JASDQU010947271.1 pos:1003 chunknumber 66600 contains 1100 sites
 	-> Printing at chr: JASDQU010947613.1 pos:24439 chunknumber 66700 contains 561 sites
+	-> Printing at chr: JASDQU010948088.1 pos:35864 chunknumber 66800 contains 641 sites
+	-> Printing at chr: JASDQU010948549.1 pos:5886 chunknumber 66900 contains 2230 sites
+	-> Printing at chr: JASDQU010949120.1 pos:35570 chunknumber 67000 contains 678 sites
+	-> Printing at chr: JASDQU010949593.1 pos:15882 chunknumber 67100 contains 843 sites
+	-> Printing at chr: JASDQU010952543.1 pos:408 chunknumber 67200 contains 771 sites
+No data for chromoId=24109 chromoname=JASDQU010955930.1
+This could either indicate that there really is no data for this chromosome
+Or it could be problem with this program regSize=0 notDone=7
+	-> Printing at chr: JASDQU010958373.1 pos:5329 chunknumber 67300 contains 278 sites
+No data for chromoId=24161 chromoname=JASDQU010960006.1
+This could either indicate that there really is no data for this chromosome
+Or it could be problem with this program regSize=0 notDone=7
+	-> Printing at chr: JASDQU010963708.1 pos:193 chunknumber 67400 contains 602 sites
+No data for chromoId=24210 chromoname=JASDQU010966197.1
+This could either indicate that there really is no data for this chromosome
+Or it could be problem with this program regSize=0 notDone=7
+No data for chromoId=24213 chromoname=JASDQU010967028.1
+This could either indicate that there really is no data for this chromosome
+Or it could be problem with this program regSize=0 notDone=7
+No data for chromoId=24222 chromoname=JASDQU010970515.1
+This could either indicate that there really is no data for this chromosome
+Or it could be problem with this program regSize=0 notDone=7
+	-> Printing at chr: JASDQU010976399.1 pos:884 chunknumber 67500 contains 559 sites
+No data for chromoId=24251 chromoname=JASDQU010976642.1
+This could either indicate that there really is no data for this chromosome
+Or it could be problem with this program regSize=0 notDone=7
+No data for chromoId=24282 chromoname=JASDQU010982888.1
+This could either indicate that there really is no data for this chromosome
+Or it could be problem with this program regSize=0 notDone=7
+	-> Printing at chr: JASDQU010990283.1 pos:1669 chunknumber 67600 contains 997 sites
+	-> Printing at chr: JASDQU011004539.1 pos:1091 chunknumber 67700 contains 251 sites
+	-> Printing at chr: JASDQU011013573.1 pos:648 chunknumber 67800 contains 1719 sites
+	-> Printing at chr: JASDQU011025223.1 pos:19173 chunknumber 67900 contains 3668 sites
