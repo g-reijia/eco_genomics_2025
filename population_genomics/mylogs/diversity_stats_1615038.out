@@ -6,3 +6,8 @@ mkdir: cannot create directory ‘/users/g/j/gjia/projects/eco_genomics_2025/pop
 	-> Reading fasta: /gpfs1/cl/ecogen/pbio6800/PopulationGenomics/ref_genome/Pmariana/Pmariana1.0-genome_reduced.fa
 	-> Reading fasta: /gpfs1/cl/ecogen/pbio6800/PopulationGenomics/ref_genome/Pmariana/Pmariana1.0-genome_reduced.fa
 	-> Parsing 7 number of samples 
+No data for chromoId=26 chromoname=JASDQU010007516.1
+This could either indicate that there really is no data for this chromosome
+Or it could be problem with this program regSize=0 notDone=7
+	-> Printing at chr: JASDQU010010023.1 pos:368305 chunknumber 100 contains 278 sites
+	-> Printing at chr: JASDQU010010137.1 pos:107122 chunknumber 200 contains 260 sites
