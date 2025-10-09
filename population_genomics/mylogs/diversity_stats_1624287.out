@@ -1,0 +1,129 @@
+mkdir: cannot create directory ‘/users/g/j/gjia/projects/eco_genomics_2025/population_genomics/mydata/ANGSD_HW1’: File exists
+	-> angsd version: 0.935 (htslib: 1.19.1) build(Dec 18 2024 17:12:57)
+	-> angsd -b /users/g/j/gjia/projects/eco_genomics_2025/population_genomics/mydata/ANGSD_HW1/_bam.list -ref /gpfs1/cl/ecogen/pbio6800/PopulationGenomics/ref_genome/Pmariana/Pmariana1.0-genome_reduced.fa -anc /gpfs1/cl/ecogen/pbio6800/PopulationGenomics/ref_genome/Pmariana/Pmariana1.0-genome_reduced.fa -out /users/g/j/gjia/projects/eco_genomics_2025/population_genomics/mydata/ANGSD_HW1/_ALL -nThreads 10 -remove_bads 1 -C 50 -baq 1 -minMapQ 20 -minQ 20 -GL 2 -doSaf 1 -doCounts 1 -minInd 4 -setMinDepthInd 1 -setMaxDepthInd 40 -setMinDepth 10 -skipTriallelic 1 -doMajorMinor 4 
+	-> Inputtype is BAM/CRAM
+[multiReader] 113 samples in 113 input files
+	-> Reading fasta: /gpfs1/cl/ecogen/pbio6800/PopulationGenomics/ref_genome/Pmariana/Pmariana1.0-genome_reduced.fa
+	-> Reading fasta: /gpfs1/cl/ecogen/pbio6800/PopulationGenomics/ref_genome/Pmariana/Pmariana1.0-genome_reduced.fa
+	-> Parsing 113 number of samples 
+
+	-> Allocated ~ 10 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 20 million nodes to the nodepool, this is not an estimate of the memory usage
+	-> Printing at chr: JASDQU010007432.1 pos:4597 chunknumber 100 contains 314 sites
+
+	-> Allocated ~ 30 million nodes to the nodepool, this is not an estimate of the memory usage
+PROBS at: JASDQU010010013.1	231162
+
+	-> Allocated ~ 40 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 50 million nodes to the nodepool, this is not an estimate of the memory usage
+	-> Printing at chr: JASDQU010010034.1 pos:208438 chunknumber 200 contains 972 sites
+
+	-> Allocated ~ 60 million nodes to the nodepool, this is not an estimate of the memory usage
+	-> Printing at chr: JASDQU010010095.1 pos:110 chunknumber 300 contains 43389 sites
+
+	-> Allocated ~ 70 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 80 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 90 million nodes to the nodepool, this is not an estimate of the memory usage
+	-> Printing at chr: JASDQU010010186.1 pos:331074 chunknumber 400 contains 164 sites
+PROBS at: JASDQU010010191.1	62297
+PROBS at: JASDQU010010227.1	68595
+	-> Printing at chr: JASDQU010010241.1 pos:583328 chunknumber 500 contains 167 sites
+	-> Printing at chr: JASDQU010010312.1 pos:269 chunknumber 600 contains 40279 sites
+	-> Printing at chr: JASDQU010010416.1 pos:6 chunknumber 700 contains 74855 sites
+	-> Printing at chr: JASDQU010010523.1 pos:227167 chunknumber 800 contains 647 sites
+	-> Printing at chr: JASDQU010010594.1 pos:16684 chunknumber 900 contains 29618 sites
+
+	-> Allocated ~ 100 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 110 million nodes to the nodepool, this is not an estimate of the memory usage
+	-> Printing at chr: JASDQU010010666.1 pos:165969 chunknumber 1000 contains 60087 sites
+	-> Printing at chr: JASDQU010010739.1 pos:149062 chunknumber 1100 contains 1630 sites
+PROBS at: JASDQU010010770.1	196538
+PROBS at: JASDQU010010843.1	242586
+	-> Printing at chr: JASDQU010010856.1 pos:655 chunknumber 1200 contains 32614 sites
+	-> Printing at chr: JASDQU010010918.1 pos:10695 chunknumber 1300 contains 46668 sites
+	-> Printing at chr: JASDQU010011015.1 pos:111297 chunknumber 1400 contains 96 sites
+	-> Printing at chr: JASDQU010011092.1 pos:302271 chunknumber 1500 contains 16676 sites
+	-> Printing at chr: JASDQU010011181.1 pos:116984 chunknumber 1600 contains 567 sites
+	-> Printing at chr: JASDQU010011289.1 pos:122067 chunknumber 1700 contains 519 sites
+	-> Printing at chr: JASDQU010011354.1 pos:155983 chunknumber 1800 contains 692 sites
+
+	-> Allocated ~ 120 million nodes to the nodepool, this is not an estimate of the memory usage
+	-> Printing at chr: JASDQU010011434.1 pos:77752 chunknumber 1900 contains 7092 sites
+	-> Printing at chr: JASDQU010011534.1 pos:182596 chunknumber 2000 contains 312 sites
+PROBS at: JASDQU010011550.1	91876
+	-> Printing at chr: JASDQU010011609.1 pos:270862 chunknumber 2100 contains 439 sites
+	-> Printing at chr: JASDQU010011725.1 pos:194932 chunknumber 2200 contains 392 sites
+	-> Printing at chr: JASDQU010011779.1 pos:202113 chunknumber 2300 contains 3951 sites
+	-> Printing at chr: JASDQU010011862.1 pos:142032 chunknumber 2400 contains 3713 sites
+PROBS at: JASDQU010011946.1	175529
+	-> Printing at chr: JASDQU010011954.1 pos:113917 chunknumber 2500 contains 507 sites
+	-> Printing at chr: JASDQU010012090.1 pos:213058 chunknumber 2600 contains 212 sites
+	-> Printing at chr: JASDQU010012204.1 pos:212523 chunknumber 2700 contains 517 sites
+	-> Printing at chr: JASDQU010012284.1 pos:953 chunknumber 2800 contains 26677 sites
+	-> Printing at chr: JASDQU010012334.1 pos:246251 chunknumber 2900 contains 417 sites
+	-> Printing at chr: JASDQU010012378.1 pos:201209 chunknumber 3000 contains 20 sites
+	-> Printing at chr: JASDQU010012436.1 pos:255653 chunknumber 3100 contains 1020 sites
+PROBS at: JASDQU010012448.1	146960
+PROBS at: JASDQU010012448.1	148562
+PROBS at: JASDQU010012476.1	210935
+	-> Printing at chr: JASDQU010012483.1 pos:172478 chunknumber 3200 contains 1055 sites
+PROBS at: JASDQU010012496.1	34557
+	-> Printing at chr: JASDQU010012563.1 pos:232092 chunknumber 3300 contains 149 sites
+	-> Printing at chr: JASDQU010012679.1 pos:55 chunknumber 3400 contains 64034 sites
+	-> Printing at chr: JASDQU010012781.1 pos:1 chunknumber 3500 contains 32957 sites
+	-> Printing at chr: JASDQU010012848.1 pos:115912 chunknumber 3600 contains 4049 sites
+PROBS at: JASDQU010012850.1	78006
+PROBS at: JASDQU010012901.1	9884
+PROBS at: JASDQU010012938.1	22456
+	-> Printing at chr: JASDQU010012958.1 pos:237053 chunknumber 3700 contains 312 sites
+PROBS at: JASDQU010013028.1	141393
+	-> Printing at chr: JASDQU010013050.1 pos:307652 chunknumber 3800 contains 1833 sites
+	-> Printing at chr: JASDQU010013168.1 pos:119132 chunknumber 3900 contains 520 sites
+	-> Printing at chr: JASDQU010013252.1 pos:116458 chunknumber 4000 contains 483 sites
+	-> Printing at chr: JASDQU010013295.1 pos:568673 chunknumber 4100 contains 2002 sites
+	-> Printing at chr: JASDQU010013361.1 pos:117449 chunknumber 4200 contains 417 sites
+	-> Printing at chr: JASDQU010013455.1 pos:150155 chunknumber 4300 contains 1813 sites
+PROBS at: JASDQU010013484.1	15146
+	-> Printing at chr: JASDQU010013546.1 pos:341461 chunknumber 4400 contains 532 sites
+	-> Printing at chr: JASDQU010013640.1 pos:74454 chunknumber 4500 contains 15523 sites
+	-> Printing at chr: JASDQU010013735.1 pos:686 chunknumber 4600 contains 25685 sites
+PROBS at: JASDQU010013806.1	81091
+	-> Printing at chr: JASDQU010013806.1 pos:155136 chunknumber 4700 contains 3869 sites
+	-> Printing at chr: JASDQU010013895.1 pos:146595 chunknumber 4800 contains 366 sites
+	-> Printing at chr: JASDQU010013978.1 pos:241624 chunknumber 4900 contains 2038 sites
+	-> Printing at chr: JASDQU010014065.1 pos:185376 chunknumber 5000 contains 3611 sites
+PROBS at: JASDQU010014110.1	17834
+	-> Printing at chr: JASDQU010014200.1 pos:245458 chunknumber 5100 contains 3602 sites
+	-> Printing at chr: JASDQU010014280.1 pos:128068 chunknumber 5200 contains 1985 sites
+	-> Printing at chr: JASDQU010014374.1 pos:355359 chunknumber 5300 contains 709 sites
+	-> Printing at chr: JASDQU010014468.1 pos:219308 chunknumber 5400 contains 928 sites
+PROBS at: JASDQU010014557.1	49275
+	-> Printing at chr: JASDQU010014572.1 pos:136273 chunknumber 5500 contains 2603 sites
+PROBS at: JASDQU010014612.1	5381
+	-> Printing at chr: JASDQU010014658.1 pos:228279 chunknumber 5600 contains 1712 sites
+	-> Printing at chr: JASDQU010014794.1 pos:175586 chunknumber 5700 contains 251 sites
+	-> Printing at chr: JASDQU010014855.1 pos:213876 chunknumber 5800 contains 914 sites
+	-> Printing at chr: JASDQU010014940.1 pos:234281 chunknumber 5900 contains 1509 sites
+
+	-> Allocated ~ 130 million nodes to the nodepool, this is not an estimate of the memory usage
+	-> Printing at chr: JASDQU010019762.1 pos:21279 chunknumber 6000 contains 379 sites
+	-> Printing at chr: JASDQU010025161.1 pos:10 chunknumber 6100 contains 5757 sites
+	-> Printing at chr: JASDQU010025480.1 pos:30777 chunknumber 6200 contains 474 sites
+PROBS at: JASDQU010026035.1	36739
+	-> Printing at chr: JASDQU010026035.1 pos:43193 chunknumber 6300 contains 331 sites
+	-> Printing at chr: JASDQU010026382.1 pos:24828 chunknumber 6400 contains 346 sites
+	-> Printing at chr: JASDQU010026730.1 pos:16064 chunknumber 6500 contains 3868 sites
+	-> Printing at chr: JASDQU010027089.1 pos:1018 chunknumber 6600 contains 9800 sites
+	-> Printing at chr: JASDQU010027502.1 pos:41396 chunknumber 6700 contains 968 sites
+PROBS at: JASDQU010027748.1	21780
+	-> Printing at chr: JASDQU010027846.1 pos:27126 chunknumber 6800 contains 651 sites
+	-> Printing at chr: JASDQU010028160.1 pos:98 chunknumber 6900 contains 7858 sites
+	-> Printing at chr: JASDQU010028469.1 pos:37581 chunknumber 7000 contains 985 sites
+	-> Printing at chr: JASDQU010028768.1 pos:52990 chunknumber 7100 contains 3449 sites
+	-> Printing at chr: JASDQU010029085.1 pos:36426 chunknumber 7200 contains 46 sites
+	-> Printing at chr: JASDQU010029478.1 pos:280 chunknumber 7300 contains 11654 sites
