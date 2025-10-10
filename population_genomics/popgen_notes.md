@@ -117,6 +117,6 @@ Once we ran the above bash script, we made a new RMarkdown file titled `RedSpruc
 
 -   Scripts for this homework assignment (listed below) can be found in `myscripts/20251009_HW1/` :
 
-    -   
+    -   Step 1: `ANGSD_HW1.sh`, `ANGSD_doTheta_HW1.sh`, `diversity_wrapper_HW1.sh`
 
 -   The RMarkdown workflow, `20251009_HW1.Rmd`, for this homework assignment can be found in `mydocs/`.
