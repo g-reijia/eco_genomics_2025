@@ -7,16 +7,13 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir = "~/projects/eco_genomics_2025/population_genomics/myresults/ANGSD_HW1")
+knitr::opts_knit$set(root.dir = "~/projects/eco_genomics_2025/population_genomics")
 ```
 
-1. Began by editing out "2100", my original population from class tutorials to run all red spruce samples.
-
-2. Load libraries 
+1. Load libraries 
 ```{r}
 library(tidyverse)
 library(ggplot2)
-library(ggpubr)
-library(qqman)
 ```
 
+2. 
