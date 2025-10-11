@@ -111,12 +111,26 @@ During last week's class, we made a file called `PCAngsd_RSBS.sh`, where K=2. To
 
 Once we ran the above bash script, we made a new RMarkdown file titled `RedSpruce_Selection.Rmd` and created scree, PCA, and Manhattan plot with red spruce ONLY. This file can be found in `mydocs/`. Notes on each of the plots and the analysis are embedded in the RMarkdown file.
 
-**October 7, 2025 -**
-
 **October 9, 2025 - Homework 1, Population Genomics**
 
--   Scripts for this homework assignment (listed below) can be found in `myscripts/20251009_HW1/` :
+-   *Names and citations of programs used in bioinformatics pipeline:*
 
-    -   Step 1: `ANGSD_HW1.sh`, `ANGSD_doTheta_HW1.sh`, `diversity_wrapper_HW1.sh`
+    -   Fastp (Chen, 2023)
 
--   The RMarkdown workflow, `20251009_HW1.Rmd`, for this homework assignment can be found in `mydocs/`.
+    -   bwa-mem2 (Vasimuddin et al., 2019)
+
+    -   sambamba (Tarasov et al., 2015)
+
+    -   samtools (Danecek et al., 2021)
+
+<!-- -->
+
+-   *Workflow:*
+
+    -   Change MYPOP from 2100 to *blank*, as we will be using all 95 samples for the HW
+
+    -   Rerun ANGSD (`ANGSD_HW1.sh`, `ANGSD_doTheta_HW1.sh`, and `diversity_wrapper_HW1.sh`) and PCAngsd using allRS (`PCAngsd_allRS_selection.sh`)
+
+        -   Code for HW analysis: `mydocs/20251009_HW1.Rmd`
+
+    -   Figures: screeplot eigen values, PCA scatter, Manhattan admixture

@@ -63,7 +63,7 @@ setwd("~/projects/eco_genomics_2025/population_genomics/myresults/ANGSD_HW1/PCA_
 
 ## 3a. Estimating PCA using only red spruce data:
 
-allRS_COV <- as.matrix(read.table("allRS_poly_K3.cov"))
+allRS_COV <- as.matrix(read.table("allRS_poly_K2.cov"))
 
 allRS_PCA <- eigen(allRS_COV)
 
@@ -85,6 +85,10 @@ pops <- data.frame(names[1:95], do.call(rbind, split[1:95]))
 
 names(pops) = c("Ind", "Pop", "Row", "Col")
 
+data=as.data.frame(allRS_PCA$vectors)
+data=data[,c(1:3)]
+data= cbind(data, pops)
+
 ## 3d. Read in selection statistics and convert test statistic to p-values:
 
 s <- read.table("allRS_poly_K3.selection")
@@ -97,7 +101,7 @@ names(pval_PC2) = "p_PC2"
 
 ## 3e. Read in site positions and SNP positions:
 
-PCAngsd_sites <- read.table("allRS_poly_K3.sites")
+PCAngsd_sites <- read.table("allRS_poly_K2.sites")
 
 MAF_all_sites <- read.table("/gpfs1/cl/ecogen/pbio6800/PopulationGenomics/ANGSD/allRS_poly.mafs.gz", header=T)
 
@@ -142,7 +146,7 @@ write.table(outliers_PC2,
             row.names=F,
             sep="\t")
 
-## 3h. Determine how many unique contigs harbor outlier loci?
+## 3h. Determine how many unique contigs harbor outlier loci:
 outlier_contigs_PC1 = unique(outliers_PC1$chromo)
 
 length(outlier_contigs_PC1)
@@ -150,12 +154,46 @@ length(outlier_contigs_PC1)
 outlier_contigs_PC2 = unique(outliers_PC2$chromo)
 
 length(outlier_contigs_PC2)
+
+## 3i. Figures from above analysis:
+
+### scree plot:
+barplot(var, 
+        xlab="Eigenvalues of the PCA", 
+        ylab="Proportion of variance explained")
+
+### scatterplot:
+ggscatter(data, x = "V1", y = "V2",
+          color = "Pop",
+          mean.point = TRUE,
+          star.plot = TRUE,
+          main="Red spruce genetic PCA") +
+  theme_bw(base_size = 13, base_family = "Times") +
+  labs(x = paste0("PC1: (",var[1]*100,"%)"), y = paste0("PC2: (",var[2]*100,"%)"))
+
+### Manhattan plot using clustering of k=2:
+q <- read.table("allRS_poly_K2.admix.2.Q", sep=" ", header=F)
+
+K=dim(q)[2] #Find the level of K modeled
+
+## rank order the samples according to population code
+ord<-order(pops[,2])
+
+barplot(t(q)[,ord],
+        #col=cols[1:K],
+        col=c("black","red"),
+        space=0,border=NA,
+        xlab="Populations",ylab="Admixture proportions",
+        main=paste0("Red Spruce Admixture: K=",K))
+text(tapply(1:nrow(pops),pops[ord,2],mean),-0.05,unique(pops[ord,2]),xpd=T,cex=0.75,srt=45)
+abline(v=cumsum(sapply(unique(pops[ord,2]),function(x){sum(pops[ord,2]==x)})),col=1,lwd=1.2)
+
 ```
 
 4. Comparing significant PC axis values with Tajima's D and nucleotide diversity using a VennDiagram
 
 4a. Changing column names in PCA outlier table to match and compare:
-```{r}
+#```{r}
 #outlier_contigs_PC1 <- rename(outliers_PC1, Chr=chromo)
 
 #outlier_contigs_PC2 <- rename(outliers_PC2, Chr=chromo)
@@ -163,7 +201,7 @@ length(outlier_contigs_PC2)
 ```
 
 4b. Generate VennDiagram:
-```{r}
+#```{r}
 #outliers_venn = list(TajimaD = theta2$Chr, outliers_PC1 = outliers_PC1$Chr, PC2_outliers = outliers_PC2$Chr)
 
 #View(outliers_venn)
