@@ -190,9 +190,9 @@ abline(v=cumsum(sapply(unique(pops[ord,2]),function(x){sum(pops[ord,2]==x)})),co
 
 ```
 
-4. Comparing significant PC axis values with Tajima's D and nucleotide diversity using a VennDiagram
+#4. Comparing significant PC axis values with Tajima's D and nucleotide diversity using a VennDiagram
 
-4a. Changing column names in PCA outlier table to match and compare:
+#4a. Changing column names in PCA outlier table to match and compare:
 #```{r}
 #outlier_contigs_PC1 <- rename(outliers_PC1, Chr=chromo)
 
