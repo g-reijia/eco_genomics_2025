@@ -357,7 +357,195 @@ display: none;
 </div>
 
 
+<ol style="list-style-type: decimal">
+<li>Load necessary libraries</li>
+</ol>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+## ✔ dplyr     1.1.4     ✔ readr     2.1.5
+## ✔ forcats   1.0.0     ✔ stringr   1.5.1
+## ✔ ggplot2   3.5.2     ✔ tibble    3.3.0
+## ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+## ✔ purrr     1.1.0     
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<pre class="r"><code>library(ggplot2)
+library(dplyr)
+library(ggpubr)
+library(qqman)</code></pre>
+<pre><code>## 
+## For example usage please run: vignette(&#39;qqman&#39;)
+## 
+## Citation appreciated but not required:
+## Turner, (2018). qqman: an R package for visualizing GWAS results using Q-Q and manhattan plots. Journal of Open Source Software, 3(25), 731, https://doi.org/10.21105/joss.00731.</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Using nucleotide diversity to find signatures of selection</li>
+</ol>
+<p>2a. Read in input theta values and visualize:</p>
+<pre class="r"><code>theta &lt;- read.table(&quot;~/projects/eco_genomics_2025/population_genomics/myresults/ANGSD_HW1/diversity/_ALL_win50000_step50000.thetas&quot;, sep=&quot;\t&quot;, header=T)
 
+head(theta)</code></pre>
+<pre><code>##                 Chr WinCenter        tW        tP    Tajima nSites
+## 1 JASDQU010010013.1     75000  0.000000  0.000000  0.000000      0
+## 2 JASDQU010010013.1    125000  0.690465  0.540386 -0.384738     68
+## 3 JASDQU010010013.1    175000 11.125256 15.904560  1.289839    745
+## 4 JASDQU010010013.1    225000 28.720951 32.896646  0.454150   2824
+## 5 JASDQU010010013.1    275000 11.021872  6.359013 -1.269477    615
+## 6 JASDQU010010013.1    325000  4.020018  3.467627 -0.373592    550</code></pre>
+<p>2b. Scaling Watterson’s theta and Pi values by nSites:</p>
+<pre class="r"><code>theta$tWsite = theta$tW/theta$nSites
+
+theta$tPsite = theta$tP/theta$nSites
+
+head(theta)</code></pre>
+<pre><code>##                 Chr WinCenter        tW        tP    Tajima nSites      tWsite
+## 1 JASDQU010010013.1     75000  0.000000  0.000000  0.000000      0         NaN
+## 2 JASDQU010010013.1    125000  0.690465  0.540386 -0.384738     68 0.010153897
+## 3 JASDQU010010013.1    175000 11.125256 15.904560  1.289839    745 0.014933230
+## 4 JASDQU010010013.1    225000 28.720951 32.896646  0.454150   2824 0.010170308
+## 5 JASDQU010010013.1    275000 11.021872  6.359013 -1.269477    615 0.017921743
+## 6 JASDQU010010013.1    325000  4.020018  3.467627 -0.373592    550 0.007309124
+##        tPsite
+## 1         NaN
+## 2 0.007946853
+## 3 0.021348403
+## 4 0.011648954
+## 5 0.010339859
+## 6 0.006304776</code></pre>
+<pre class="r"><code>summary(theta)</code></pre>
+<pre><code>##      Chr              WinCenter             tW                tP         
+##  Length:28847       Min.   :  75000   Min.   :  0.000   Min.   :  0.000  
+##  Class :character   1st Qu.: 125000   1st Qu.:  3.347   1st Qu.:  3.119  
+##  Mode  :character   Median : 175000   Median : 11.539   Median : 11.175  
+##                     Mean   : 238173   Mean   : 17.104   Mean   : 16.470  
+##                     3rd Qu.: 325000   3rd Qu.: 24.748   3rd Qu.: 23.924  
+##                     Max.   :3625000   Max.   :269.677   Max.   :251.672  
+##                                                                          
+##      Tajima             nSites          tWsite            tPsite       
+##  Min.   :-2.07275   Min.   :    0   Min.   :0.00124   Min.   :0.00049  
+##  1st Qu.:-0.39075   1st Qu.:  274   1st Qu.:0.00906   1st Qu.:0.00821  
+##  Median :-0.04885   Median :  905   Median :0.01290   Median :0.01296  
+##  Mean   :-0.08210   Mean   : 1392   Mean   :0.01359   Mean   :0.01342  
+##  3rd Qu.: 0.17912   3rd Qu.: 1974   3rd Qu.:0.01743   3rd Qu.:0.01783  
+##  Max.   : 2.26987   Max.   :17002   Max.   :0.16679   Max.   :0.34214  
+##                                     NA&#39;s   :3150      NA&#39;s   :3150</code></pre>
+<p>2c. Arrange and summarize theta table:</p>
+<pre class="r"><code>theta2 &lt;- theta %&gt;%
+  arrange(Chr, WinCenter) %&gt;%
+  filter(nSites&gt;100)
+
+summary(theta2)</code></pre>
+<pre><code>##      Chr              WinCenter             tW                 tP          
+##  Length:24221       Min.   :  75000   Min.   :  0.4595   Min.   :  0.1868  
+##  Class :character   1st Qu.: 125000   1st Qu.:  6.9388   1st Qu.:  6.6278  
+##  Mode  :character   Median : 175000   Median : 14.9178   Median : 14.5131  
+##                     Mean   : 238757   Mean   : 20.3329   Mean   : 19.5785  
+##                     3rd Qu.: 325000   3rd Qu.: 27.8460   3rd Qu.: 26.9938  
+##                     Max.   :3625000   Max.   :269.6766   Max.   :251.6715  
+##      Tajima            nSites          tWsite             tPsite         
+##  Min.   :-2.0728   Min.   :  101   Min.   :0.001245   Min.   :0.0004898  
+##  1st Qu.:-0.4278   1st Qu.:  558   1st Qu.:0.009210   1st Qu.:0.0084761  
+##  Median :-0.1149   Median : 1172   Median :0.013023   Median :0.0130938  
+##  Mean   :-0.0909   Mean   : 1654   Mean   :0.013682   Mean   :0.0135226  
+##  3rd Qu.: 0.2316   3rd Qu.: 2235   3rd Qu.:0.017512   3rd Qu.:0.0178611  
+##  Max.   : 2.2699   Max.   :17002   Max.   :0.045065   Max.   :0.0466784</code></pre>
+<p>2d. Subset theta values using threshold parameters:</p>
+<pre class="r"><code>theta2[which(theta2$Tajima &lt; -1.5 &amp; theta2$tPsite &lt; 0.001),]</code></pre>
+<pre><code>##                     Chr WinCenter        tW       tP    Tajima nSites
+## 822   JASDQU010011299.1    125000  4.108143 1.288983 -1.871418   1921
+## 2067  JASDQU010013608.1    175000  5.859222 2.429630 -1.666863   2496
+## 2149  JASDQU010013845.1    275000  4.506650 1.667689 -1.739391   1893
+## 2628  JASDQU010099703.1    175000 19.373495 9.778515 -1.527975   9838
+## 9719  JASDQU010101717.1    575000  1.895862 0.647999 -1.560052   1058
+## 10064 JASDQU010101834.1    225000 16.416562 6.585429 -1.835166   6613
+## 15622 JASDQU010106661.1    325000  3.260785 1.214339 -1.652927   1503
+## 17036 JASDQU010242954.1     75000  7.539524 3.389230 -1.606022   3915
+## 17146 JASDQU010243604.1     75000  3.351223 1.327979 -1.597128   1991
+## 17454 JASDQU010245218.1     75000  5.147362 1.762227 -1.845902   3598
+## 19367 JASDQU010735279.1    175000  7.075244 2.530194 -1.863638   3638
+## 21796 JASDQU010737411.1    425000  6.963361 2.868787 -1.703408   3131
+## 23926 JASDQU010790038.1    225000  2.681839 0.785601 -1.799957   1039
+##            tWsite       tPsite
+## 822   0.002138544 0.0006709958
+## 2067  0.002347445 0.0009734095
+## 2149  0.002380692 0.0008809768
+## 2628  0.001969251 0.0009939535
+## 9719  0.001791930 0.0006124754
+## 10064 0.002482468 0.0009958308
+## 15622 0.002169518 0.0008079434
+## 17036 0.001925804 0.0008657037
+## 17146 0.001683186 0.0006669910
+## 17454 0.001430618 0.0004897796
+## 19367 0.001944817 0.0006954904
+## 21796 0.002224005 0.0009162526
+## 23926 0.002581173 0.0007561126</code></pre>
+<pre class="r"><code>summary(theta2)</code></pre>
+<pre><code>##      Chr              WinCenter             tW                 tP          
+##  Length:24221       Min.   :  75000   Min.   :  0.4595   Min.   :  0.1868  
+##  Class :character   1st Qu.: 125000   1st Qu.:  6.9388   1st Qu.:  6.6278  
+##  Mode  :character   Median : 175000   Median : 14.9178   Median : 14.5131  
+##                     Mean   : 238757   Mean   : 20.3329   Mean   : 19.5785  
+##                     3rd Qu.: 325000   3rd Qu.: 27.8460   3rd Qu.: 26.9938  
+##                     Max.   :3625000   Max.   :269.6766   Max.   :251.6715  
+##      Tajima            nSites          tWsite             tPsite         
+##  Min.   :-2.0728   Min.   :  101   Min.   :0.001245   Min.   :0.0004898  
+##  1st Qu.:-0.4278   1st Qu.:  558   1st Qu.:0.009210   1st Qu.:0.0084761  
+##  Median :-0.1149   Median : 1172   Median :0.013023   Median :0.0130938  
+##  Mean   :-0.0909   Mean   : 1654   Mean   :0.013682   Mean   :0.0135226  
+##  3rd Qu.: 0.2316   3rd Qu.: 2235   3rd Qu.:0.017512   3rd Qu.:0.0178611  
+##  Max.   : 2.2699   Max.   :17002   Max.   :0.045065   Max.   :0.0466784</code></pre>
+<pre class="r"><code>sum(theta2$nSites)</code></pre>
+<pre><code>## [1] 40068560</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Using PCA to find signatures of selection:</li>
+</ol>
+<pre class="r"><code>setwd(&quot;~/projects/eco_genomics_2025/population_genomics/myresults/ANGSD_HW1/PCA_ADMIX_HW1&quot;)
+
+## 3a. Estimating PCA using only red spruce data:
+
+allRS_COV &lt;- as.matrix(read.table(&quot;allRS_poly_K3.cov&quot;))
+
+allRS_PCA &lt;- eigen(allRS_COV)
+
+## 3b. Analyze variance:
+
+var &lt;- round(allRS_PCA$values/sum(allRS_PCA$values),3)
+
+var[1:3]</code></pre>
+<pre><code>## [1] 0.057 0.037 0.014</code></pre>
+<pre class="r"><code>## 3c. Incorporate allRS_bam.list and extract samples 1-95 to factor only for red spruce:
+
+names &lt;- read.table(&quot;allRS_bam.list&quot;)
+
+names &lt;- unlist(strsplit(basename(as.character(names[,1])), split = &quot;.sorted.rmdup.bam&quot;))
+
+split = strsplit(names, &quot;_&quot;)
+
+pops &lt;- data.frame(names[1:95], do.call(rbind, split[1:95]))
+
+names(pops) = c(&quot;Ind&quot;, &quot;Pop&quot;, &quot;Row&quot;, &quot;Col&quot;)
+
+## 3d. Read in selection statistics and convert test statistic to p-values:
+
+s &lt;- read.table(&quot;allRS_poly_K3.selection&quot;)
+
+pval_PC1 &lt;- as.data.frame(1-pchisq(s[,1],1))
+names(pval_PC1) = &quot;p_PC1&quot;
+
+pval_PC2 &lt;- as.data.frame(1-pchisq(s[,2],1))
+names(pval_PC2) = &quot;p_PC2&quot;
+
+## 3e. Read in site positions and SNP positions:
+
+PCAngsd_sites &lt;- read.table(&quot;allRS_poly_K3.sites&quot;)
+MAF_all_sites &lt;- read.table(&quot;/gpfs1/cl/ecogen/pbio6800/PopulationGenomics/ANGSD/allRS_poly.mafs.gz&quot;, header=T)
+
+pos_filtered &lt;- cbind(MAF_all_sites,PCAngsd_sites)[which(PCAngsd_sites==1),]
+
+dim(pos_filtered)</code></pre>
+<pre><code>## [1] 542303     10</code></pre>
 
 
 

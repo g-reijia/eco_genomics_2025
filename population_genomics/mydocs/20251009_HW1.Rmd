@@ -7,13 +7,169 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir = "~/projects/eco_genomics_2025/population_genomics")
+knitr::opts_knit$set(root.dir = "~/projects/eco_genomics_2025/population_genomics/myresults/ANGSD_HW1/diversity/")
 ```
 
-1. Load libraries 
-```{r}
+1. Load necessary libraries
+```{r warning=FALSE}
 library(tidyverse)
 library(ggplot2)
+library(dplyr)
+library(ggpubr)
 ```
 
-2. 
+2. Using nucleotide diversity to find signatures of selection
+
+2a. Read in input theta values and visualize:
+```{r}
+theta <- read.table("~/projects/eco_genomics_2025/population_genomics/myresults/ANGSD_HW1/diversity/_ALL_win50000_step50000.thetas", sep="\t", header=T)
+
+head(theta)
+```
+
+2b. Scaling Watterson's theta and Pi values by nSites:
+```{r}
+theta$tWsite = theta$tW/theta$nSites
+
+theta$tPsite = theta$tP/theta$nSites
+
+head(theta)
+
+summary(theta)
+```
+
+2c. Arrange and summarize theta table:
+```{r}
+theta2 <- theta %>%
+  arrange(Chr, WinCenter) %>%
+  filter(nSites>100)
+
+summary(theta2)
+```
+
+2d. Subset theta values using threshold parameters:
+```{r}
+theta2[which(theta2$Tajima < -1.5 & theta2$tPsite < 0.001),]
+
+summary(theta2)
+
+sum(theta2$nSites)
+```
+
+3. Using PCA to find signatures of selection:
+
+```{r}
+setwd("~/projects/eco_genomics_2025/population_genomics/myresults/ANGSD_HW1/PCA_ADMIX_HW1")
+
+## 3a. Estimating PCA using only red spruce data:
+
+allRS_COV <- as.matrix(read.table("allRS_poly_K3.cov"))
+
+allRS_PCA <- eigen(allRS_COV)
+
+## 3b. Analyze variance:
+
+var <- round(allRS_PCA$values/sum(allRS_PCA$values),3)
+
+var[1:3]
+
+## 3c. Incorporate allRS_bam.list and extract samples 1-95 to factor only for red spruce:
+
+names <- read.table("allRS_bam.list")
+
+names <- unlist(strsplit(basename(as.character(names[,1])), split = ".sorted.rmdup.bam"))
+
+split = strsplit(names, "_")
+
+pops <- data.frame(names[1:95], do.call(rbind, split[1:95]))
+
+names(pops) = c("Ind", "Pop", "Row", "Col")
+
+## 3d. Read in selection statistics and convert test statistic to p-values:
+
+s <- read.table("allRS_poly_K3.selection")
+
+pval_PC1 <- as.data.frame(1-pchisq(s[,1],1))
+names(pval_PC1) = "p_PC1"
+
+pval_PC2 <- as.data.frame(1-pchisq(s[,2],1))
+names(pval_PC2) = "p_PC2"
+
+## 3e. Read in site positions and SNP positions:
+
+PCAngsd_sites <- read.table("allRS_poly_K3.sites")
+
+MAF_all_sites <- read.table("/gpfs1/cl/ecogen/pbio6800/PopulationGenomics/ANGSD/allRS_poly.mafs.gz", header=T)
+
+pos_filtered <- cbind(MAF_all_sites,PCAngsd_sites)[which(PCAngsd_sites==1),]
+
+dim(pos_filtered)
+
+## 3f. Combine loci and PC outlier p-values together:
+
+loci_pvalues <- cbind(pos_filtered,pval_PC1,pval_PC2)
+
+loci_pvalues %>%
+  filter(p_PC1==min(p_PC1)) %>%
+  select(chromo,position)
+
+cutoff=1e-3   # equals p<0.001
+
+outliers_PC1 <- loci_pvalues %>%
+                    filter(p_PC1<cutoff) %>%
+                    select(chromo,position)
+                    
+outliers_PC2 <- loci_pvalues %>%
+                    filter(p_PC2<cutoff) %>%
+                    select(chromo,position)
+
+## 3e. Determine how many outlier loci are < the cutoff:
+dim(outliers_PC1)[1]
+
+dim(outliers_PC2)[1]
+
+## 3g. Write tables with outlier list:
+write.table(outliers_PC1,
+            "~/projects/eco_genomics_2025/population_genomics/mydata/ANGSD_HW1/outliers_PC1_RS",
+            quote=F,
+            row.names=F,
+            sep="\t")
+
+
+write.table(outliers_PC2,
+            "~/projects/eco_genomics_2025/population_genomics/mydata/ANGSD_HW1/outliers_PC1_RS",
+            quote=F,
+            row.names=F,
+            sep="\t")
+
+## 3h. Determine how many unique contigs harbor outlier loci?
+outlier_contigs_PC1 = unique(outliers_PC1$chromo)
+
+length(outlier_contigs_PC1)
+
+outlier_contigs_PC2 = unique(outliers_PC2$chromo)
+
+length(outlier_contigs_PC2)
+```
+
+4. Comparing significant PC axis values with Tajima's D and nucleotide diversity using a VennDiagram
+
+4a. Changing column names in PCA outlier table to match and compare:
+```{r}
+#outlier_contigs_PC1 <- rename(outliers_PC1, Chr=chromo)
+
+#outlier_contigs_PC2 <- rename(outliers_PC2, Chr=chromo)
+
+```
+
+4b. Generate VennDiagram:
+```{r}
+#outliers_venn = list(TajimaD = theta2$Chr, outliers_PC1 = outliers_PC1$Chr, PC2_outliers = outliers_PC2$Chr)
+
+#View(outliers_venn)
+
+#ggVennDiagram(outliers_venn,
+                  color = "black", # Border color of sets
+                  lwd = 1.5) + # Line width of set borders
+                  scale_fill_gradient(low="grey",high="red")
+```
