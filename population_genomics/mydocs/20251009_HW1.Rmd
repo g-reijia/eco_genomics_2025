@@ -1,7 +1,7 @@
 ---
 title: "Homework 1"
 author: "G. Rei Jia"
-date: "2025-10-05"
+date: "2025-10-12"
 output: html_document
 ---
 
@@ -16,6 +16,7 @@ library(tidyverse)
 library(ggplot2)
 library(dplyr)
 library(ggpubr)
+library(ggVennDiagram)
 ```
 
 2. Using nucleotide diversity to find signatures of selection
@@ -171,7 +172,7 @@ ggscatter(data, x = "V1", y = "V2",
   theme_bw(base_size = 13, base_family = "Times") +
   labs(x = paste0("PC1: (",var[1]*100,"%)"), y = paste0("PC2: (",var[2]*100,"%)"))
 
-### Manhattan plot using clustering of k=2:
+### Manhattan plot using clustering of K=2:
 q <- read.table("allRS_poly_K2.admix.2.Q", sep=" ", header=F)
 
 K=dim(q)[2] #Find the level of K modeled
@@ -190,24 +191,26 @@ abline(v=cumsum(sapply(unique(pops[ord,2]),function(x){sum(pops[ord,2]==x)})),co
 
 ```
 
-#4. Comparing significant PC axis values with Tajima's D and nucleotide diversity using a VennDiagram
+4. Comparing significant PC axis values with Tajima's D and nucleotide diversity using a VennDiagram.
 
-#4a. Changing column names in PCA outlier table to match and compare:
-#```{r}
-#outlier_contigs_PC1 <- rename(outliers_PC1, Chr=chromo)
+4a. Changing column names in PCA outlier table to match and compare:
+```{r}
+outlier_PC1 <- rename(outliers_PC1, Chr=chromo)
 
-#outlier_contigs_PC2 <- rename(outliers_PC2, Chr=chromo)
-
+outlier_PC2 <- rename(outliers_PC2, Chr=chromo)
 ```
 
 4b. Generate VennDiagram:
-#```{r}
-#outliers_venn = list(TajimaD = theta2$Chr, outliers_PC1 = outliers_PC1$Chr, PC2_outliers = outliers_PC2$Chr)
+```{r}
+outliers_venn = list("Tajima's D & Pi" = theta2$Chr, "PC1 outliers" = outlier_PC1$Chr, "PC2 outliers" = outlier_PC2$Chr)
 
-#View(outliers_venn)
-
-#ggVennDiagram(outliers_venn,
+venn_diagram <- ggVennDiagram(outliers_venn,
+                  label_alpha = 0,
                   color = "black", # Border color of sets
-                  lwd = 1.5) + # Line width of set borders
-                  scale_fill_gradient(low="grey",high="red")
+                  lwd = 0) + # Line width of set borders
+                  scale_fill_gradient(low="orange",high="lightblue")
+
+venn_diagram + scale_x_continuous(expand = expansion(mult = .2))
 ```
+
+5. 
