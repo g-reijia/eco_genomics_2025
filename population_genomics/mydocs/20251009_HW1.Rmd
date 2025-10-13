@@ -48,9 +48,9 @@ theta2 <- theta %>%
 summary(theta2)
 ```
 
-2d. Subset theta values using threshold parameters:
+2d. Subset theta values using Tajima < -1.5 & Pi < 0.001 threshold parameters:
 ```{r}
-theta2[which(theta2$Tajima < -1.5 & theta2$tPsite < 0.001),]
+theta2 <- theta2[which(theta2$Tajima < -1.5 | theta2$tPsite < 0.001),]
 
 summary(theta2)
 
@@ -102,7 +102,7 @@ names(pval_PC2) = "p_PC2"
 
 ## 3e. Read in site positions and SNP positions:
 
-PCAngsd_sites <- read.table("allRS_poly_K2.sites")
+PCAngsd_sites <- read.table("allRS_poly_K3.sites")
 
 MAF_all_sites <- read.table("/gpfs1/cl/ecogen/pbio6800/PopulationGenomics/ANGSD/allRS_poly.mafs.gz", header=T)
 
@@ -142,7 +142,7 @@ write.table(outliers_PC1,
 
 
 write.table(outliers_PC2,
-            "~/projects/eco_genomics_2025/population_genomics/mydata/ANGSD_HW1/outliers_PC1_RS",
+            "~/projects/eco_genomics_2025/population_genomics/mydata/ANGSD_HW1/outliers_PC2_RS",
             quote=F,
             row.names=F,
             sep="\t")
@@ -159,7 +159,7 @@ length(outlier_contigs_PC2)
 ## 3i. Figures from above analysis:
 
 ### scree plot:
-barplot(var, 
+barplot_HW1 <- barplot(var, 
         xlab="Eigenvalues of the PCA", 
         ylab="Proportion of variance explained")
 
@@ -172,46 +172,34 @@ ggscatter(data, x = "V1", y = "V2",
   theme_bw(base_size = 13, base_family = "Times") +
   labs(x = paste0("PC1: (",var[1]*100,"%)"), y = paste0("PC2: (",var[2]*100,"%)"))
 
-### Manhattan plot using clustering of K=2:
-q <- read.table("allRS_poly_K2.admix.2.Q", sep=" ", header=F)
-
-K=dim(q)[2] #Find the level of K modeled
-
-## rank order the samples according to population code
-ord<-order(pops[,2])
-
-barplot(t(q)[,ord],
-        #col=cols[1:K],
-        col=c("black","red"),
-        space=0,border=NA,
-        xlab="Populations",ylab="Admixture proportions",
-        main=paste0("Red Spruce Admixture: K=",K))
-text(tapply(1:nrow(pops),pops[ord,2],mean),-0.05,unique(pops[ord,2]),xpd=T,cex=0.75,srt=45)
-abline(v=cumsum(sapply(unique(pops[ord,2]),function(x){sum(pops[ord,2]==x)})),col=1,lwd=1.2)
-
 ```
 
 4. Comparing significant PC axis values with Tajima's D and nucleotide diversity using a VennDiagram.
 
 4a. Changing column names in PCA outlier table to match and compare:
 ```{r}
-outlier_PC1 <- rename(outliers_PC1, Chr=chromo)
+outliers_PC1 <- rename(outliers_PC1, Chr=chromo)
 
-outlier_PC2 <- rename(outliers_PC2, Chr=chromo)
+outliers_PC2 <- rename(outliers_PC2, Chr=chromo)
 ```
 
 4b. Generate VennDiagram:
 ```{r}
-outliers_venn = list("Tajima's D & Pi" = theta2$Chr, "PC1 outliers" = outlier_PC1$Chr, "PC2 outliers" = outlier_PC2$Chr)
+venn_diagram <- list( 
+  "TajimaD and Pi" = theta2$Chr, 
+  "PC1 outliers" = outlier_contigs_PC1, 
+  "PC2 outliers" = outlier_contigs_PC2)
 
 venn_diagram <- ggVennDiagram(outliers_venn,
                   label_alpha = 0,
                   color = "black", # Border color of sets
                   lwd = 0) + # Line width of set borders
-                  scale_fill_gradient(low="orange",high="lightblue")
+                  scale_fill_gradient(low="lightblue",high="lightgreen")
 
-venn_diagram + scale_x_continuous(expand = expansion(mult = .2))
+venndiagram_HW1 <- venn_diagram + scale_x_continuous(expand = expansion(mult = .2))
+
+venndiagram_HW1
+
+ggsave(filename = "venndiagram_HW1.png", plot = venndiagram_HW1)
+
 ```
-
-5. 
-SNPs?
