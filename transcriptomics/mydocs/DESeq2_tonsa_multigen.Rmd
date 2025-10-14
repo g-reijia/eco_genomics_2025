@@ -1,0 +1,68 @@
+---
+title: "DESeq2_tonsa_multigen"
+output: html_document
+date: "2025-10-14"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = "~/projects/eco_genomics_2025/transcriptomics/mydata")
+```
+
+## Import the libraries that we're likely to need in this session
+```{r}
+library(DESeq2)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(scales)
+library(ggpubr)
+library(vsn)  
+library("pheatmap")
+library("vsn")
+```
+
+Import data:
+```{r} 
+# Import the counts table
+countsTable <- read.table("counts_table.txt", header=TRUE, row.names=1)
+head(countsTable)
+dim(countsTable)
+```
+
+```{r}
+countsTableRound <- round(countsTable) # bc DESeq2 doesn't like decimals (and Salmon outputs data with decimals)
+head(countsTableRound)
+```
+
+```{r}
+#import the sample description table
+conds <- read.delim("metadata.txt", header=TRUE, stringsAsFactors = TRUE, row.names=1)
+head(conds)
+```
+
+Explore data distributions:
+```{r}
+# Let's see how many reads we have from each sample
+colSums(countsTableRound)
+mean(colSums(countsTableRound)) #note that we are below the general rule of thumb recommendation of 20M reads per sample. We're at ~12M reads/sample.
+```
+
+Visualizing variation across samples:
+```{r}
+barplot(colSums(countsTableRound), names.arg=colnames(countsTableRound),cex.names=0.5, las=3,ylim=c(0,21000000)) #change dims
+abline(h=mean(colSums(countsTableRound)), col="blue", lwd=2)
+```
+
+```{r}
+# the average number of counts per gene
+rowSums(countsTableRound)
+mean(rowSums(countsTableRound)) # 
+median(rowSums(countsTableRound)) #
+```
+
+```{r}
+apply(countsTableRound,2,mean) # 2 in the apply function does the action across columns
+apply(countsTableRound,1,mean) # 1 in the apply function does the action across rows
+hist(apply(countsTableRound,1,mean),xlim=c(0,10000), ylim=c(0,60000),breaks=10000)
+```

@@ -41,3 +41,11 @@ We then made another mapping rate file with ONLY sample names and mapping rates 
 -   `grep -r –include \*.log -e 'Mapping rate' | sed -E 's|/logs/.*:.*Mapping rate = ([0-9.]+)%|\t\1|' > ~/projects/eco_genomics_2025/transcriptomics/myresults/mapping_rate.txt`
 
 In order to prepare this data to be imported into DESeq2, we created a data matrix including all of the mapped reads. The code we used to do this is called `create_count_matrix.R` found in `mydata/` folder.
+
+#### **DESeq2 - start of DNA analysis!**
+
+Began by copying over `metadata.txt` file from:
+
+-   `/gpfs1/cl/ecogen/pbio6800/Transcriptomics`
+
+Then wrote an RMarkdown file titled `DESeq2_tonsa_multigen.Rmd` to visualize reads, variation, and global variation in gene expression using PCA.
