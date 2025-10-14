@@ -42,10 +42,14 @@ We then made another mapping rate file with ONLY sample names and mapping rates 
 
 In order to prepare this data to be imported into DESeq2, we created a data matrix including all of the mapped reads. The code we used to do this is called `create_count_matrix.R` found in `mydata/` folder.
 
-#### **DESeq2 - start of DNA analysis!**
+#### **!! DESeq2 - start of DNA analysis !!**
 
-Began by copying over `metadata.txt` file from:
+We began by copying over `metadata.txt` file from:
 
 -   `/gpfs1/cl/ecogen/pbio6800/Transcriptomics`
 
 Then wrote an RMarkdown file titled `DESeq2_tonsa_multigen.Rmd` to visualize reads, variation, and global variation in gene expression using PCA.
+
+In the first chunk of code, we explored the data distributions by looking at the variance across samples and variance across genes.
+
+In the second chunk of code, we started working with DESeq2. Here, we began by correcting the column names to match between the metadata table and the counts matrix. Then, we started filtering out genes with too few reads and removed all genes with counts \< 15.
