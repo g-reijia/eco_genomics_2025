@@ -1,8 +1,6 @@
 ## Population Genomics Notebook
 
-##### **Fall 2025 Ecological Genomics - [Class website & tutorials.](https://pespenilab.github.io/Ecological-Genomics/)**
-
-##### **Author: G. Rei Jia**
+##### **Author: G. Rei Jia \| Fall 2025 Ecological Genomics - [Class website & tutorials.](https://pespenilab.github.io/Ecological-Genomics/)**
 
 This will keep my notes on population genomics coding sessions!
 

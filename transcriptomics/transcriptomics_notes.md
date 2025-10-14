@@ -1,8 +1,6 @@
 # Transcriptomics Notebook
 
-##### **Fall 2025 Ecological Genomics - [Class website & tutorials.](https://pespenilab.github.io/Ecological-Genomics/)**
-
-##### **Author: G. Rei Jia**
+##### **Author: G. Rei Jia \| Fall 2025 Ecological Genomics - [Class website & tutorials.](https://pespenilab.github.io/Ecological-Genomics/)**
 
 This will keep my notes on transcriptomics coding sessions!
 
@@ -24,7 +22,7 @@ We began today's coding session by editing and running the `fastp_tonsa.sh` bash
 
 We then copied the script `salmon_quant.sh` from `/gpfs1/cl/ecogen/pbio6800/Transcriptomics/scripts` into our own `myscripts/` folder and edited it and customized the script based on our repositories and sent in the mapping script.
 
-#### October 14, 2025 - [Mapping and creating a counts matrix](https://pespenilab.github.io/Ecological-Genomics/Fall2025/tutorials/EcoGen2025_Transcriptomics3_MappingToCountsMatrix.html) and [gene expression analysis](https://pespenilab.github.io/Ecological-Genomics/Fall2025/tutorials/EcoGen2025_Transcriptomics4_GeneExpressionAnalysis.html)
+#### October 14, 2025 - [Mapping and creating a counts matrix](https://pespenilab.github.io/Ecological-Genomics/Fall2025/tutorials/EcoGen2025_Transcriptomics3_MappingToCountsMatrix.html) and [import to DESeq2 and visualize](https://pespenilab.github.io/Ecological-Genomics/Fall2025/tutorials/EcoGen2025_Transcriptomics4_GeneExpressionAnalysis.html)
 
 We began class by looking at the Salmon mapped reads in:
 
@@ -42,4 +40,4 @@ We then made another mapping rate file with ONLY sample names and mapping rates 
 
 -   `grep -r –include \*.log -e 'Mapping rate' | sed -E 's|/logs/.*:.*Mapping rate = ([0-9.]+)%|\t\1|' > ~/projects/eco_genomics_2025/transcriptomics/myresults/mapping_rate.txt`
 
-In order to prepare this data for import into DESeq2, we created a data matrix including all of the mapped reads. The code we used to do this is called `create_count_matrix.R` found in `mydata/` folder.
+In order to prepare this data to be imported into DESeq2, we created a data matrix including all of the mapped reads. The code we used to do this is called `create_count_matrix.R` found in `mydata/` folder.
