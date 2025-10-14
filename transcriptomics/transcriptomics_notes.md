@@ -23,3 +23,23 @@ We then chose our samples (mine is C1) and edited the bash script, titled `fastp
 We began today's coding session by editing and running the `fastp_tonsa.sh` bash script, which generated fastq reports and is housed in my `myresults/fastp_reports` folder.
 
 We then copied the script `salmon_quant.sh` from `/gpfs1/cl/ecogen/pbio6800/Transcriptomics/scripts` into our own `myscripts/` folder and edited it and customized the script based on our repositories and sent in the mapping script.
+
+#### October 14, 2025 - [Mapping and creating a counts matrix](https://pespenilab.github.io/Ecological-Genomics/Fall2025/tutorials/EcoGen2025_Transcriptomics3_MappingToCountsMatrix.html) and [gene expression analysis](https://pespenilab.github.io/Ecological-Genomics/Fall2025/tutorials/EcoGen2025_Transcriptomics4_GeneExpressionAnalysis.html)
+
+We began class by looking at the Salmon mapped reads in:
+
+-   `/gpfs1/cl/ecogen/pbio6800/Transcriptomics`
+
+Then, we looked into all of the samples and in terminal, used the function:
+
+-   `grep -r –include \*.log -e 'Mapping rate'`
+
+From this, we observed low mapping rates from \~30%-60 (80% is ideal). We are interested in using these mapping rates later, so we then saved the list of mapping rates into our own results folder by using the bash code:
+
+-   `grep -r –include \*.log -e 'Mapping rate' > ~/projects/eco_genomics_2025/transcriptomics/myresults/mapping_rates_list.txt`
+
+We then made another mapping rate file with ONLY sample names and mapping rates and saved the new list of mapping rates into our own results folder by using the bash code:
+
+-   `grep -r –include \*.log -e 'Mapping rate' | sed -E 's|/logs/.*:.*Mapping rate = ([0-9.]+)%|\t\1|' > ~/projects/eco_genomics_2025/transcriptomics/myresults/mapping_rate.txt`
+
+In order to prepare this data for import into DESeq2, we created a data matrix including all of the mapped reads. The code we used to do this is called `create_count_matrix.R` found in `mydata/` folder.
