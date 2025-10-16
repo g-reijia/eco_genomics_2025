@@ -53,3 +53,21 @@ Then wrote an RMarkdown file titled `DESeq2_tonsa_multigen.Rmd` to visualize rea
 In the first chunk of code, we explored the data distributions by looking at the variance across samples and variance across genes.
 
 In the second chunk of code, we started working with DESeq2. Here, we began by correcting the column names to match between the metadata table and the counts matrix. Then, we started filtering out genes with too few reads and removed all genes with counts \< 15.
+
+#### October 16, 2025 - [Import to DESeq2 and visualize](https://pespenilab.github.io/Ecological-Genomics/Fall2025/tutorials/EcoGen2025_Transcriptomics4_GeneExpressionAnalysis.html)
+
+-   Continuation from last class.
+
+During today's class, we began visualizing the dataset by making a heat map, cluster tree, and PCA plot, outlined in the RMarkdown file `DEseq2_tonsa_multigen.Rmd`
+
+*Notes:*
+
+-   Types of distribution: Negative binomial, poisson, and gaussian.
+
+-   What is size factor? - DESeq does this to scale everything to try to compare data using like factors.
+
+-   Looking at different variables to test specific contrasts:
+
+    -   Change reference from "control" to treatment"
+
+    -   Change contrast groups from contrast=c("group","controlG1","treatmentG1") to not include "G1".
