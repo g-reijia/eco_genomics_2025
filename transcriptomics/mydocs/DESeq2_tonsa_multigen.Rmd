@@ -20,6 +20,7 @@ library(ggpubr)
 library(vsn)  
 library("pheatmap")
 library("vsn")
+library(eulerr)
 ```
 
 Import data:
@@ -63,7 +64,7 @@ mean(rowSums(countsTableRound))
 median(rowSums(countsTableRound))
 ```
 
-```{r message=FALSE, warning=FALSE}
+```{r include=FALSE}
 apply(countsTableRound,2,mean) # 2 in the apply function does the action across columns
 apply(countsTableRound,1,mean) # 1 in the apply function does the action across rows
 ```
@@ -73,7 +74,7 @@ hist(apply(countsTableRound,1,mean),xlim=c(0,3000),ylim=c(0,1000), breaks = 5000
 ```
 
 Now we are going to start working with DESeq2!
-```{r}
+```{r include=FALSE}
 #### Corrects the column names to match between the metadata table and the counts matrix.
 colnames(countsTableRound) <-substr(colnames(countsTableRound), start = 1, stop = 4)
 
@@ -84,7 +85,7 @@ dds <- DESeqDataSetFromMatrix(countData = countsTableRound, colData=conds,
 dim(dds)
 ```
 
-```{r}
+```{r include=FALSE}
 # Filter out genes with too few reads - remove all genes with counts < 15 in more than 75% of 24 samples, so 18)
 ## suggested by WGCNA on RNAseq FAQ
 
@@ -99,8 +100,9 @@ dds <- DESeq(dds)
 resultsNames(dds)
 # Copy the results names 
 ```
-Continuation from Oct 14 class.
-```{r}
+
+# Continuation from Oct 14 class.
+```{r include=FALSE}
 # The goal of transformation "is to remove the dependence of the variance on the mean, particularly the high variance of the logarithm of count data when the mean is low."
 
 # this gives log2(n + 1)
@@ -198,14 +200,238 @@ head(resG1_CvT)
 
 Plotting individual genes:
 ```{r}
-# Counts of specific top interaction gene! (important validation that the normalization, model is working)
-d <-plotCounts(dds, gene="TRINITY_DN139369_c0_g5_i1-", intgroup = (c("line","generation")), returnData=TRUE)
+# Counts of specific top interaction gene! (important validatition that the normalization, model is working)
+d <-plotCounts(dds, gene="TRINITY_DN139369_c0_g5_i1", intgroup = (c("line","generation")), returnData=TRUE)
 d
 
-p <-ggplot(d, aes(x=line, y=count, color=line, shape=generation)) + 
+d$generation <- factor(d$generation, levels = sort(unique(d$generation)))
+
+p <- ggplot(d, aes(x = generation, y = count, color = line, group = line)) +
   theme_minimal() + theme(text = element_text(size=20), panel.grid.major=element_line(colour="grey"))
-p <- p + geom_point(position=position_jitter(w=0.2,h=0), size=3)
+p <- p + geom_point(position=position_jitter(w=0.2,h=0), size=3, aes(shape = line)) 
 p <- p + stat_summary(fun = mean, geom = "point", size=5, alpha=0.7) 
+p <- p + stat_summary(fun = mean, geom = "line", size = 1.5, aes(group = line), alpha = 0.8)
+p <- p + scale_color_manual(values = c("control" = "blue", "treatment" = "red"))
 p
+
+```
+Now we are making an MA plot:
+
+- Question: What is the relationship between LFC and magnitude of expression?
+
+- Fed results from generation 1 and treatment. Color coded by significance, where grey is not significantly expressed, blue are significantly expressed.
+
+```{r}
+plotMA(resG1_CvT, ylim=c(-5,5))
 ```
 
+We can make a volcano plot:
+
+- Question: What is the relationship between LFC and significance of DGE?
+- First make it into a dataframe and remove NAs, add column to dataframe called "significance" and include adjust parameters showing "up" and "down" regulated genes. Then using ggplot with log fold change on the X axis and adjusted p-value on Y axis. Using the new column of significance to show up and downregulated genes, then giving lines to show log fold change and p-value.
+
+```{r}
+# Make a dataframe
+res_df <- as.data.frame(resG1_CvT)
+
+# Remove NAs
+res_df <- res_df[!is.na(res_df$padj), ]
+
+# Add significance column for color mapping
+res_df$significance <- "Not Sig"
+res_df$significance[res_df$padj < 0.05 & res_df$log2FoldChange > 0] <- "Up"
+res_df$significance[res_df$padj < 0.05 & res_df$log2FoldChange < 0] <- "Down"
+
+ggplot(res_df, aes(x = log2FoldChange, y = -log10(padj), color = significance)) +
+  geom_point(alpha = 0.7, size = 2) +
+  scale_color_manual(values = c("Up" = "blue", "Down" = "red", "Not Sig" = "grey")) +
+  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "black") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +
+  labs(
+    title = "Volcano Plot: Generation 1 (Treatment vs Control)",
+    x = expression(log[2]~Fold~Change),
+    y = expression(-log[10]~Adjusted~p~value)
+  ) +
+  theme_bw(base_size = 16) +
+  theme(legend.title = element_blank())
+```
+
+Heatmap #1 - top 20 genes sorted by p-value:
+
+- Question: For DEGs, what does gene expression variation look like across individual samples among treatment groups?
+
+- In this heatmap, we are only pulling the top 100 genes, regardless of whether they are up or downregulated.
+- Normalizing it by getting rid of top row of genes, making it into a dataframe, plotting it using a heatmap and don't want to cluster by columns.
+```{r}
+topgenes <- head(rownames(resG1_CvT),100)
+mat <- assay(vsd)[topgenes,]
+mat <- mat - rowMeans(mat)
+df <- as.data.frame(colData(dds)[,c("generation","line")])
+pheatmap(mat, annotation_col=df)
+pheatmap(mat, annotation_col=df, cluster_cols = F)
+
+```
+
+Let’s make plots to explore differentially expressed genes between CvsT across generations:
+
+```{r}
+# First step: Identify the DEGs in the contrast for control versus treatment for each generation:
+
+#Gen1
+resG1_CvT <- results(dds, contrast=c("group","controlG1","treatmentG1"), alpha = 0.05)
+resG1_CvT <- resG1_CvT[order(resG1_CvT$padj),] #sort
+head(resG1_CvT)
+summary(resG1_CvT)
+
+resG1_CvT <- resG1_CvT[!is.na(resG1_CvT$padj),]
+degs_G1_CvTM <- row.names(resG1_CvT[resG1_CvT$padj < 0.05,])
+```
+
+```{r}
+#Gen2
+resG2_CvT <- results(dds, contrast=c("group","controlG2","treatmentG2"), alpha = 0.05)
+resG2_CvT <- resG2_CvT[order(resG2_CvT$padj),] #sort
+head(resG2_CvT)
+summary(resG2_CvT)
+
+resG2_CvT <- resG2_CvT[!is.na(resG2_CvT$padj),]
+degs_G2_CvTM <- row.names(resG2_CvT[resG2_CvT$padj < 0.05,])
+```
+
+```{r}
+#Gen3
+resG3_CvT <- results(dds, contrast=c("group","controlG3","treatmentG3"), alpha = 0.05)
+resG3_CvT <- resG3_CvT[order(resG3_CvT$padj),] #sort
+head(resG3_CvT)
+summary(resG3_CvT)
+
+resG3_CvT <- resG3_CvT[!is.na(resG3_CvT$padj),]
+degs_G3_CvTM <- row.names(resG3_CvT[resG3_CvT$padj < 0.05,])
+```
+
+```{r}
+#Gen4
+resG4_CvT <- results(dds, contrast=c("group","controlG4","treatmentG4"), alpha = 0.05)
+resG4_CvT <- resG4_CvT[order(resG4_CvT$padj),] #sort
+head(resG4_CvT)
+summary(resG4_CvT)
+
+resG4_CvT <- resG4_CvT[!is.na(resG4_CvT$padj),]
+degs_G4_CvTM <- row.names(resG4_CvT[resG4_CvT$padj < 0.05,])
+```
+
+Make a heatmap of G1 sig genes and how they change across generations:
+
+- Question: How does gene expression change across generations for the genes that are initially differentially expressed in Generation 1 (between different developmental temperatures, 18 vs. 22 C)
+
+- Start by identifying significant genes, then make a dataframe with log fold change for all of the significant genes from G1 from all four different generations (we'll call this log fold change matrix), then remove rows with any same values, and use a heatmap to plot the dataframe and scale it by rows and then by color. Cluster by rows and colors by equal distance.
+
+```{r}
+sig_genes_G1 <- rownames(resG1_CvT[which(resG1_CvT$padj < 0.05 & !is.na(resG1_CvT$padj)), ])
+
+# Combine into a data frame
+lfc_mat <- data.frame(
+  Gen1 = resG1_CvT[sig_genes_G1, "log2FoldChange"],
+  Gen2 = resG2_CvT[sig_genes_G1, "log2FoldChange"],
+  Gen3 = resG3_CvT[sig_genes_G1, "log2FoldChange"],
+  Gen4 = resG4_CvT[sig_genes_G1, "log2FoldChange"]
+)
+
+# Remove any rows with missing values (some genes may not be in all result tables)
+lfc_mat <- na.omit(lfc_mat)
+
+pheatmap(lfc_mat,
+         scale = "row",             # scales each gene’s LFCs across generations
+         color = colorRampPalette(c("blue", "white", "red"))(50),
+         clustering_distance_rows = "euclidean",
+         clustering_distance_cols = "euclidean",
+         clustering_method = "complete",
+         show_rownames = FALSE,
+         main = "LFC (Treatment vs Control) of Sig Genes in Gen 1")
+```
+
+Making a heatmap for Generation 2:
+
+- What is happening in generation 2?
+
+  - Biologically-relevant thoughts:
+  - In G2, there are more differentially expressed genes compared to G1. Did they adjust their physiology through development?
+  - In the first generation, parents are already making gametes and there is direct exposure from G1 to G2.
+  - There could also be epigenetic variation looking at DNA methylation.
+  - In G2, they are in the same environment, but may have inherited different epigenetic patterns.
+
+- Experiment-relevant thoughts:
+  - Only two samples in Generation 2.
+```{r}
+sig_genes_G2 <- rownames(resG2_CvT[which(resG2_CvT$padj < 0.05 & !is.na(resG2_CvT$padj)), ])
+
+# Combine into a data frame
+lfc_mat_G2 <- data.frame(
+  Gen1 = resG1_CvT[sig_genes_G2, "log2FoldChange"],
+  Gen2 = resG2_CvT[sig_genes_G2, "log2FoldChange"],
+  Gen3 = resG3_CvT[sig_genes_G2, "log2FoldChange"],
+  Gen4 = resG4_CvT[sig_genes_G2, "log2FoldChange"]
+)
+
+# Remove any rows with missing values (some genes may not be in all result tables)
+lfc_mat_G2 <- na.omit(lfc_mat_G2)
+
+pheatmap(lfc_mat_G2,
+         scale = "row",             # scales each gene’s LFCs across generations
+         color = colorRampPalette(c("blue", "white", "red"))(50),
+         clustering_distance_rows = "euclidean",
+         clustering_distance_cols = "euclidean",
+         clustering_method = "complete",
+         show_rownames = FALSE,
+         main = "LFC (Treatment vs Control) of Sig Genes in Gen 2")
+```
+
+Here we can make a Venn or Euler plot:
+
+- Question: How much overlap is there between genes differentially expressed between treatments across generations?
+
+```{r}
+# Total
+length(degs_G1_CvTM)  # 573 genes differentially expressed
+length(degs_G2_CvTM)  # 4568 genes differentially expressed
+length(degs_G3_CvTM)  # 1234 genes differentially expressed
+length(degs_G4_CvTM)  # 40 genes differentially expressed
+
+# Intersections
+length(intersect(degs_G1_CvTM,degs_G2_CvTM))  # 227
+length(intersect(degs_G1_CvTM,degs_G3_CvTM))  # 71
+#length(intersect(degs_G1_CvTM,degs_G4_CvTM))
+
+length(intersect(degs_G2_CvTM,degs_G3_CvTM))  # 294 
+#length(intersect(degs_G2_CvTM,degs_G4_CvTM))  
+#length(intersect(degs_G3_CvTM,degs_G4_CvTM)) 
+
+# To calc number shared in all three contrasts
+int12 <- intersect(degs_G1_CvTM,degs_G2_CvTM)
+length(intersect(degs_G3_CvTM,int12)) # 13 - intersect of all three contrasts
+
+# Number unique
+573 - 227 - 71 + 13 #  G1, 288 genes are totally unique to generation 1
+4568 - 227 - 294 + 13 #  G2, 4060 genes are totally unique to generation 2
+1234 - 71 - 294 + 13 #  G3, 882 genes are totally unique to generation 3
+
+227 - 13 # G1&G2, 214 genes 
+71 - 13 # G1&G3, 58 genes
+294 - 13 # G2&G3, 281 genes
+
+# Note that the names are important and have to be specific to line up the diagram
+fit1 <- euler(c("G1" = 288, "G2" = 4060, "G3" = 882 , "G1&G2" = 214, "G1&G3" = 58, "G2&G3" = 281, "G1&G2&G3" = 13))
+
+
+plot(fit1,  lty = 1:3, quantities = TRUE)
+# lty changes the lines
+
+plot(fit1, quantities = TRUE, fill = "transparent",
+     lty = 1:3,
+     labels = list(font = 4))
+
+#cross check
+ #  total G1
+ #  total G2
+ #  total G3
+```

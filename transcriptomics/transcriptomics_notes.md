@@ -56,8 +56,6 @@ In the second chunk of code, we started working with DESeq2. Here, we began by c
 
 #### October 16, 2025 - [Import to DESeq2 and visualize](https://pespenilab.github.io/Ecological-Genomics/Fall2025/tutorials/EcoGen2025_Transcriptomics4_GeneExpressionAnalysis.html)
 
--   Continuation from last class.
-
 During today's class, we began visualizing the dataset by making a heat map, cluster tree, and PCA plot, outlined in the RMarkdown file `DEseq2_tonsa_multigen.Rmd`
 
 *Notes:*
@@ -71,3 +69,21 @@ During today's class, we began visualizing the dataset by making a heat map, clu
     -   Change reference from "control" to treatment"
 
     -   Change contrast groups from contrast=c("group","controlG1","treatmentG1") to not include "G1".
+
+#### October 21, 2025 - [Import to DESeq2 and visualize](https://pespenilab.github.io/Ecological-Genomics/Fall2025/tutorials/EcoGen2025_Transcriptomics4_GeneExpressionAnalysis.html)
+
+In today's class, we continued visualizing the dataset by making an MA plot, volcano plot, several heatmaps, and a Venn Diagram which are outlined in the RMarkdown file `DEseq2_tonsa_multigen.Rmd.` Each plot is meant to show us the following:
+
+-   MA plot - Plotting the relationship between LFC and magnitude of expression.
+
+-   Volcano plot - Plotting the relationship between LFC and significance of DGE in Generation 1, comparing control and treatment.
+
+-   Heatmaps - Plotting relative expression on gene and sample level
+
+    -   Heatmap 1: Plotting top 20 genes sorted by p-value.
+
+    -   Heatmap 2: Plotting LFC and G1 significant genes and how they change across generations.
+
+    -   Heatmap 3: Plotting LFC and G2 significant genes and how they change across generations.
+
+-   Venn Diagram - Plotting overlap between genes differentially expressed between treatments across generations.
