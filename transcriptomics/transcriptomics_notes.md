@@ -87,3 +87,11 @@ In today's class, we continued visualizing the dataset by making an MA plot, vol
     -   Heatmap 3: Plotting LFC and G2 significant genes and how they change across generations.
 
 -   Venn Diagram - Plotting overlap between genes differentially expressed between treatments across generations.
+
+#### October 23, 2025 - [Functional enrichment analysis](https://pespenilab.github.io/Ecological-Genomics/Fall2025/tutorials/EcoGen2025_Transcriptomics5_FunctionalEnrichment.html)
+
+Today, we began the next tutorial on understanding Gene Ontology (GO) and functional enrichment statistical tests. Here we will implement a functional enrichment analysis with our data using TopGO.
+
+We created a new RMarkdown file called `DESeq2ToTopGo.Rmd`, which can be found in `mydata/` folder.
+
+First, we began by visualizing our data using several different plot types. Then, we created a topGO plot and REVIGO plot.
