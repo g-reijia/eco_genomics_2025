@@ -90,8 +90,16 @@ In today's class, we continued visualizing the dataset by making an MA plot, vol
 
 #### October 23, 2025 - [Functional enrichment analysis](https://pespenilab.github.io/Ecological-Genomics/Fall2025/tutorials/EcoGen2025_Transcriptomics5_FunctionalEnrichment.html)
 
-Today, we began the next tutorial on understanding Gene Ontology (GO) and functional enrichment statistical tests. Here we will implement a functional enrichment analysis with our data using TopGO.
+Today, we began the next tutorial on understanding Gene Ontology (GO) and functional enrichment statistical tests. Here we made a functional enrichment analysis with our data using TopGO.
 
 We created a new RMarkdown file called `DESeq2ToTopGo.Rmd`, which can be found in `mydata/` folder.
 
 First, we began by visualizing our data using several different plot types. Then, we created a topGO plot and REVIGO plot.
+
+#### October 28, 2025 - [Weighted Gene Correlation Network Analysis (WGCNA)](https://pespenilab.github.io/Ecological-Genomics/Fall2025/tutorials/EcoGen2025_Transcriptomics6_CorrelationNetworkAnalyses.html)
+
+Today, we began the next tutorial on WGCNA. We created a new RMarkdown file called `DESeq2ToWGCNA.Rmd`, which can be found in `mydata/` folder.
+
+We began by doing basic DESeq2 data filtering, then copied trait data, `WGCNA_TraitData.csv` from `/gpfs1/cl/ecogen/pbio6800/Transcriptomics/enrichment` to `mydata/` folder and imported it to this RMarkdown file. We then chose a set of soft-thresholding powers and plotted the threshold powers to visualize them.
+
+Once we began Network Construction, I chose a soft-thresholding power = 24. We then plotted dendrograms of modules and visualized the correlation between each eigengene of each module and the imported ULT trait data. Because I chose the soft-threshold power = 24, my correlation showed that my module was MEsalmon, with a p-value of 0.48 and plotted the eigengene correlation. Finally, we looked at GO categories are present in any modules correlated with ULT. From this, my unique GO categories are: GO:0016746, GO:0005634, GO:0000276, GO:0015078, and GO:0015986. When these categories were submitted to REVIGO, each term was associated with proton motive force-driven ATP synthesis.
