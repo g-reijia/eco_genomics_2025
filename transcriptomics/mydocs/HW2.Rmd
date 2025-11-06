@@ -19,6 +19,7 @@ library(topGO)
 library(GO.db)
 library(ggplot2)
 library(scales)
+library(rrvgo)
 ```
 
 Import the counts matrix:
@@ -62,7 +63,6 @@ dds$group <- factor(paste0(dds$line, dds$generation))
 design(dds) <- ~ group
 dds <- DESeq(dds)
 resultsNames(dds)
-
 
 #Gen1
 resG1_CvT <- results(dds, contrast=c("group","controlG1","treatmentG1"), alpha = 0.05)
