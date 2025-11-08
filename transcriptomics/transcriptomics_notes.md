@@ -102,4 +102,22 @@ Today, we began the next tutorial on WGCNA. We created a new RMarkdown file call
 
 We began by doing basic DESeq2 data filtering, then copied trait data, `WGCNA_TraitData.csv` from `/gpfs1/cl/ecogen/pbio6800/Transcriptomics/enrichment` to `mydata/` folder and imported it to this RMarkdown file. We then chose a set of soft-thresholding powers and plotted the threshold powers to visualize them.
 
-Once we began Network Construction, I chose a soft-thresholding power = 24. We then plotted dendrograms of modules and visualized the correlation between each eigengene of each module and the imported ULT trait data. Because I chose the soft-threshold power = 24, my correlation showed that my module was MEsalmon, with a p-value of 0.48 and plotted the eigengene correlation. Finally, we looked at GO categories are present in any modules correlated with ULT. From this, my unique GO categories are: GO:0016746, GO:0005634, GO:0000276, GO:0015078, and GO:0015986. When these categories were submitted to REVIGO, each term was associated with proton motive force-driven ATP synthesis.
+Once we began Network Construction, I chose a soft-thresholding power = 24. We then plotted dendrograms of modules and visualized the correlation between each eigengene of each module and the imported ULT trait data. Because I chose the soft-threshold power = 24, my correlation showed that my module was MEsalmon, with a p-value of 0.48 and plotted the eigengene correlation. Finally, we looked at GO categories are present in any modules correlated with ULT. From this, my unique GO categories are: <GO:0016746>, <GO:0005634>, <GO:0000276>, <GO:0015078>, and <GO:0015986>. When these categories were submitted to REVIGO, each term was associated with proton motive force-driven ATP synthesis.
+
+#### November 4, 2025 - Submission for Homework 2 Plan
+
+**Question:** *What are the functional differences among genes differentially expressed at G1 vs. G2 vs. G3 vs. G4?*
+
+**Analysis and Visualization Strategy:** I will begin by using DESeq2 to set up contrasts to compare treatment versus control between each generation. Then, I will input the results into TopGO, which will find gene ontology terms. Finally, I will use a bioconductor package called "rrvgo" ([Sayols, 2023](https://pmc.ncbi.nlm.nih.gov/articles/PMC10155054/)) to compare GO enrichment results and reduce redundancy.
+
+Creative or Unique Visualization: Using rrvgo, I will generate several plots to show gene ontology results. One unique plot that I will use to visualize this data is a treemap that combines like gene ontology terms into parent terms. The size of both the parent and child terms are organized by score, which determines the size of the boxes.
+
+**Anticipated challenges or areas of support:** In this assignment, I anticipate that I will need further support in understanding the DESeq2 script that we generated during class time. Additionally, instead of using REViGO like we did in class, I am attempting to try to use a new package that is new to me. Although this will be a challenge, according to the creator of rrvgo, it is heavily influenced by REViGO, so hopefully there is overlap. If I have time, in addition to my first analysis, I would be interested in comparing REViGO and rrvgo to see if both yield the same results.
+
+**References:** Sayols, S. (2023). rrvgo: a Bioconductor package for interpreting lists of Gene Ontology terms. *PubMed*, *2023*. <https://doi.org/10.17912/micropub.biology.000811>
+
+#### **November 5, 2025 - Homework 2 Notes**
+
+-   Began assignment by making a copy of `DESeq2ToTopGO.Rmd` script from Tutorial 4 that we reviewed during class and calling it `HW2.Rmd`. This script can be found in `mydocs/` folder.
+
+-   
