@@ -281,3 +281,15 @@ topGO_plot
 # Dark colors are more significant and ranked in order. The number of significant genes in those categories is scaled by size of the dots. We can't see all of the GO terms but they are listed along the side.
 ```
 
+```{r}
+# Select only the columns REVIGO needs
+revigo_input <- filtered_GO_results[, c("GO.ID", "classicFisher")]
+
+sigRes <- revigo_input[as.numeric(revigo_input$classicFisher) < 0.05, ]
+
+# Rename columns for clarity
+colnames(sigRes) <- c("GO.ID", "pValue")
+
+# Save as txt to upload to REVIGO
+write.table(sigRes, file = "topGOsig_for_REVIGO.txt", sep = "\t", row.names = FALSE, quote = FALSE)
+```
