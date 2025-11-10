@@ -116,7 +116,9 @@ Creative or Unique Visualization: Using rrvgo, I will generate several plots to 
 
 **References:** Sayols, S. (2023). rrvgo: a Bioconductor package for interpreting lists of Gene Ontology terms. *PubMed*, *2023*. <https://doi.org/10.17912/micropub.biology.000811>
 
-#### [**Homework 2 Notes:**]{.underline}
+------------------------------------------------------------------------
+
+#### **Homework 2 Notes:**
 
 **November 5, 2025**
 
