@@ -20,6 +20,8 @@ library(GO.db)
 library(ggplot2)
 library(scales)
 library(gridExtra)
+library(treemap)
+library(gridGraphics)
 ```
 
 Import the counts matrix:
@@ -522,4 +524,275 @@ colnames(sigRes_G4) <- c("GO.ID", "pValue")
 
 # Save as txt to upload to REVIGO
 write.table(sigRes_G4, file = "G4topGOsig_for_REVIGO.txt", sep = "\t", row.names = FALSE, quote = FALSE)
+```
+
+Subsetting each .txt file to only show the top 32 genes from each list:
+```{r}
+#### Generation 1:
+G1_topGO30sig <- sigRes_G1 %>%
+  arrange(pValue) %>% 
+  slice_head(n=32)
+
+write.table(G1_topGO30sig, file = "G1top32_forREVIGO.txt", sep = "\t", row.names = FALSE, quote = FALSE)
+
+#### Generation 2:
+G2_topGO30sig <- sigRes_G2 %>%
+  arrange(pValue) %>% 
+  slice_head(n=32)
+
+write.table(G2_topGO30sig, file = "G2top32_forREVIGO.txt", sep = "\t", row.names = FALSE, quote = FALSE)
+
+#### Generation 3:
+G3_topGO30sig <- sigRes_G3 %>%
+  arrange(pValue) %>% 
+  slice_head(n=32)
+
+write.table(G3_topGO30sig, file = "G3top32_forREVIGO.txt", sep = "\t", row.names = FALSE, quote = FALSE)
+
+#### Generation 4:
+G4_topGO30sig <- sigRes_G4 %>%
+  arrange(pValue) %>% 
+  slice_head(n=32)
+
+write.table(G4_topGO30sig, file = "G4top32_forREVIGO.txt", sep = "\t", row.names = FALSE, quote = FALSE)
+```
+
+R scripts for each treemap exported from REViGO for plotting:
+```{r}
+#### Generation 1:
+
+# Here is your data from Revigo. Scroll down for plot configuration options.
+
+G1_revigo.names <- c("term_ID","description","frequency","value","uniqueness","dispensability","representative");
+G1_revigo.data <- rbind(c("GO:0006403","RNA localization",0.43118734924099966,2.283996656365201,0.8159085137563465,0,"RNA localization"),
+c("GO:0007309","oocyte axis specification",0.00992237100321502,2.1739251972991736,0.5247861323696643,0.57143096,"RNA localization"),
+c("GO:0007351","tripartite regional subdivision",0.009411347603907806,1.8961962790440432,0.6108392626670105,0.63160916,"RNA localization"),
+c("GO:0009880","embryonic pattern specification",0.04061784318826817,2.036212172654445,0.6011944108178463,0.68585269,"RNA localization"),
+c("GO:0010248","establishment or maintenance of transmembrane electrochemical gradient",0.030493901844215313,1.4621809049267258,0.9110661050973451,0.18758971,"RNA localization"),
+c("GO:0015931","nucleobase-containing compound transport",0.6344071600510524,1.8297382846050425,0.8945653941536629,0.24178085,"RNA localization"),
+c("GO:0045185","maintenance of protein location",0.08477026488841122,1.3062730510763532,0.8283678037877401,0.44268159,"RNA localization"),
+c("GO:0051205","protein insertion into membrane",0.18732130505382838,1.6363880201078558,0.7472469673898914,0.47261329,"RNA localization"),
+c("GO:0051236","establishment of RNA localization",0.4041201431910277,2.3872161432802645,0.7760577235073922,0.64830993,"RNA localization"),
+c("GO:0060810","intracellular mRNA localization involved in pattern specification process",0.0013428559326239496,2.3872161432802645,0.5206082414485902,0.33256854,"RNA localization"),
+c("GO:0007028","cytoplasm organization",0.009155835904254202,1.8794260687941502,0.9332706833185263,0.00212161,"cytoplasm organization"),
+c("GO:0007021","tubulin complex assembly",0.037364327546012266,1.5670307091255944,0.9207018857875888,0.20960521,"cytoplasm organization"),
+c("GO:0009448","gamma-aminobutyric acid metabolic process",0.06233349863993961,2.070581074285707,0.9821742967949368,-0,"gamma-aminobutyric acid metabolic process"),
+c("GO:0033619","membrane protein proteolysis",0.0628643951714421,1.5171264163912463,0.9583927364201941,0.06357375,"membrane protein proteolysis"),
+c("GO:0006457","protein folding",1.1355876808838297,1.3178549236261683,0.9520949329642249,0.27188323,"membrane protein proteolysis"),
+c("GO:0046835","carbohydrate phosphorylation",0.2723385645852381,1.586700235918748,0.9606487512347872,0.06353316,"carbohydrate phosphorylation"),
+c("GO:0043545","molybdopterin cofactor metabolic process",0.17683964733026045,1.3726341434072673,0.9364418992077391,0.38115691,"carbohydrate phosphorylation"),
+c("GO:0072132","mesenchyme morphogenesis",0.009720800662377174,1.779891911959945,0.6800396054890875,-0,"mesenchyme morphogenesis"),
+c("GO:0001822","kidney development",0.0856475217238886,1.3496924768680636,0.6230348423444513,0.59182406,"mesenchyme morphogenesis"),
+c("GO:0035845","photoreceptor cell outer segment organization",0.005456594297047,1.3353580244438745,0.6158271158737786,0.31194486,"mesenchyme morphogenesis"),
+c("GO:0048882","lateral line development",0.007327507742288401,1.640164517660112,0.6423740197623755,0.48262198,"mesenchyme morphogenesis"),
+c("GO:0048925","lateral line system development",0.00826722299323666,1.7011469235902934,0.666854968696479,0.64944447,"mesenchyme morphogenesis"),
+c("GO:0060485","mesenchyme development",0.1095492217170409,1.4934949675951281,0.6596541996059666,0.56392683,"mesenchyme morphogenesis"),
+c("GO:0090131","mesenchyme migration",0.0007012376646048955,1.7351821769904636,0.683972917525958,0.64521231,"mesenchyme morphogenesis"),
+c("GO:0090130","tissue migration",0.01403894838652311,1.341035157335565,0.7906898844393901,-0,"tissue migration"),
+c("GO:0030537","larval behavior",0.002586346204271497,1.3306831194338877,0.8061021991154845,0.29502156,"tissue migration"));
+
+stuff <- data.frame(G1_revigo.data);
+names(stuff) <- G1_revigo.names;
+
+stuff$value <- as.numeric( as.character(stuff$value) );
+stuff$frequency <- as.numeric( as.character(stuff$frequency) );
+stuff$uniqueness <- as.numeric( as.character(stuff$uniqueness) );
+stuff$dispensability <- as.numeric( as.character(stuff$dispensability) );
+
+# by default, outputs to a PDF file
+pdf( file="G1_revigo_treemap.pdf", width=16, height=9 ) # width and height are in inches <- commented out because I don't want to save as PDF
+
+# check the tmPlot command documentation for all possible parameters - there are a lot more
+G1_treemap <- treemap(
+  stuff,
+  index = c("representative","description"),
+  vSize = "value",
+  type = "categorical",
+  vColor = "representative",
+  title = "Revigo TreeMap for Generation 1",
+  inflate.labels = FALSE,      # set this to TRUE for space-filling group labels - good for posters
+  lowerbound.cex.labels = 0,   # try to draw as many labels as possible (still, some small squares may not get a label)
+  bg.labels = "#CCCCCCAA",   # define background color of group labels
+								 # "#CCCCCC00" is fully transparent, "#CCCCCCAA" is semi-transparent grey, NA is opaque
+  position.legend = "none"
+)
+
+dev.off()
+
+#### Generation 2:
+
+# Here is your data from Revigo. Scroll down for plot configuration options.
+
+G2_revigo.names <- c("term_ID","description","frequency","value","uniqueness","dispensability","representative");
+G2_revigo.data <- rbind(c("GO:0000912","assembly of actomyosin apparatus involved in cytokinesis",0.029480372102256007,3.744727494896694,0.883290956142653,0.00301826,"assembly of actomyosin apparatus involved in cytokinesis"),
+c("GO:0097581","lamellipodium organization",0.02583507185386457,2.9244530386074694,0.9701668733227043,0.21984032,"assembly of actomyosin apparatus involved in cytokinesis"),
+c("GO:0003012","muscle system process",0.13872297977971257,5.080921907623926,0.8648367112690702,0,"muscle system process"),
+c("GO:0001700","embryonic development via the syncytial blastoderm",0.0032591936800259918,3.0604807473813813,0.837918402691036,0.33901475,"muscle system process"),
+c("GO:0002164","larval development",0.0352265463255771,3.619788758288394,0.8150136572003547,0.3945465,"muscle system process"),
+c("GO:0002165","instar larval or pupal development",0.01640669013664652,3.3279021420642825,0.8211844725875281,0.6898526,"muscle system process"),
+c("GO:0003006","developmental process involved in reproduction",0.6560177718039772,2.752026733638193,0.8540603805027049,0.43129073,"muscle system process"),
+c("GO:0007351","tripartite regional subdivision",0.009411347603907806,3.1804560644581312,0.8159030286453139,0.56995628,"muscle system process"),
+c("GO:0008298","intracellular mRNA localization",0.01767573157825943,2.91721462968355,0.9093768633295769,0.54614401,"muscle system process"),
+c("GO:0035272","exocrine system development",0.019282616267192104,2.6903698325741012,0.8370144174057864,0.40248477,"muscle system process"),
+c("GO:0060810","intracellular mRNA localization involved in pattern specification process",0.0013428559326239496,4.4089353929735005,0.7664321356912029,0.32212587,"muscle system process"),
+c("GO:0044057","regulation of system process",0.1966645162044952,3.619788758288394,0.9301644643682976,-0,"regulation of system process"),
+c("GO:0045807","positive regulation of endocytosis",0.04220769376389061,2.709965388637482,0.8234991214963477,0.55051371,"regulation of system process"),
+c("GO:0060491","regulation of cell projection assembly",0.1060912967150621,3.3665315444204134,0.8211924111528346,0.1450252,"regulation of system process"),
+c("GO:0080135","regulation of cellular response to stress",0.2516591510266063,2.838631997765025,0.8648687996334417,0.46807965,"regulation of system process"),
+c("GO:1901798","positive regulation of signal transduction by p53 class mediator",0.007446746535460085,3.3467874862246565,0.8432788604438033,0.56127259,"regulation of system process"),
+c("GO:2001244","positive regulation of intrinsic apoptotic signaling pathway",0.018919221849906978,3.5850266520291822,0.8197957110434334,0.12813529,"regulation of system process"),
+c("GO:0098657","import into cell",1.4585544692459873,4.853871964321762,0.9108949348256709,-0,"import into cell"),
+c("GO:0006839","mitochondrial transport",0.11195670973155487,3.2518119729937998,0.9233543073574391,0.24266565,"import into cell"),
+c("GO:0006897","endocytosis",0.6960167088753068,4.3872161432802645,0.9133802350037356,0.29088754,"import into cell"),
+c("GO:0034643","establishment of mitochondrion localization, microtubule-mediated",0.014280264991751515,4.102372908709558,0.9333510921822432,0.2001031,"import into cell"),
+c("GO:1902600","proton transmembrane transport",1.5171915652976047,2.9136401693252516,0.9086982780461841,0.31782089,"import into cell"),
+c("GO:1901293","nucleoside phosphate biosynthetic process",2.746415767047826,4.721246399047171,0.9179979196582567,-0,"nucleoside phosphate biosynthetic process"),
+c("GO:0006413","translational initiation",0.5259708337369472,3.721246399047171,0.926134901728167,0.31564317,"nucleoside phosphate biosynthetic process"),
+c("GO:0006414","translational elongation",0.4751126494303395,2.8927900303521317,0.9265146901862473,0.56205624,"nucleoside phosphate biosynthetic process"),
+c("GO:0019693","ribose phosphate metabolic process",2.0341598701500896,3.050609993355087,0.944470657025616,0.66749241,"nucleoside phosphate biosynthetic process"),
+c("GO:0140053","mitochondrial gene expression",0.34976996565582075,3.795880017344075,0.9424576200985333,0.1958194,"nucleoside phosphate biosynthetic process"));
+
+stuff <- data.frame(G2_revigo.data);
+names(stuff) <- G2_revigo.names;
+
+stuff$value <- as.numeric( as.character(stuff$value) );
+stuff$frequency <- as.numeric( as.character(stuff$frequency) );
+stuff$uniqueness <- as.numeric( as.character(stuff$uniqueness) );
+stuff$dispensability <- as.numeric( as.character(stuff$dispensability) );
+
+# by default, outputs to a PDF file
+pdf( file="G2_revigo_treemap.pdf", width=16, height=9 ) # width and height are in inches <- commented out because I don't want to save as PDF
+
+# check the tmPlot command documentation for all possible parameters - there are a lot more
+G2_treemap <- treemap(
+  stuff,
+  index = c("representative","description"),
+  vSize = "value",
+  type = "categorical",
+  vColor = "representative",
+  title = "Revigo TreeMap for Generation 2",
+  inflate.labels = FALSE,      # set this to TRUE for space-filling group labels - good for posters
+  lowerbound.cex.labels = 0,   # try to draw as many labels as possible (still, some small squares may not get a label)
+  bg.labels = "#CCCCCCAA",   # define background color of group labels
+								 # "#CCCCCC00" is fully transparent, "#CCCCCCAA" is semi-transparent grey, NA is opaque
+  position.legend = "none"
+)
+
+dev.off()
+
+#### Generation 3:
+# Here is your data from Revigo. Scroll down for plot configuration options.
+
+G3_revigo.names <- c("term_ID","description","frequency","value","uniqueness","dispensability","representative");
+G3_revigo.data <- rbind(c("GO:0003012","muscle system process",0.13872297977971257,2.815308569182401,0.8064401610823462,-0,"muscle system process"),
+c("GO:0007436","larval salivary gland morphogenesis",0.00017885818975752393,2.027334407733889,0.8661563785407915,0.2893523,"muscle system process"),
+c("GO:0016203","muscle attachment",0.0028446969228101424,1.7872798455821577,0.8503164525166629,0.37059529,"muscle system process"),
+c("GO:0072144","glomerular mesangial cell development",0.0008318325333167383,1.7888794587419508,0.8196312549384999,0.32947018,"muscle system process"),
+c("GO:0097746","blood vessel diameter maintenance",0.09133407655062385,2.2924298239020637,0.715882181791112,0.63380443,"muscle system process"),
+c("GO:0006414","translational elongation",0.4751126494303395,3.721246399047171,0.8810857177993994,0,"translational elongation"),
+c("GO:0006270","DNA replication initiation",0.22167343356281313,2.8927900303521317,0.9098395746178356,0.14426908,"translational elongation"),
+c("GO:0006413","translational initiation",0.5259708337369472,1.8745187342994059,0.8802983616121536,0.56205624,"translational elongation"),
+c("GO:0006457","protein folding",1.1355876808838297,2.099086932262331,0.8675498710443552,0.35020084,"translational elongation"),
+c("GO:0016072","rRNA metabolic process",1.7068011195727755,2.3819519032879075,0.9070856904925826,0.32684345,"translational elongation"),
+c("GO:0034982","mitochondrial protein processing",0.06498798129745208,1.9714287473074623,0.8882006541080704,0.63747714,"translational elongation"),
+c("GO:0036297","interstrand cross-link repair",0.10678969536078195,1.9072793553159009,0.8837564161578849,0.41248712,"translational elongation"),
+c("GO:0009636","response to toxic substance",1.1586802604947455,1.904830648568245,0.9643311695330768,-0,"response to toxic substance"),
+c("GO:0009607","response to biotic stimulus",1.3534937363861945,1.8119156262850618,0.9641159421218839,0.31425691,"response to toxic substance"),
+c("GO:0019693","ribose phosphate metabolic process",2.0341598701500896,2.9136401693252516,0.9324449252792466,0.06001262,"ribose phosphate metabolic process"),
+c("GO:0046390","ribose phosphate biosynthetic process",1.3979584501636921,2.7986028756795487,0.9016817410960407,0.63606655,"ribose phosphate metabolic process"),
+c("GO:0032200","telomere organization",0.2054853478803147,1.9974020192800914,0.9673431581625613,0.00306722,"telomere organization"),
+c("GO:0051276","chromosome organization",1.0830374413217383,1.747389659432627,0.9669734103478294,0.47521183,"telomere organization"),
+c("GO:0045824","negative regulation of innate immune response",0.022862619081227626,2.585026652029182,0.8191110108256309,-0,"negative regulation of innate immune response"),
+c("GO:0002831","regulation of response to biotic stimulus",0.282820222308806,1.975104039892515,0.8152987480512545,0.63061791,"negative regulation of innate immune response"),
+c("GO:0032101","regulation of response to external stimulus",0.4870138165964275,1.8629625452104874,0.8091913861164622,0.66401586,"negative regulation of innate immune response"),
+c("GO:0070873","regulation of glycogen metabolic process",0.034689971756304526,2.2898826348881838,0.7989771710299678,0.11602134,"negative regulation of innate immune response"),
+c("GO:0080134","regulation of response to stress",0.717363291871923,2.2284125191187445,0.8047559237184041,0.51154079,"negative regulation of innate immune response"),
+c("GO:0051169","nuclear transport",0.6525655248397686,3.537602002101044,0.9813365884421212,0.00340863,"nuclear transport"),
+c("GO:0051236","establishment of RNA localization",0.4041201431910277,1.7835701691237489,0.9840458947073021,0.2482829,"nuclear transport"));
+
+stuff <- data.frame(G3_revigo.data);
+names(stuff) <- G3_revigo.names;
+
+stuff$value <- as.numeric( as.character(stuff$value) );
+stuff$frequency <- as.numeric( as.character(stuff$frequency) );
+stuff$uniqueness <- as.numeric( as.character(stuff$uniqueness) );
+stuff$dispensability <- as.numeric( as.character(stuff$dispensability) );
+
+# by default, outputs to a PDF file
+pdf( file="G3_revigo_treemap.pdf", width=16, height=9 ) # width and height are in inches <- commented out because I don't want to save as PDF
+
+# check the tmPlot command documentation for all possible parameters - there are a lot more
+G3_treemap <- treemap(
+  stuff,
+  index = c("representative","description"),
+  vSize = "value",
+  type = "categorical",
+  vColor = "representative",
+  title = "Revigo TreeMap for Generation 3",
+  inflate.labels = FALSE,      # set this to TRUE for space-filling group labels - good for posters
+  lowerbound.cex.labels = 0,   # try to draw as many labels as possible (still, some small squares may not get a label)
+  bg.labels = "#CCCCCCAA",   # define background color of group labels
+								 # "#CCCCCC00" is fully transparent, "#CCCCCCAA" is semi-transparent grey, NA is opaque
+  position.legend = "none"
+)
+
+dev.off()
+
+#### Generation 4:
+# Here is your data from Revigo. Scroll down for plot configuration options.
+
+G4_revigo.names <- c("term_ID","description","frequency","value","uniqueness","dispensability","representative");
+G4_revigo.data <- rbind(c("GO:0003012","muscle system process",0.13872297977971257,2.815308569182401,0.8064401610823462,-0,"muscle system process"),
+c("GO:0007436","larval salivary gland morphogenesis",0.00017885818975752393,2.027334407733889,0.8661563785407915,0.2893523,"muscle system process"),
+c("GO:0016203","muscle attachment",0.0028446969228101424,1.7872798455821577,0.8503164525166629,0.37059529,"muscle system process"),
+c("GO:0072144","glomerular mesangial cell development",0.0008318325333167383,1.7888794587419508,0.8196312549384999,0.32947018,"muscle system process"),
+c("GO:0097746","blood vessel diameter maintenance",0.09133407655062385,2.2924298239020637,0.715882181791112,0.63380443,"muscle system process"),
+c("GO:0006414","translational elongation",0.4751126494303395,3.721246399047171,0.8810857177993994,0,"translational elongation"),
+c("GO:0006270","DNA replication initiation",0.22167343356281313,2.8927900303521317,0.9098395746178356,0.14426908,"translational elongation"),
+c("GO:0006413","translational initiation",0.5259708337369472,1.8745187342994059,0.8802983616121536,0.56205624,"translational elongation"),
+c("GO:0006457","protein folding",1.1355876808838297,2.099086932262331,0.8675498710443552,0.35020084,"translational elongation"),
+c("GO:0016072","rRNA metabolic process",1.7068011195727755,2.3819519032879075,0.9070856904925826,0.32684345,"translational elongation"),
+c("GO:0034982","mitochondrial protein processing",0.06498798129745208,1.9714287473074623,0.8882006541080704,0.63747714,"translational elongation"),
+c("GO:0036297","interstrand cross-link repair",0.10678969536078195,1.9072793553159009,0.8837564161578849,0.41248712,"translational elongation"),
+c("GO:0009636","response to toxic substance",1.1586802604947455,1.904830648568245,0.9643311695330768,-0,"response to toxic substance"),
+c("GO:0009607","response to biotic stimulus",1.3534937363861945,1.8119156262850618,0.9641159421218839,0.31425691,"response to toxic substance"),
+c("GO:0019693","ribose phosphate metabolic process",2.0341598701500896,2.9136401693252516,0.9324449252792466,0.06001262,"ribose phosphate metabolic process"),
+c("GO:0046390","ribose phosphate biosynthetic process",1.3979584501636921,2.7986028756795487,0.9016817410960407,0.63606655,"ribose phosphate metabolic process"),
+c("GO:0032200","telomere organization",0.2054853478803147,1.9974020192800914,0.9673431581625613,0.00306722,"telomere organization"),
+c("GO:0051276","chromosome organization",1.0830374413217383,1.747389659432627,0.9669734103478294,0.47521183,"telomere organization"),
+c("GO:0045824","negative regulation of innate immune response",0.022862619081227626,2.585026652029182,0.8191110108256309,-0,"negative regulation of innate immune response"),
+c("GO:0002831","regulation of response to biotic stimulus",0.282820222308806,1.975104039892515,0.8152987480512545,0.63061791,"negative regulation of innate immune response"),
+c("GO:0032101","regulation of response to external stimulus",0.4870138165964275,1.8629625452104874,0.8091913861164622,0.66401586,"negative regulation of innate immune response"),
+c("GO:0070873","regulation of glycogen metabolic process",0.034689971756304526,2.2898826348881838,0.7989771710299678,0.11602134,"negative regulation of innate immune response"),
+c("GO:0080134","regulation of response to stress",0.717363291871923,2.2284125191187445,0.8047559237184041,0.51154079,"negative regulation of innate immune response"),
+c("GO:0051169","nuclear transport",0.6525655248397686,3.537602002101044,0.9813365884421212,0.00340863,"nuclear transport"),
+c("GO:0051236","establishment of RNA localization",0.4041201431910277,1.7835701691237489,0.9840458947073021,0.2482829,"nuclear transport"));
+
+stuff <- data.frame(G4_revigo.data);
+names(stuff) <- G4_revigo.names;
+
+stuff$value <- as.numeric( as.character(stuff$value) );
+stuff$frequency <- as.numeric( as.character(stuff$frequency) );
+stuff$uniqueness <- as.numeric( as.character(stuff$uniqueness) );
+stuff$dispensability <- as.numeric( as.character(stuff$dispensability) );
+
+# by default, outputs to a PDF file
+pdf( file="G4_revigo_treemap.pdf", width=16, height=9 ) # width and height are in inches <- commented out because I don't want to save as PDF
+
+# check the tmPlot command documentation for all possible parameters - there are a lot more
+G4_treemap <- treemap(
+  stuff,
+  index = c("representative","description"),
+  vSize = "value",
+  type = "categorical",
+  vColor = "representative",
+  title = "Revigo TreeMap for Generation 4",
+  inflate.labels = FALSE,      # set this to TRUE for space-filling group labels - good for posters
+  lowerbound.cex.labels = 0,   # try to draw as many labels as possible (still, some small squares may not get a label)
+  bg.labels = "#CCCCCCAA",   # define background color of group labels
+								 # "#CCCCCC00" is fully transparent, "#CCCCCCAA" is semi-transparent grey, NA is opaque
+  position.legend = "none"
+)
+
+dev.off()
 ```

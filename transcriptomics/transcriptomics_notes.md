@@ -116,8 +116,26 @@ Creative or Unique Visualization: Using rrvgo, I will generate several plots to 
 
 **References:** Sayols, S. (2023). rrvgo: a Bioconductor package for interpreting lists of Gene Ontology terms. *PubMed*, *2023*. <https://doi.org/10.17912/micropub.biology.000811>
 
-#### **November 5, 2025 - Homework 2 Notes**
+#### [**Homework 2 Notes:**]{.underline}
+
+**November 5, 2025**
 
 -   Began assignment by making a copy of `DESeq2ToTopGO.Rmd` script from Tutorial 4 that we reviewed during class and calling it `HW2.Rmd`. This script can be found in `mydocs/` folder.
 
--   
+-   Edited `DESeq2ToTopGO.Rmd` script to run TopGO analysis across each of the generations.
+
+**November 8, 2025**
+
+-   Tried for hours to figure out how to use "rrvgo" bioconductor package with no success. May have to do with package not having a genome wide annotation for copepods, but not entirely sure. Will ask Melissa about this during office hours after assignment submission.
+
+-   Decided to pivot and instead of using the rrvgo package, I used REViGO. To do this, I used the script from Tutorial 5 to make .txt files for Generations 1 through 4 and will input those into REViGO.
+
+**November 9, 2025**
+
+-   Input each .txt file into REViGO and generated treemaps of each generation (as I mentioned that I would do in my HW2 plan).
+
+-   After inputting each of the .txt files into REViGO, there were several warnings which indicated that some GO terms and their genes were removed from plots due to being "obsolete" as they either "represent a molecular function" or "because it is an unnecessary grouping class". In addition, when each treemap was generated, some of the nested rectangles did not show the GO term unless I hovered my mouse above each individual rectangle. Therefore, I decided to subset each .txt file to only show the top 32 genes from each generation (using generation 1 as a reference for how many genes to subset) and arranged them in ascending order by p-value. I then exported each file and input results into REViGO again. Talk about this in the Results section?
+
+-   Exported R scripts for treemaps of each generation to arrange them aesthetically.
+
+-   Because I didn't get rrvgo to work, I couldn't compare results between rrvgo and REViGO.
