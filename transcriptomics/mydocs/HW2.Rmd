@@ -19,7 +19,6 @@ library(topGO)
 library(GO.db)
 library(ggplot2)
 library(scales)
-library(rrvgo)
 library(gridExtra)
 ```
 
@@ -33,12 +32,11 @@ countsTableRound <- round(countsTable) # bc DESeq2 doesn't like decimals (and Sa
 colnames(countsTableRound) <- substr(colnames(countsTableRound), start=1, stop = 4)
 ```
 
-Import the sample description table:
+Import the sample description table and create DESeq object:
 ```{r}
-#import the sample description table
 conds <- read.delim("metadata.txt", header=TRUE, stringsAsFactors = TRUE, row.names=1)
 
-#### Create a DESeq object and define the experimental design here with the tilda
+# Define the experimental design here with the tilda
 
 dds <- DESeqDataSetFromMatrix(countData = countsTableRound, colData=conds, 
                               design= ~ generation + line)
@@ -86,110 +84,8 @@ resG4_CvT <- resG4_CvT[order(resG4_CvT$padj),] #sort
 resG4_CvT <- resG4_CvT[!is.na(resG4_CvT$padj),]
 ```
 
-Before we jump in, what do the distributions of our results look like?
-
-Looking closely at our data:
+Run groups from each generation to TopGO!
 ```{r}
-library(ggplot2)
-library(ggpubr)
-
-# Convert results to data frame and clean - making sure that there are no NAs in there. 
-res_df <- as.data.frame(resG1_CvT)
-res_df <- res_df[!is.na(res_df$padj), ]
-
-# Calculate and add -log10(padj)
-res_df$negLog10Padj <- -log10(res_df$padj)
-
-# Panel 1: padj distribution
-p1 <- ggplot(res_df, aes(x = padj)) +
-  geom_histogram(bins = 50, fill = "skyblue3", color = "black") +
-  theme_minimal(base_size = 16) +
-  ggtitle("Adjusted p-values (padj)") +
-  xlab("padj") +
-  ylab("Count")
-
-# Panel 2: -log10(padj)
-p2 <- ggplot(res_df, aes(x = negLog10Padj)) +
-  geom_histogram(bins = 50, fill = "tomato3", color = "black") +
-  theme_minimal(base_size = 16) +
-  ggtitle("-log10(padj)") +
-  xlab("-log10(padj)") +
-  ylab("Count")
-
-# Panel 3: Wald Statistic
-p3 <- ggplot(res_df, aes(x = stat)) +
-  geom_histogram(bins = 50, fill = "seagreen3", color = "black") +
-  theme_minimal(base_size = 16) +
-  ggtitle("Wald Statistic") +
-  xlab("stat") +
-  ylab("Count")
-
-# Combine vertically with ggpubr
-combined_plot <- ggarrange(
-  p1, p2, p3,
-  ncol = 1, nrow = 3,
-  labels = c("A", "B", "C"),  # optional panel labels
-  align = "v",                # vertical alignment
-  common.legend = FALSE
-)
-
-# Show combined plot
-combined_plot
-```
-
-```{r}
-# Panel D: Wald statistic vs -log10(padj) scatter 
-p4 <- ggplot(res_df, aes(x = pvalue, y = negLog10Padj)) +
-  geom_point(alpha = 0.4, color = "yellow4") + ylim(c(0,5)) +
-  theme_minimal(base_size = 8) +
-  ggtitle("P-value vs -log10(padj)") +
-  xlab("P-value") +
-  ylab("-log10(padj)") +
-  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "red") +
-  geom_vline(xintercept = 0, linetype = "dotted", color = "black")
-
-# Panel E: Wald statistic vs -log10(padj) scatter 
-p5 <- ggplot(res_df, aes(x = stat, y = negLog10Padj)) +
-  geom_point(alpha = 0.4, color = "purple4") + ylim(c(0,5)) +
-  theme_minimal(base_size = 8) +
-  ggtitle("Wald Statistic vs -log10(padj)") +
-  xlab("Wald statistic") +
-  ylab("-log10(padj)") +
-  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "red") +
-  geom_vline(xintercept = 0, linetype = "dotted", color = "black")
-
-
-combined_plot <- ggarrange(
-  p4, p5,
-  ncol = 2, nrow = 1,
-  align = "h"
-)
-
-# Show combined plot
-combined_plot
-```
-
-Let’s make a density plot with a rugplot below to understand what we’re testing in a functional enrichment test:
-```{r}
-ggplot(res_df, aes(x = negLog10Padj)) +
-  geom_density(fill = "lightblue", color = "blue", alpha = 0.5, linewidth = 1) + xlim(c(0,5)) +
-  geom_rug(sides = "b", color = "gray30", alpha = 0.5) +
-  geom_vline(xintercept = -log10(0.05), linetype = "dashed", color = "red") +
-  theme_minimal(base_size = 8) +
-  xlab(expression(-log[10](padj))) +
-  ylab("Density") +
-  ggtitle(expression("Density of " * -log[10](padj)))
-
-# You get to see the density of -log[10] with a rug plot underneath. This shows the individual genes that are along the tail distribution. In this section past the threshold/cut off line, there are about 400-500 genes.
-
-# This is the same data as in plot B (above) which showed a histogram.
-```
-
-Run TopGO!
-```{r}
-library(topGO)
-library(GO.db)
-
 #### Generation 1:
 
 # Convert to data frame
@@ -250,7 +146,7 @@ Gen1_res_table <- GenTable(GOdata, classicFisher = result,
 #Plot the filtered results, showing >5 and < 500 gene members.
 
 # Keep GO terms with enough but not too many genes
-filtered_GO_results <- Gen1_res_table %>%
+filtered_GO_results_G1 <- Gen1_res_table %>%
   filter(Annotated >= 5 & Annotated < 500) %>%  # adjust as needed
   group_by(Term) %>%
   slice_min(classicFisher, n = 1) %>%  # keep only the most significant per Term
@@ -281,7 +177,7 @@ G1_TopGO_plot <- function(df, title) {
 }
 
 # Generate G1 plot
-G1_topGO_plot <- G1_TopGO_plot(filtered_GO_results, "GO Enrichment for DEGs at Gen1")
+G1_topGO_plot <- G1_TopGO_plot(filtered_GO_results_G1, "GO Enrichment for DEGs at Gen1")
 G1_topGO_plot
 
 #### Generation 2:
@@ -344,7 +240,7 @@ Gen2_res_table <- GenTable(GOdata, classicFisher = result,
 #Plot the filtered results, showing >5 and < 500 gene members.
 
 # Keep GO terms with enough but not too many genes
-filtered_GO_results <- Gen2_res_table %>%
+filtered_GO_results_G2 <- Gen2_res_table %>%
   filter(Annotated >= 5 & Annotated < 500) %>%  # adjust as needed
   group_by(Term) %>%
   slice_min(classicFisher, n = 1) %>%  # keep only the most significant per Term
@@ -375,7 +271,7 @@ G2_TopGO_plot <- function(df, title) {
 }
 
 # Generate G2 plot
-G2_topGO_plot <- G2_TopGO_plot(filtered_GO_results, "GO Enrichment for DEGs at Gen2")
+G2_topGO_plot <- G2_TopGO_plot(filtered_GO_results_G2, "GO Enrichment for DEGs at Gen2")
 G2_topGO_plot
 
 #### Generation 3:
@@ -438,7 +334,7 @@ Gen3_res_table <- GenTable(GOdata, classicFisher = result,
 #Plot the filtered results, showing >5 and < 500 gene members.
 
 # Keep GO terms with enough but not too many genes
-filtered_GO_results <- Gen3_res_table %>%
+filtered_GO_results_G3 <- Gen3_res_table %>%
   filter(Annotated >= 5 & Annotated < 500) %>%  # adjust as needed
   group_by(Term) %>%
   slice_min(classicFisher, n = 1) %>%  # keep only the most significant per Term
@@ -469,7 +365,7 @@ G3_TopGO_plot <- function(df, title) {
 }
 
 # Generate G3 plot
-G3_topGO_plot <- G3_TopGO_plot(filtered_GO_results, "GO Enrichment for DEGs at Gen3")
+G3_topGO_plot <- G3_TopGO_plot(filtered_GO_results_G3, "GO Enrichment for DEGs at Gen3")
 G3_topGO_plot
 
 #### Generation 4:
@@ -532,7 +428,7 @@ Gen4_res_table <- GenTable(GOdata, classicFisher = result,
 #Plot the filtered results, showing >5 and < 500 gene members.
 
 # Keep GO terms with enough but not too many genes
-filtered_GO_results <- Gen4_res_table %>%
+filtered_GO_results_G4 <- Gen4_res_table %>%
   filter(Annotated >= 5 & Annotated < 500) %>%  # adjust as needed
   group_by(Term) %>%
   slice_min(classicFisher, n = 1) %>%  # keep only the most significant per Term
@@ -563,12 +459,67 @@ G4_TopGO_plot <- function(df, title) {
 }
 
 # Generate G4 plot
-G4_topGO_plot <- G4_TopGO_plot(filtered_GO_results, "GO Enrichment for DEGs at Gen4")
+G4_topGO_plot <- G4_TopGO_plot(filtered_GO_results_G4, "GO Enrichment for DEGs at Gen4")
 G4_topGO_plot
 ```
+Saving each plot into a single .png file:
 ```{r}
 # Saving "GO Enrichment DEGs by Generation" plots
 plot <- list(G1_topGO_plot + G2_topGO_plot + G3_topGO_plot + G4_topGO_plot)
 ggsave("GOEnrichmentG1toG4.png", plot = plot, width=20, height=10, units = "in", dpi = 300)
 ```
 
+Generating ID lists for Generations 1 through 4 to be input into REViGO:
+```{r}
+## Generate Gen1 ID list for REViGO ###
+
+# Select only the columns REVIGO needs
+revigo_input_G1 <- filtered_GO_results_G1[, c("GO.ID", "classicFisher")]
+
+sigRes_G1 <- revigo_input_G1[as.numeric(revigo_input_G1$classicFisher) < 0.05, ]
+
+# Rename columns for clarity
+colnames(sigRes_G1) <- c("GO.ID", "pValue")
+
+# Save as txt to upload to REVIGO
+write.table(sigRes_G1, file = "G1topGOsig_for_REVIGO.txt", sep = "\t", row.names = FALSE, quote = FALSE)
+
+### Generate Gen2 ID list for REViGO ###
+
+# Select only the columns REVIGO needs
+revigo_input_G2 <- filtered_GO_results_G2[, c("GO.ID", "classicFisher")]
+
+sigRes_G2 <- revigo_input_G2[as.numeric(revigo_input_G2$classicFisher) < 0.05, ]
+
+# Rename columns for clarity
+colnames(sigRes_G2) <- c("GO.ID", "pValue")
+
+# Save as txt to upload to REVIGO
+write.table(sigRes_G2, file = "G2topGOsig_for_REVIGO.txt", sep = "\t", row.names = FALSE, quote = FALSE)
+
+### Generate Gen3 ID list for REViGO ###
+
+# Select only the columns REVIGO needs
+revigo_input_G3 <- filtered_GO_results_G3[, c("GO.ID", "classicFisher")]
+
+sigRes_G3 <- revigo_input_G3[as.numeric(revigo_input_G3$classicFisher) < 0.05, ]
+
+# Rename columns for clarity
+colnames(sigRes_G3) <- c("GO.ID", "pValue")
+
+# Save as txt to upload to REVIGO
+write.table(sigRes_G3, file = "G3topGOsig_for_REVIGO.txt", sep = "\t", row.names = FALSE, quote = FALSE)
+
+### Generate Gen4 ID list for REViGO ###
+
+# Select only the columns REVIGO needs
+revigo_input_G4 <- filtered_GO_results_G4[, c("GO.ID", "classicFisher")]
+
+sigRes_G4 <- revigo_input_G4[as.numeric(revigo_input_G4$classicFisher) < 0.05, ]
+
+# Rename columns for clarity
+colnames(sigRes_G4) <- c("GO.ID", "pValue")
+
+# Save as txt to upload to REVIGO
+write.table(sigRes_G4, file = "G4topGOsig_for_REVIGO.txt", sep = "\t", row.names = FALSE, quote = FALSE)
+```
