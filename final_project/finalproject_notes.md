@@ -49,3 +49,7 @@ Resources:
 -   Worked together w/ Max to figure out how to clean the reads. Bash scripts for both runs can be found in my `myscripts/` folder. Files are called `bbduk_spruce_run1.sh` and `bbduk_spruce_run2.sh`
 
 -   Cleaned reads output into `/gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/cleanreads`
+
+#### November 15, 2025 - Trim and clean reads
+
+For some reason neither of my `bbduk_spruce_run1.sh` or `bbduk_spruce_run2.sh` scripts work? Going to consult with Max about this and see what he did differently.
