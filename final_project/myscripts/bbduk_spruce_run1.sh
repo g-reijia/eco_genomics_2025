@@ -4,7 +4,7 @@
 
 # Name the output file: Re-direct the log file to your home directory
 # The first part of the name (%x) will be whatever you name your job 
-#SBATCH --output=/users/g/j/gjia/projects/eco_genomics_2025/finalproject/mylogs/%x_%j.out
+#SBATCH --output=/users/g/j/gjia/projects/eco_genomics_2025/final_project/mylogs/%x_%j.out
 
 # Which partition to use: options include short (<3 hrs), general (<48 hrs), or week
 #SBATCH --partition=general

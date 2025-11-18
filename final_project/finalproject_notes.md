@@ -50,6 +50,32 @@ Resources:
 
 -   Cleaned reads output into `/gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/cleanreads`
 
-#### November 15, 2025 - Trim and clean reads
+#### November 15, 2025
 
 For some reason neither of my `bbduk_spruce_run1.sh` or `bbduk_spruce_run2.sh` scripts work? Going to consult with Max about this and see what he did differently.
+
+#### November 18, 2025
+
+-   Max re-ran the bbduk scripts to distinguish files between run 1 and run 2.
+
+-   Copied any files from `cleanreads_run2/` with new naming convention using wildcard. Used the following line of code in terminal to do it:
+
+    `cp /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/cleanreads_run2/*.fastq.gz_run2.clean.fq /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/combine_reads`
+
+-   Currently writing bash script with loop to combine the reads
+
+-   Spoke to Steve about how to index the reads:
+
+    -   In terminal, this gets us to the help menu:
+
+        -   Module load gcc salmon
+
+        -   Salmon -h
+
+        -   Salmon index -h
+
+    -   Then use command **-t** to input transcript fasta file
+
+        -   Salmon index -t **[reference transcriptome]**
+
+-   Reference transcriptome found here: `/gpfs1/cl/ecogen/pbio6800/PopulationGenomics/ref_genome/Pmariana/annotation/Pmariana-v1-transcripts.fa`
