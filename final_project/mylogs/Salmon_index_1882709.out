@@ -1,0 +1,8 @@
+Starting Salmon index at: Tue Nov 18 09:25:48 PM EST 2025
+Running on node: node305.cluster
+Version Server Response: Not Found
+index ["salmon_index"] did not previously exist  . . . creating it
+Exception : [boost::filesystem::create_directories: Permission denied [system:13]: "salmon_index", "salmon_index"]
+salmon index was invoked improperly.
+For usage information, try salmon index --help
+Exiting.

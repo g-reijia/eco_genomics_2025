@@ -1,0 +1,4 @@
+Starting Salmon index at: Tue Nov 18 09:28:48 PM EST 2025
+Running on node: node305.cluster
+Version Server Response: Not Found
+exception : [the required argument for option '--index' is missing]. Exiting.

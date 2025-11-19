@@ -16,10 +16,12 @@ echo "Running on node: `hostname`"
 
 module purge
 
-module load gcc/13.3.0-xp3epyt salmon/1.10.2-uhrt76c
+module load gcc salmon
 
 # Change to the reference directory
-cd /gpfs1/cl/ecogen/pbio6800/Transcriptomics/Reference_Transcriptome
+cd /gpfs1/cl/ecogen/pbio6800/PopulationGenomics/ref_genome/Pmariana/annotation
 
 # Run Salmon index
-salmon index -t trinity.trimmomatic.above500.noPhiX.fasta -i salmon_index -p 8
+salmon index -t pmariana-v1_transcripts.fa -i salmon_index
+
+#for some reason salmon index is not working, will need to ask melissa about this.

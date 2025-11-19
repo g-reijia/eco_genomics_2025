@@ -68,14 +68,16 @@ For some reason neither of my `bbduk_spruce_run1.sh` or `bbduk_spruce_run2.sh` s
 
     -   In terminal, this gets us to the help menu:
 
-        -   Module load gcc salmon
-
-        -   Salmon -h
-
-        -   Salmon index -h
+        -   Module load gcc salmon \> salmon -h \> salmon index -h
 
     -   Then use command **-t** to input transcript fasta file
 
         -   Salmon index -t **[reference transcriptome]**
 
 -   Reference transcriptome found here: `/gpfs1/cl/ecogen/pbio6800/PopulationGenomics/ref_genome/Pmariana/annotation/Pmariana-v1-transcripts.fa`
+
+-   Chatted w/ Steve about the bash script that I wrote to combine reads and it can be found in `myscripts/`. The script is called `combine_cleanreads.sh`.
+
+-   Combined reads worked, yay!
+
+-   Tried to index the reference transcriptome but for some reason I am not getting it right. Will need to ask Melissa or Steve what's up with that
