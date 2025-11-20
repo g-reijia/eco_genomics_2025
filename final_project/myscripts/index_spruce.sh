@@ -19,9 +19,7 @@ module purge
 module load gcc salmon
 
 # Change to the reference directory
-cd /gpfs1/cl/ecogen/pbio6800/PopulationGenomics/ref_genome/Pmariana/annotation
+cd /gpfs1/cl/ecogen/pbio6800/PopulationGenomics/ref_genome/Pmariana/annotation/
 
 # Run Salmon index
-salmon index -t pmariana-v1_transcripts.fa -i salmon_index
-
-#for some reason salmon index is not working, will need to ask melissa about this.
+salmon index -t pmariana-v1_transcripts.fa -i /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index
