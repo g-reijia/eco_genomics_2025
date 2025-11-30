@@ -1,0 +1,1005 @@
+salmon 1.10.2
+Starting Salmon quantification at: Sat Nov 29 08:04:08 PM EST 2025
+Running on node: hc-node02.cluster
+Starting sample ASC_06_C_0_GAGTCC_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { ASC_06_C_0_GAGTCC_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ASC_06_C_0_GAGTCC_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ASC_06_C_0_GAGTCC_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ASC_06_C_0_GAGTCC_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample ASC_06_C_0_GAGTCC_R1.fastq.gz.clean.fq done
+Starting sample ASC_06_C_10_ACGTCT_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { ASC_06_C_10_ACGTCT_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ASC_06_C_10_ACGTCT_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ASC_06_C_10_ACGTCT_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ASC_06_C_10_ACGTCT_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample ASC_06_C_10_ACGTCT_R1.fastq.gz.clean.fq done
+Starting sample ASC_06_C_5_GTGTAG_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { ASC_06_C_5_GTGTAG_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ASC_06_C_5_GTGTAG_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ASC_06_C_5_GTGTAG_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ASC_06_C_5_GTGTAG_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample ASC_06_C_5_GTGTAG_R1.fastq.gz.clean.fq done
+Starting sample ASC_06_D_H_0_CGCAAC_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { ASC_06_D_H_0_CGCAAC_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ASC_06_D_H_0_CGCAAC_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ASC_06_D_H_0_CGCAAC_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ASC_06_D_H_0_CGCAAC_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample ASC_06_D_H_0_CGCAAC_R1.fastq.gz.clean.fq done
+Starting sample ASC_06_D_H_10_CAGCGT_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { ASC_06_D_H_10_CAGCGT_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ASC_06_D_H_10_CAGCGT_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ASC_06_D_H_10_CAGCGT_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ASC_06_D_H_10_CAGCGT_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample ASC_06_D_H_10_CAGCGT_R1.fastq.gz.clean.fq done
+Starting sample ASC_06_H_0_AATAGC_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { ASC_06_H_0_AATAGC_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ASC_06_H_0_AATAGC_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ASC_06_H_0_AATAGC_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ASC_06_H_0_AATAGC_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample ASC_06_H_0_AATAGC_R1.fastq.gz.clean.fq done
+Starting sample ASC_06_H_10_TCGAGG_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { ASC_06_H_10_TCGAGG_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ASC_06_H_10_TCGAGG_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ASC_06_H_10_TCGAGG_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ASC_06_H_10_TCGAGG_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample ASC_06_H_10_TCGAGG_R1.fastq.gz.clean.fq done
+Starting sample ASC_06_H_5_CCGCAA_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { ASC_06_H_5_CCGCAA_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ASC_06_H_5_CCGCAA_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ASC_06_H_5_CCGCAA_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ASC_06_H_5_CCGCAA_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample ASC_06_H_5_CCGCAA_R1.fastq.gz.clean.fq done
+Starting sample BLANK_ACATTA_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { BLANK_ACATTA_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/BLANK_ACATTA_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/BLANK_ACATTA_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/BLANK_ACATTA_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample BLANK_ACATTA_R1.fastq.gz.clean.fq done
+Starting sample BRU_05_C_0_ACCGTG_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { BRU_05_C_0_ACCGTG_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/BRU_05_C_0_ACCGTG_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/BRU_05_C_0_ACCGTG_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/BRU_05_C_0_ACCGTG_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample BRU_05_C_0_ACCGTG_R1.fastq.gz.clean.fq done
+Starting sample BRU_05_C_10_GCATGG_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { BRU_05_C_10_GCATGG_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/BRU_05_C_10_GCATGG_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/BRU_05_C_10_GCATGG_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/BRU_05_C_10_GCATGG_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample BRU_05_C_10_GCATGG_R1.fastq.gz.clean.fq done
+Starting sample BRU_05_D_H_0_GCGAAT_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { BRU_05_D_H_0_GCGAAT_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/BRU_05_D_H_0_GCGAAT_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/BRU_05_D_H_0_GCGAAT_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/BRU_05_D_H_0_GCGAAT_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample BRU_05_D_H_0_GCGAAT_R1.fastq.gz.clean.fq done
+Starting sample BRU_05_D_H_10_GATTGT_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { BRU_05_D_H_10_GATTGT_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/BRU_05_D_H_10_GATTGT_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/BRU_05_D_H_10_GATTGT_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/BRU_05_D_H_10_GATTGT_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample BRU_05_D_H_10_GATTGT_R1.fastq.gz.clean.fq done
+Starting sample BRU_05_D_H_5_GGTATA_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { BRU_05_D_H_5_GGTATA_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/BRU_05_D_H_5_GGTATA_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/BRU_05_D_H_5_GGTATA_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/BRU_05_D_H_5_GGTATA_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample BRU_05_D_H_5_GGTATA_R1.fastq.gz.clean.fq done
+Starting sample BRU_05_H_0_TGGATT_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { BRU_05_H_0_TGGATT_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/BRU_05_H_0_TGGATT_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/BRU_05_H_0_TGGATT_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/BRU_05_H_0_TGGATT_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample BRU_05_H_0_TGGATT_R1.fastq.gz.clean.fq done
+Starting sample BRU_05_H_10_TTCCGC_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { BRU_05_H_10_TTCCGC_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/BRU_05_H_10_TTCCGC_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/BRU_05_H_10_TTCCGC_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/BRU_05_H_10_TTCCGC_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample BRU_05_H_10_TTCCGC_R1.fastq.gz.clean.fq done
+Starting sample CAM_02_C_0_GGCTGC_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { CAM_02_C_0_GGCTGC_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/CAM_02_C_0_GGCTGC_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/CAM_02_C_0_GGCTGC_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/CAM_02_C_0_GGCTGC_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample CAM_02_C_0_GGCTGC_R1.fastq.gz.clean.fq done
+Starting sample CAM_02_C_10_AACGCC_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { CAM_02_C_10_AACGCC_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/CAM_02_C_10_AACGCC_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/CAM_02_C_10_AACGCC_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/CAM_02_C_10_AACGCC_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample CAM_02_C_10_AACGCC_R1.fastq.gz.clean.fq done
+Starting sample CAM_02_C_5_TTAACT_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { CAM_02_C_5_TTAACT_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/CAM_02_C_5_TTAACT_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/CAM_02_C_5_TTAACT_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/CAM_02_C_5_TTAACT_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample CAM_02_C_5_TTAACT_R1.fastq.gz.clean.fq done
+Starting sample CAM_02_D_H_0_ATAAGA_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { CAM_02_D_H_0_ATAAGA_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/CAM_02_D_H_0_ATAAGA_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/CAM_02_D_H_0_ATAAGA_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/CAM_02_D_H_0_ATAAGA_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample CAM_02_D_H_0_ATAAGA_R1.fastq.gz.clean.fq done
+Starting sample CAM_02_D_H_10_AAGACA_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { CAM_02_D_H_10_AAGACA_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/CAM_02_D_H_10_AAGACA_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/CAM_02_D_H_10_AAGACA_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/CAM_02_D_H_10_AAGACA_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample CAM_02_D_H_10_AAGACA_R1.fastq.gz.clean.fq done
+Starting sample CAM_02_H_0_ATTGGT_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { CAM_02_H_0_ATTGGT_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/CAM_02_H_0_ATTGGT_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/CAM_02_H_0_ATTGGT_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/CAM_02_H_0_ATTGGT_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample CAM_02_H_0_ATTGGT_R1.fastq.gz.clean.fq done
+Starting sample CAM_02_H_10_CAAGCA_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { CAM_02_H_10_CAAGCA_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/CAM_02_H_10_CAAGCA_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/CAM_02_H_10_CAAGCA_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/CAM_02_H_10_CAAGCA_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample CAM_02_H_10_CAAGCA_R1.fastq.gz.clean.fq done
+Starting sample CAM_02_H_5_GGTGAG_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { CAM_02_H_5_GGTGAG_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/CAM_02_H_5_GGTGAG_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/CAM_02_H_5_GGTGAG_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/CAM_02_H_5_GGTGAG_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample CAM_02_H_5_GGTGAG_R1.fastq.gz.clean.fq done
+Starting sample ESC_01_C_0_CAGATG_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { ESC_01_C_0_CAGATG_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ESC_01_C_0_CAGATG_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ESC_01_C_0_CAGATG_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ESC_01_C_0_CAGATG_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample ESC_01_C_0_CAGATG_R1.fastq.gz.clean.fq done
+Starting sample ESC_01_C_10_ACAACG_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { ESC_01_C_10_ACAACG_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ESC_01_C_10_ACAACG_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ESC_01_C_10_ACAACG_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ESC_01_C_10_ACAACG_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample ESC_01_C_10_ACAACG_R1.fastq.gz.clean.fq done
+Starting sample ESC_01_D_H_0_CGGTTA_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { ESC_01_D_H_0_CGGTTA_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ESC_01_D_H_0_CGGTTA_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ESC_01_D_H_0_CGGTTA_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ESC_01_D_H_0_CGGTTA_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample ESC_01_D_H_0_CGGTTA_R1.fastq.gz.clean.fq done
+Starting sample ESC_01_D_H_10_TACCTT_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { ESC_01_D_H_10_TACCTT_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ESC_01_D_H_10_TACCTT_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ESC_01_D_H_10_TACCTT_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ESC_01_D_H_10_TACCTT_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample ESC_01_D_H_10_TACCTT_R1.fastq.gz.clean.fq done
+Starting sample ESC_01_D_H_5_GACGAT_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { ESC_01_D_H_5_GACGAT_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ESC_01_D_H_5_GACGAT_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ESC_01_D_H_5_GACGAT_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ESC_01_D_H_5_GACGAT_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample ESC_01_D_H_5_GACGAT_R1.fastq.gz.clean.fq done
+Starting sample ESC_01_H_0_TCAGGA_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { ESC_01_H_0_TCAGGA_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ESC_01_H_0_TCAGGA_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ESC_01_H_0_TCAGGA_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ESC_01_H_0_TCAGGA_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample ESC_01_H_0_TCAGGA_R1.fastq.gz.clean.fq done
+Starting sample ESC_01_H_10_ATGGCG_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { ESC_01_H_10_ATGGCG_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ESC_01_H_10_ATGGCG_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ESC_01_H_10_ATGGCG_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/ESC_01_H_10_ATGGCG_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample ESC_01_H_10_ATGGCG_R1.fastq.gz.clean.fq done
+Starting sample JAY_02_C_0_ACCTAC_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { JAY_02_C_0_ACCTAC_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/JAY_02_C_0_ACCTAC_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/JAY_02_C_0_ACCTAC_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/JAY_02_C_0_ACCTAC_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample JAY_02_C_0_ACCTAC_R1.fastq.gz.clean.fq done
+Starting sample JAY_02_C_10_TATGTC_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { JAY_02_C_10_TATGTC_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/JAY_02_C_10_TATGTC_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/JAY_02_C_10_TATGTC_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/JAY_02_C_10_TATGTC_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample JAY_02_C_10_TATGTC_R1.fastq.gz.clean.fq done
+Starting sample JAY_02_D_H_0_CCAATT_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { JAY_02_D_H_0_CCAATT_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/JAY_02_D_H_0_CCAATT_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/JAY_02_D_H_0_CCAATT_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/JAY_02_D_H_0_CCAATT_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample JAY_02_D_H_0_CCAATT_R1.fastq.gz.clean.fq done
+Starting sample JAY_02_D_H_10_CGCCTG_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { JAY_02_D_H_10_CGCCTG_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/JAY_02_D_H_10_CGCCTG_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/JAY_02_D_H_10_CGCCTG_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/JAY_02_D_H_10_CGCCTG_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample JAY_02_D_H_10_CGCCTG_R1.fastq.gz.clean.fq done
+Starting sample JAY_02_H_0_AACCGA_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { JAY_02_H_0_AACCGA_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/JAY_02_H_0_AACCGA_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/JAY_02_H_0_AACCGA_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/JAY_02_H_0_AACCGA_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample JAY_02_H_0_AACCGA_R1.fastq.gz.clean.fq done
+Starting sample JAY_02_H_10_CGATCT_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { JAY_02_H_10_CGATCT_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/JAY_02_H_10_CGATCT_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/JAY_02_H_10_CGATCT_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/JAY_02_H_10_CGATCT_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample JAY_02_H_10_CGATCT_R1.fastq.gz.clean.fq done
+Starting sample JAY_02_H_5_ATGAAC_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { JAY_02_H_5_ATGAAC_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/JAY_02_H_5_ATGAAC_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/JAY_02_H_5_ATGAAC_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/JAY_02_H_5_ATGAAC_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample JAY_02_H_5_ATGAAC_R1.fastq.gz.clean.fq done
+Starting sample KAN_04_C_0_CACACT_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { KAN_04_C_0_CACACT_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/KAN_04_C_0_CACACT_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/KAN_04_C_0_CACACT_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/KAN_04_C_0_CACACT_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample KAN_04_C_0_CACACT_R1.fastq.gz.clean.fq done
+Starting sample KAN_04_C_10_CGTCGC_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { KAN_04_C_10_CGTCGC_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/KAN_04_C_10_CGTCGC_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/KAN_04_C_10_CGTCGC_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/KAN_04_C_10_CGTCGC_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample KAN_04_C_10_CGTCGC_R1.fastq.gz.clean.fq done
+Starting sample KAN_04_D_H_0_CAATGC_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { KAN_04_D_H_0_CAATGC_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/KAN_04_D_H_0_CAATGC_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/KAN_04_D_H_0_CAATGC_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/KAN_04_D_H_0_CAATGC_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample KAN_04_D_H_0_CAATGC_R1.fastq.gz.clean.fq done
+Starting sample KAN_04_D_H_10_TGACAC_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { KAN_04_D_H_10_TGACAC_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/KAN_04_D_H_10_TGACAC_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/KAN_04_D_H_10_TGACAC_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/KAN_04_D_H_10_TGACAC_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample KAN_04_D_H_10_TGACAC_R1.fastq.gz.clean.fq done
+Starting sample KAN_04_H_0_CTCCAT_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { KAN_04_H_0_CTCCAT_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/KAN_04_H_0_CTCCAT_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/KAN_04_H_0_CTCCAT_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/KAN_04_H_0_CTCCAT_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample KAN_04_H_0_CTCCAT_R1.fastq.gz.clean.fq done
+Starting sample KAN_04_H_10_TAGGCT_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { KAN_04_H_10_TAGGCT_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/KAN_04_H_10_TAGGCT_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/KAN_04_H_10_TAGGCT_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/KAN_04_H_10_TAGGCT_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample KAN_04_H_10_TAGGCT_R1.fastq.gz.clean.fq done
+Starting sample LOL_02_C_0_AGTACT_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { LOL_02_C_0_AGTACT_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/LOL_02_C_0_AGTACT_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/LOL_02_C_0_AGTACT_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/LOL_02_C_0_AGTACT_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample LOL_02_C_0_AGTACT_R1.fastq.gz.clean.fq done
+Starting sample LOL_02_C_10_CCTAAG_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { LOL_02_C_10_CCTAAG_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/LOL_02_C_10_CCTAAG_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/LOL_02_C_10_CCTAAG_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/LOL_02_C_10_CCTAAG_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample LOL_02_C_10_CCTAAG_R1.fastq.gz.clean.fq done
+Starting sample LOL_02_C_5_CAACAG_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { LOL_02_C_5_CAACAG_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/LOL_02_C_5_CAACAG_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/LOL_02_C_5_CAACAG_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/LOL_02_C_5_CAACAG_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample LOL_02_C_5_CAACAG_R1.fastq.gz.clean.fq done
+Starting sample LOL_02_D_H_0_AGATAG_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { LOL_02_D_H_0_AGATAG_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/LOL_02_D_H_0_AGATAG_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/LOL_02_D_H_0_AGATAG_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/LOL_02_D_H_0_AGATAG_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample LOL_02_D_H_0_AGATAG_R1.fastq.gz.clean.fq done
+Starting sample LOL_02_D_H_10_CAGGAC_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { LOL_02_D_H_10_CAGGAC_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/LOL_02_D_H_10_CAGGAC_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/LOL_02_D_H_10_CAGGAC_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/LOL_02_D_H_10_CAGGAC_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample LOL_02_D_H_10_CAGGAC_R1.fastq.gz.clean.fq done
+Starting sample LOL_02_H_0_TGGCGA_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { LOL_02_H_0_TGGCGA_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/LOL_02_H_0_TGGCGA_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/LOL_02_H_0_TGGCGA_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/LOL_02_H_0_TGGCGA_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample LOL_02_H_0_TGGCGA_R1.fastq.gz.clean.fq done
+Starting sample LOL_02_H_10_GACATC_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { LOL_02_H_10_GACATC_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/LOL_02_H_10_GACATC_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/LOL_02_H_10_GACATC_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/LOL_02_H_10_GACATC_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample LOL_02_H_10_GACATC_R1.fastq.gz.clean.fq done
+Starting sample MMF_13_C_0_ACAGAT_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { MMF_13_C_0_ACAGAT_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/MMF_13_C_0_ACAGAT_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/MMF_13_C_0_ACAGAT_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/MMF_13_C_0_ACAGAT_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample MMF_13_C_0_ACAGAT_R1.fastq.gz.clean.fq done
+Starting sample MMF_13_C_10_TGTGCA_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { MMF_13_C_10_TGTGCA_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/MMF_13_C_10_TGTGCA_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/MMF_13_C_10_TGTGCA_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/MMF_13_C_10_TGTGCA_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample MMF_13_C_10_TGTGCA_R1.fastq.gz.clean.fq done
+Starting sample MMF_13_C_5_AGTTGA_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { MMF_13_C_5_AGTTGA_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/MMF_13_C_5_AGTTGA_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/MMF_13_C_5_AGTTGA_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/MMF_13_C_5_AGTTGA_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample MMF_13_C_5_AGTTGA_R1.fastq.gz.clean.fq done
+Starting sample MMF_13_D_H_0_CTCTCG_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { MMF_13_D_H_0_CTCTCG_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/MMF_13_D_H_0_CTCTCG_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/MMF_13_D_H_0_CTCTCG_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/MMF_13_D_H_0_CTCTCG_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample MMF_13_D_H_0_CTCTCG_R1.fastq.gz.clean.fq done
+Starting sample MMF_13_D_H_10_TTTATG_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { MMF_13_D_H_10_TTTATG_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/MMF_13_D_H_10_TTTATG_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/MMF_13_D_H_10_TTTATG_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/MMF_13_D_H_10_TTTATG_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample MMF_13_D_H_10_TTTATG_R1.fastq.gz.clean.fq done
+Starting sample MMF_13_D_H_5_AAGCTC_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { MMF_13_D_H_5_AAGCTC_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/MMF_13_D_H_5_AAGCTC_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/MMF_13_D_H_5_AAGCTC_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/MMF_13_D_H_5_AAGCTC_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample MMF_13_D_H_5_AAGCTC_R1.fastq.gz.clean.fq done
+Starting sample MMF_13_H_0_AATCCG_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { MMF_13_H_0_AATCCG_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/MMF_13_H_0_AATCCG_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/MMF_13_H_0_AATCCG_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/MMF_13_H_0_AATCCG_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample MMF_13_H_0_AATCCG_R1.fastq.gz.clean.fq done
+Starting sample MMF_13_H_10_ATACTG_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { MMF_13_H_10_ATACTG_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/MMF_13_H_10_ATACTG_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/MMF_13_H_10_ATACTG_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/MMF_13_H_10_ATACTG_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample MMF_13_H_10_ATACTG_R1.fastq.gz.clean.fq done
+Starting sample MMF_13_H_5_CGAAGG_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { MMF_13_H_5_CGAAGG_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/MMF_13_H_5_CGAAGG_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/MMF_13_H_5_CGAAGG_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/MMF_13_H_5_CGAAGG_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample MMF_13_H_5_CGAAGG_R1.fastq.gz.clean.fq done
+Starting sample NOR_02_C_0_AATGAA_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { NOR_02_C_0_AATGAA_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/NOR_02_C_0_AATGAA_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/NOR_02_C_0_AATGAA_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/NOR_02_C_0_AATGAA_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample NOR_02_C_0_AATGAA_R1.fastq.gz.clean.fq done
+Starting sample NOR_02_C_10_TTGGTA_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { NOR_02_C_10_TTGGTA_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/NOR_02_C_10_TTGGTA_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/NOR_02_C_10_TTGGTA_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/NOR_02_C_10_TTGGTA_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample NOR_02_C_10_TTGGTA_R1.fastq.gz.clean.fq done
+Starting sample NOR_02_C_5_TCGTTC_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { NOR_02_C_5_TCGTTC_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/NOR_02_C_5_TCGTTC_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/NOR_02_C_5_TCGTTC_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/NOR_02_C_5_TCGTTC_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample NOR_02_C_5_TCGTTC_R1.fastq.gz.clean.fq done
+Starting sample NOR_02_D_H_0_TCTTAA_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { NOR_02_D_H_0_TCTTAA_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/NOR_02_D_H_0_TCTTAA_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/NOR_02_D_H_0_TCTTAA_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/NOR_02_D_H_0_TCTTAA_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample NOR_02_D_H_0_TCTTAA_R1.fastq.gz.clean.fq done
+Starting sample NOR_02_D_H_10_GTGCCA_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { NOR_02_D_H_10_GTGCCA_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/NOR_02_D_H_10_GTGCCA_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/NOR_02_D_H_10_GTGCCA_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/NOR_02_D_H_10_GTGCCA_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample NOR_02_D_H_10_GTGCCA_R1.fastq.gz.clean.fq done
+Starting sample NOR_02_D_H_5_CACTAA_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { NOR_02_D_H_5_CACTAA_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/NOR_02_D_H_5_CACTAA_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/NOR_02_D_H_5_CACTAA_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/NOR_02_D_H_5_CACTAA_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample NOR_02_D_H_5_CACTAA_R1.fastq.gz.clean.fq done
+Starting sample NOR_02_H_0_GTTACC_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { NOR_02_H_0_GTTACC_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/NOR_02_H_0_GTTACC_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/NOR_02_H_0_GTTACC_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/NOR_02_H_0_GTTACC_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample NOR_02_H_0_GTTACC_R1.fastq.gz.clean.fq done
+Starting sample NOR_02_H_10_GTAGAA_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { NOR_02_H_10_GTAGAA_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/NOR_02_H_10_GTAGAA_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/NOR_02_H_10_GTAGAA_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/NOR_02_H_10_GTAGAA_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample NOR_02_H_10_GTAGAA_R1.fastq.gz.clean.fq done
+Starting sample NOR_02_H_5_GAAGTG_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { NOR_02_H_5_GAAGTG_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/NOR_02_H_5_GAAGTG_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/NOR_02_H_5_GAAGTG_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/NOR_02_H_5_GAAGTG_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample NOR_02_H_5_GAAGTG_R1.fastq.gz.clean.fq done
+Starting sample XBM_07_C_0_GATCAC_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { XBM_07_C_0_GATCAC_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/XBM_07_C_0_GATCAC_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/XBM_07_C_0_GATCAC_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/XBM_07_C_0_GATCAC_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample XBM_07_C_0_GATCAC_R1.fastq.gz.clean.fq done
+Starting sample XBM_07_C_10_GCTCGA_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { XBM_07_C_10_GCTCGA_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/XBM_07_C_10_GCTCGA_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/XBM_07_C_10_GCTCGA_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/XBM_07_C_10_GCTCGA_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample XBM_07_C_10_GCTCGA_R1.fastq.gz.clean.fq done
+Starting sample XBM_07_C_5_TGCACG_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { XBM_07_C_5_TGCACG_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/XBM_07_C_5_TGCACG_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/XBM_07_C_5_TGCACG_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/XBM_07_C_5_TGCACG_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample XBM_07_C_5_TGCACG_R1.fastq.gz.clean.fq done
+Starting sample XBM_07_D_H_0_ATATCC_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { XBM_07_D_H_0_ATATCC_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/XBM_07_D_H_0_ATATCC_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/XBM_07_D_H_0_ATATCC_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/XBM_07_D_H_0_ATATCC_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample XBM_07_D_H_0_ATATCC_R1.fastq.gz.clean.fq done
+Starting sample XBM_07_D_H_10_GTCAGG_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { XBM_07_D_H_10_GTCAGG_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/XBM_07_D_H_10_GTCAGG_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/XBM_07_D_H_10_GTCAGG_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/XBM_07_D_H_10_GTCAGG_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample XBM_07_D_H_10_GTCAGG_R1.fastq.gz.clean.fq done
+Starting sample XBM_07_D_H_5_CTAGTC_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { XBM_07_D_H_5_CTAGTC_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/XBM_07_D_H_5_CTAGTC_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/XBM_07_D_H_5_CTAGTC_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/XBM_07_D_H_5_CTAGTC_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample XBM_07_D_H_5_CTAGTC_R1.fastq.gz.clean.fq done
+Starting sample XBM_07_H_0_ACCAGT_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { XBM_07_H_0_ACCAGT_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/XBM_07_H_0_ACCAGT_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/XBM_07_H_0_ACCAGT_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/XBM_07_H_0_ACCAGT_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample XBM_07_H_0_ACCAGT_R1.fastq.gz.clean.fq done
+Starting sample XBM_07_H_10_GGAGGT_R1.fastq.gz.clean.fq
+Version Server Response: Not Found
+### salmon (selective-alignment-based) v1.10.2
+### [ program ] => salmon 
+### [ command ] => quant 
+### [ index ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/hotConifers/salmon_index }
+### [ libType ] => { A }
+### [ unmatedReads ] => { XBM_07_H_10_GGAGGT_R1.fastq.gz.clean.fq }
+### [ threads ] => { 8 }
+### [ output ] => { /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/XBM_07_H_10_GGAGGT_R1.fastq.gz.clean.fq }
+Logs will be written to /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/XBM_07_H_10_GGAGGT_R1.fastq.gz.clean.fq/logs
+logger failed with : [Failed opening file /gpfs1/cl/ecogen/pbio6800/GroupProjects/picea_rnaseq/mapped_reads/XBM_07_H_10_GGAGGT_R1.fastq.gz.clean.fq/logs/salmon_quant.log for writing: Permission denied]. Exiting.
+Sample XBM_07_H_10_GGAGGT_R1.fastq.gz.clean.fq done
+Salmon quantification completed at: Sat Nov 29 08:04:15 PM EST 2025

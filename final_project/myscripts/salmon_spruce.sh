@@ -6,7 +6,7 @@
 #SBATCH --mem=16G
 #SBATCH --time=1:00:00 
 #SBATCH --job-name=Salmon_mapping
-#SBATCH --output=/users/g/j/gjia/projects/eco_genomics_2025/transcriptomics/mylogs/%x_%j.out
+#SBATCH --output=/users/g/j/gjia/projects/eco_genomics_2025/final_project/mylogs/%x_%j.out
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=rei.jia@uvm.edu
 
