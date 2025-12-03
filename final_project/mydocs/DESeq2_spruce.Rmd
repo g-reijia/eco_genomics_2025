@@ -64,13 +64,14 @@ hist(apply(countsTableRound,1,mean),xlim=c(0,14), ylim=c(0,60000),breaks=1000000
 
 Now we are going to start working with DESeq2!
 ```{r}
+# subsetting to only include data from day 10
 day10_samps = grep("_10_",colnames(countsTableRound))
 
-#### Creating DESeq objects and defining the experimental design here with the tilda
+# creating DESeq objects and defining the experimental design here with the tilda
 
 dds <- DESeqDataSetFromMatrix(countData = countsTableRound[,day10_samps],
                               colData=metadata_spruce[which(metadata_spruce$day_harvest == 10),],
-                              design= ~ treatment) # + source_climate
+                              design= ~ source_climate + treatment)
 
 # Filter out genes with too few reads by removing all genes with counts < 15
 dds <- dds[rowSums(counts(dds) >= 15) >= 18,]
@@ -81,11 +82,12 @@ dds <- DESeq(dds)
 
 # List the results you've generated
 resultsNames(dds)
+
 # Copy the results names 
 ```
 
 ```{r}
-# The goal of transformation "is to remove the dependence of the variance on the mean, particularly the high variance of the logarithm of count data when the mean is low."
+# Transformation to remove the dependence of the variance on the mean, particularly the high variance of the logarithm of count data when the mean is low."
 
 # this gives log2(n + 1)
 ntd <- normTransform(dds)
@@ -116,8 +118,9 @@ pheatmap(sampleDistMatrix,
 Making a cluster tree to look for outlier samples:
 ```{r}
 sampleTree <- hclust(dist(sampleDists), method="average")
+
 # plot
-plot(sampleTree, main="Sample clustering to detect outliers", sub="", xlab="",cex.lab=1.5, cex.axis=1.5, cex.main=2)
+plot(sampleTree, main="Sample clustering to detect outliers", sub="", xlab="",cex.lab=0.5, cex.axis=0.5, cex.main=2)
 
 # is there a tree that we see on its own? We see two clusters but nothing particularly on its own
 ```
@@ -127,10 +130,10 @@ PCA to visualize global gene expression patterns:
 # first transform the data for plotting using variance stabilization
 vsd <- vst(dds, blind=FALSE)
 
-pcaData <- plotPCA(vsd, intgroup=c("treatment","day_harvest"), returnData=TRUE)
+pcaData <- plotPCA(vsd, intgroup=c("treatment","source_climate"), returnData=TRUE)
 percentVar <- round(100 * attr(pcaData,"percentVar"))
 
-ggplot(pcaData, aes(PC1, PC2, color=treatment, shape=as.factor(day_harvest))) +
+ggplot(pcaData, aes(PC1, PC2, color=treatment, shape=source_climate)) +
   geom_point(size=3) +
   xlab(paste0("PC1: ",percentVar[1],"% variance")) +
   ylab(paste0("PC2: ",percentVar[2],"% variance")) + 
@@ -142,7 +145,6 @@ ggplot(pcaData, aes(PC1, PC2)) +
   geom_point(size=5, stroke = 1, aes(fill = treatment, shape = treatment, alpha = day_harvest)) +
   xlab(paste0("PC1: ",percentVar[1],"% variance")) +
   ylab(paste0("PC2: ",percentVar[2],"% variance")) +
-  #scale_fill_manual(values=c('lightblue','lightgreen', 'purple'), labels = c("Harvest Day", "Treatment"))+
   theme_linedraw() +
   theme(legend.position = "none") +
   theme(panel.border = element_rect(color = "black", fill = NA, size = 3))+
@@ -150,12 +152,14 @@ ggplot(pcaData, aes(PC1, PC2)) +
   theme(legend.title = element_blank()) +
   theme_linedraw()
 ```
-*YOU STOPPED WORKING HERE.*
-There are no obvious clusters observed... so now I will make groups to test specific contrasts: 
+
+There are no obvious clusters observed... so I will make groups to test specific contrasts below:
 ```{r}
-metadata_spruce$day_harvest <- as.character(metadata_spruce$day_harvest)
+
+# start again from here!!!!!!!
+metadata_spruce$source_climate <- metadata_spruce$source_climate
 dds$treatment <- relevel(dds$treatment, ref = "Control")
-dds$day_harvest <- relevel(dds$day_harvest, ref = "0") #getting an error here, still.
+dds$source_climate <- relevel(dds$source_climate, ref = "") #getting an error here, still.
 
 dds$group <- factor(paste0(dds$treatment, dds$day_harvest))
 design(dds) <- ~ group
