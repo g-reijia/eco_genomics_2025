@@ -71,7 +71,7 @@ day10_samps = grep("_10_",colnames(countsTableRound))
 
 dds <- DESeqDataSetFromMatrix(countData = countsTableRound[,day10_samps],
                               colData=metadata_spruce[which(metadata_spruce$day_harvest == 10),],
-                              design= ~ source_climate + treatment)
+                              design= ~ source_climate + treatment + source_climate:treatment)
 
 dim(dds)
 
@@ -163,7 +163,7 @@ There appears to be some clustering...!!!! But let's try specific contrasts just
 
 metadata_spruce$day_harvest <- as.character(metadata_spruce$day_harvest)
 dds$treatment <- relevel(dds$treatment, ref = "Control")
-dds$source_climate <- relevel(dds$source_climate, ref = "HotDry")
+dds$source_climate <- relevel(dds$source_climate, ref = "CoolWet")
 
 dds$group <- factor(paste0(dds$source_climate, dds$treatment))
 design(dds) <- ~ group
@@ -171,22 +171,29 @@ dds <- DESeq(dds)
 resultsNames(dds)
 ```
 
-Comparing source_climate across the three different treatments and control:
+Comparing source_climate across the three different treatments:
 ```{r}
-coolwet_DHvCont <- results(dds, contrast=c("group","CoolWetDrought; Heat","CoolWetControl"), alpha = 0.05)
-summary(coolwet_DHvCont)
+### Fix this part
 
-coolwet_HvCont <- results(dds, contrast=c("group","CoolWetHeat","CoolWetControl"), alpha = 0.05)
-summary(coolwet_HvCont)
+#CoolWet_C_H_HD
+#HotDry_C_H_HD
 
-hotdry_Contvcoolwet_Cont <- results(dds, contrast=c("group","HotDryControl","CoolWetControl"), alpha = 0.05)
-summary(hotdry_Contvcoolwet_Cont)
+#Compare within source climate or do a pairwise comparison between CoolWet and HotDry.
 
-hotdry_DHvcoolwet_Cont <- results(dds, contrast=c("group","HotDryDrought; Heat","CoolWetControl"), alpha = 0.05)
-summary(hotdry_DHvcoolwet_Cont)
+#coolwet_DHvCont <- results(dds, contrast=c("group","CoolWetDrought; Heat","CoolWetControl"), alpha = 0.05)
+#summary(coolwet_DHvCont)
 
-hotdry_Hvcoolwet_Cont <- results(dds, contrast=c("group","HotDryDrought; Heat","CoolWetControl"), alpha = 0.05)
-summary(hotdry_Hvcoolwet_Cont)
+#coolwet_HvCont <- results(dds, contrast=c("group","CoolWetHeat","CoolWetControl"), alpha = 0.05)
+#summary(coolwet_HvCont)
+
+#hotdry_Contvcoolwet_Cont <- results(dds, contrast=c("group","HotDryControl","CoolWetControl"), alpha = 0.05)
+#summary(hotdry_Contvcoolwet_Cont)
+
+#hotdry_DHvcoolwet_Cont <- results(dds, contrast=c("group","HotDryDrought; Heat","CoolWetControl"), alpha = 0.05)
+#summary(hotdry_DHvcoolwet_Cont)
+
+#hotdry_Hvcoolwet_Cont <- results(dds, contrast=c("group","HotDryDrought; Heat","CoolWetControl"), alpha = 0.05)
+#summary(hotdry_Hvcoolwet_Cont)
 
 ```
 
