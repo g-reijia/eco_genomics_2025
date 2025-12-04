@@ -32,7 +32,7 @@ countsTableRound <- round(countsTable)
 head(countsTableRound)
 
 samples <- colnames(countsTableRound)
-removeBLANK <- !grepl("BLANK", samples) # done to remove "BLANK_ACATTA from table"
+removeBLANK <- !grepl("BLANK", samples) # remove "BLANK_ACATTA from table"
 countsTableRound <- countsTableRound[, removeBLANK]
 samples <- colnames(countsTableRound)
 
@@ -59,7 +59,7 @@ median(rowSums(countsTableRound))
 # variation across genes:
 apply(countsTableRound,2,mean) # 2 in apply, action across columns
 apply(countsTableRound,1,mean) # 1 in apply, action across rows
-hist(apply(countsTableRound,1,mean),xlim=c(0,14), ylim=c(0,60000),breaks=1000000)
+hist(apply(countsTableRound,1,mean),xlim=c(0,6), ylim=c(0,60000),breaks=1000000)
 ```
 
 Now we are going to start working with DESeq2!
@@ -72,6 +72,8 @@ day10_samps = grep("_10_",colnames(countsTableRound))
 dds <- DESeqDataSetFromMatrix(countData = countsTableRound[,day10_samps],
                               colData=metadata_spruce[which(metadata_spruce$day_harvest == 10),],
                               design= ~ source_climate + treatment)
+
+dim(dds)
 
 # Filter out genes with too few reads by removing all genes with counts < 15
 dds <- dds[rowSums(counts(dds) >= 15) >= 18,]
@@ -117,10 +119,10 @@ pheatmap(sampleDistMatrix,
 
 Making a cluster tree to look for outlier samples:
 ```{r}
-sampleTree <- hclust(dist(sampleDists), method="average")
+sampleTree <- hclust(dist(sampleDists), method = "average")
 
 # plot
-plot(sampleTree, main="Sample clustering to detect outliers", sub="", xlab="",cex.lab=0.5, cex.axis=0.5, cex.main=2)
+plot(sampleTree, main="Sample clustering to detect outliers", sub="", xlab="",cex.lab=1.5, cex.axis=1.5, cex.main=2)
 
 # is there a tree that we see on its own? We see two clusters but nothing particularly on its own
 ```
@@ -142,9 +144,10 @@ ggplot(pcaData, aes(PC1, PC2, color=treatment, shape=source_climate)) +
 
 ```{r}
 ggplot(pcaData, aes(PC1, PC2)) +
-  geom_point(size=5, stroke = 1, aes(fill = treatment, shape = treatment, alpha = day_harvest)) +
+  geom_point(size=5, stroke = 1, aes(fill = source_climate, shape = treatment, alpha = day_harvest)) +
   xlab(paste0("PC1: ",percentVar[1],"% variance")) +
   ylab(paste0("PC2: ",percentVar[2],"% variance")) +
+  scale_fill_manual(values=c('#6699CC',"#CC3333"), labels = c("Control", "Treatment"))+
   theme_linedraw() +
   theme(legend.position = "none") +
   theme(panel.border = element_rect(color = "black", fill = NA, size = 3))+
@@ -153,163 +156,204 @@ ggplot(pcaData, aes(PC1, PC2)) +
   theme_linedraw()
 ```
 
-There are no obvious clusters observed... so I will make groups to test specific contrasts below:
+There appears to be some clustering...!!!! But let's try specific contrasts just in case.
 ```{r}
 
-# start again from here!!!!!!!
-metadata_spruce$source_climate <- metadata_spruce$source_climate
+metadata_spruce$day_harvest <- as.character(metadata_spruce$day_harvest)
 dds$treatment <- relevel(dds$treatment, ref = "Control")
-dds$source_climate <- relevel(dds$source_climate, ref = "") #getting an error here, still.
+dds$source_climate <- relevel(dds$source_climate, ref = "HotDry")
 
-dds$group <- factor(paste0(dds$treatment, dds$day_harvest))
+dds$group <- factor(paste0(dds$source_climate, dds$treatment))
 design(dds) <- ~ group
 dds <- DESeq(dds)
 resultsNames(dds)
 ```
-```{r}
-resG1_CvT <- results(dds, contrast=c("group","controlG1","treatmentG1"), alpha = 0.05)
 
-summary(resG1_CvT)
+Comparing source_climate with the three different treatments:
+```{r}
+coolwet_DHvCont <- results(dds, contrast=c("group","CoolWetDrought; Heat","CoolWetControl"), alpha = 0.05)
+summary(coolwet_DHvCont)
+
+coolwet_HvCont <- results(dds, contrast=c("group","CoolWetHeat","CoolWetControl"), alpha = 0.05)
+summary(coolwet_HvCont)
+
+hotdry_Contvcoolwet_Cont <- results(dds, contrast=c("group","HotDryControl","CoolWetControl"), alpha = 0.05)
+summary(hotdry_Contvcoolwet_Cont)
+
+hotdry_DHvcoolwet_Cont <- results(dds, contrast=c("group","HotDryDrought; Heat","CoolWetControl"), alpha = 0.05)
+summary(hotdry_DHvcoolwet_Cont)
+
+hotdry_Hvcoolwet_Cont <- results(dds, contrast=c("group","HotDryDrought; Heat","CoolWetControl"), alpha = 0.05)
+summary(hotdry_Hvcoolwet_Cont)
+
 ```
 
-Then we can reorder them by significance:
-```{r}
-#Here we are looking at generation 1, control vs treatment:
-
-resG1_CvT <- resG1_CvT[order(resG1_CvT$padj),]
-head(resG1_CvT)
-```
-
-Plotting individual genes:
-```{r}
-# Counts of specific top interaction gene! (important validatition that the normalization, model is working)
-d <-plotCounts(dds, gene="TRINITY_DN139369_c0_g5_i1", intgroup = (c("line","generation")), returnData=TRUE)
-d
-
-d$generation <- factor(d$generation, levels = sort(unique(d$generation)))
-
-p <- ggplot(d, aes(x = generation, y = count, color = line, group = line)) +
-  theme_minimal() + theme(text = element_text(size=20), panel.grid.major=element_line(colour="grey"))
-p <- p + geom_point(position=position_jitter(w=0.2,h=0), size=3, aes(shape = line)) 
-p <- p + stat_summary(fun = mean, geom = "point", size=5, alpha=0.7) 
-p <- p + stat_summary(fun = mean, geom = "line", size = 1.5, aes(group = line), alpha = 0.8)
-p <- p + scale_color_manual(values = c("control" = "blue", "treatment" = "red"))
-p
-
-```
 Now we are making an MA plot:
 
 - Question: What is the relationship between LFC and magnitude of expression?
 
-- Fed results from generation 1 and treatment. Color coded by significance, where grey is not significantly expressed, blue are significantly expressed.
-
 ```{r}
-plotMA(resG1_CvT, ylim=c(-5,5))
+plotMA(coolwet_DHvCont, ylim=c(-5,5))
+plotMA(coolwet_HvCont, ylim=c(-5,5))
+plotMA(hotdry_Contvcoolwet_Cont, ylim=c(-5,5))
+plotMA(hotdry_DHvcoolwet_Cont, ylim=c(-5,5))
+plotMA(hotdry_Hvcoolwet_Cont, ylim=c(-5,5))
+
 ```
 
-We can make a volcano plot:
+Making volcano plots:
 
 - Question: What is the relationship between LFC and significance of DGE?
+
 - First make it into a dataframe and remove NAs, add column to dataframe called "significance" and include adjust parameters showing "up" and "down" regulated genes. Then using ggplot with log fold change on the X axis and adjusted p-value on Y axis. Using the new column of significance to show up and downregulated genes, then giving lines to show log fold change and p-value.
 
 ```{r}
-# Make a dataframe
-res_df <- as.data.frame(resG1_CvT)
 
-# Remove NAs
-res_df <- res_df[!is.na(res_df$padj), ]
+### coolwet_DHvCont volcano plot:
 
-# Add significance column for color mapping
-res_df$significance <- "Not Sig"
+res_df <- as.data.frame(coolwet_DHvCont) # Make a dataframe
+res_df <- res_df[!is.na(res_df$padj), ] # Remove NAs
+res_df$significance <- "Not Sig" # Add significance column for color mapping
 res_df$significance[res_df$padj < 0.05 & res_df$log2FoldChange > 0] <- "Up"
 res_df$significance[res_df$padj < 0.05 & res_df$log2FoldChange < 0] <- "Down"
 
-ggplot(res_df, aes(x = log2FoldChange, y = -log10(padj), color = significance)) +
+volcano_coolwet_DHvCont <- ggplot(res_df, aes(x = log2FoldChange, y = -log10(padj), color = significance)) +
   geom_point(alpha = 0.7, size = 2) +
   scale_color_manual(values = c("Up" = "blue", "Down" = "red", "Not Sig" = "grey")) +
   geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "black") +
   geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +
   labs(
-    title = "Volcano Plot: Generation 1 (Treatment vs Control)",
+    title = "Volcano Plot: Coolwet - Drought; Heat vs Control",
     x = expression(log[2]~Fold~Change),
     y = expression(-log[10]~Adjusted~p~value)
   ) +
   theme_bw(base_size = 16) +
   theme(legend.title = element_blank())
+
+volcano_coolwet_DHvCont
+
+
+### coolwet_HvCont volcano plot:
+
+res_df <- as.data.frame(coolwet_HvCont) # Make a dataframe
+res_df <- res_df[!is.na(res_df$padj), ] # Remove NAs
+res_df$significance <- "Not Sig" # Add significance column for color mapping
+res_df$significance[res_df$padj < 0.05 & res_df$log2FoldChange > 0] <- "Up"
+res_df$significance[res_df$padj < 0.05 & res_df$log2FoldChange < 0] <- "Down"
+
+volcano_coolwet_HvCont <- ggplot(res_df, aes(x = log2FoldChange, y = -log10(padj), color = significance)) +
+  geom_point(alpha = 0.7, size = 2) +
+  scale_color_manual(values = c("Up" = "blue", "Down" = "red", "Not Sig" = "grey")) +
+  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "black") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +
+  labs(
+    title = "Volcano Plot: Coolwet - Heat vs Control",
+    x = expression(log[2]~Fold~Change),
+    y = expression(-log[10]~Adjusted~p~value)
+  ) +
+  theme_bw(base_size = 16) +
+  theme(legend.title = element_blank())
+
+volcano_coolwet_HvCont
+
+### hotdry_Contvcoolwet_Cont volcano plot:
+
+res_df <- as.data.frame(hotdry_Contvcoolwet_Cont) # Make a dataframe
+res_df <- res_df[!is.na(res_df$padj), ] # Remove NAs
+res_df$significance <- "Not Sig" # Add significance column for color mapping
+res_df$significance[res_df$padj < 0.05 & res_df$log2FoldChange > 0] <- "Up"
+res_df$significance[res_df$padj < 0.05 & res_df$log2FoldChange < 0] <- "Down"
+
+volcano_hotdry_Contvcoolwet_Cont <- ggplot(res_df, aes(x = log2FoldChange, y = -log10(padj), color = significance)) +
+  geom_point(alpha = 0.7, size = 2) +
+  scale_color_manual(values = c("Up" = "blue", "Down" = "red", "Not Sig" = "grey")) +
+  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "black") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +
+  labs(
+    title = "Volcano Plot: HotDry - Control vs CoolWet - Control",
+    x = expression(log[2]~Fold~Change),
+    y = expression(-log[10]~Adjusted~p~value)
+  ) +
+  theme_bw(base_size = 16) +
+  theme(legend.title = element_blank())
+
+volcano_hotdry_Contvcoolwet_Cont
+
+### hotdry_DHvcoolwet_Cont
+
+res_df <- as.data.frame(hotdry_DHvcoolwet_Cont) # Make a dataframe
+res_df <- res_df[!is.na(res_df$padj), ] # Remove NAs
+res_df$significance <- "Not Sig" # Add significance column for color mapping
+res_df$significance[res_df$padj < 0.05 & res_df$log2FoldChange > 0] <- "Up"
+res_df$significance[res_df$padj < 0.05 & res_df$log2FoldChange < 0] <- "Down"
+
+volcano_hotdry_DHvcoolwet_Cont <- ggplot(res_df, aes(x = log2FoldChange, y = -log10(padj), color = significance)) +
+  geom_point(alpha = 0.7, size = 2) +
+  scale_color_manual(values = c("Up" = "blue", "Down" = "red", "Not Sig" = "grey")) +
+  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "black") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +
+  labs(
+    title = "Volcano Plot: HotDry - Drought; Heat vs CoolWet - Control",
+    x = expression(log[2]~Fold~Change),
+    y = expression(-log[10]~Adjusted~p~value)
+  ) +
+  theme_bw(base_size = 16) +
+  theme(legend.title = element_blank())
+
+volcano_hotdry_DHvcoolwet_Cont
+
+### hotdry_Hvcoolwet_Cont volcano plot:
+
+res_df <- as.data.frame(hotdry_Hvcoolwet_Cont) # Make a dataframe
+res_df <- res_df[!is.na(res_df$padj), ] # Remove NAs
+res_df$significance <- "Not Sig" # Add significance column for color mapping
+res_df$significance[res_df$padj < 0.05 & res_df$log2FoldChange > 0] <- "Up"
+res_df$significance[res_df$padj < 0.05 & res_df$log2FoldChange < 0] <- "Down"
+
+volcano_hotdry_Hvcoolwet_Cont <- ggplot(res_df, aes(x = log2FoldChange, y = -log10(padj), color = significance)) +
+  geom_point(alpha = 0.7, size = 2) +
+  scale_color_manual(values = c("Up" = "blue", "Down" = "red", "Not Sig" = "grey")) +
+  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "black") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +
+  labs(
+    title = "Volcano Plot: HotDry - Heat vs CoolWet - Control",
+    x = expression(log[2]~Fold~Change),
+    y = expression(-log[10]~Adjusted~p~value)
+  ) +
+  theme_bw(base_size = 16) +
+  theme(legend.title = element_blank())
+
+volcano_hotdry_Hvcoolwet_Cont
+
 ```
 
-Heatmap #1 - top 20 genes sorted by p-value:
+Heatmap #1 - top 10 genes sorted by p-value:
 
 - Question: For DEGs, what does gene expression variation look like across individual samples among treatment groups?
 
 - In this heatmap, we are only pulling the top 100 genes, regardless of whether they are up or downregulated.
 - Normalizing it by getting rid of top row of genes, making it into a dataframe, plotting it using a heatmap and don't want to cluster by columns.
 ```{r}
-topgenes <- head(rownames(resG1_CvT),100)
+### top 10 genes for coolwet_DHvCont, anything more than 10 looked really squished on the heat map.
+topgenes <- head(rownames(coolwet_DHvCont),10)
 mat <- assay(vsd)[topgenes,]
 mat <- mat - rowMeans(mat)
-df <- as.data.frame(colData(dds)[,c("generation","line")])
+df <- as.data.frame(colData(dds)[,c("source_climate","treatment")])
 pheatmap(mat, annotation_col=df)
 pheatmap(mat, annotation_col=df, cluster_cols = F)
 
 ```
 
-Let’s make plots to explore differentially expressed genes between CvsT across generations:
+Make a heatmap of treatment significant genes and how they change across source_climate:
+
+- Question: How does gene expression change across treatments compared to source climate?
+
+- Start by identifying significant genes, then make a dataframe with log fold change for all of the significant genes from treatment types (we'll call this log fold change matrix), then remove rows with any same values, and use a heatmap to plot the dataframe and scale it by rows and then by color. Cluster by rows and colors by equal distance.
+
+*YOU STOPPED HERE AND ARE CONFUSED*
 
 ```{r}
-# First step: Identify the DEGs in the contrast for control versus treatment for each generation:
-
-#Gen1
-resG1_CvT <- results(dds, contrast=c("group","controlG1","treatmentG1"), alpha = 0.05)
-resG1_CvT <- resG1_CvT[order(resG1_CvT$padj),] #sort
-head(resG1_CvT)
-summary(resG1_CvT)
-
-resG1_CvT <- resG1_CvT[!is.na(resG1_CvT$padj),]
-degs_G1_CvTM <- row.names(resG1_CvT[resG1_CvT$padj < 0.05,])
-```
-
-```{r}
-#Gen2
-resG2_CvT <- results(dds, contrast=c("group","controlG2","treatmentG2"), alpha = 0.05)
-resG2_CvT <- resG2_CvT[order(resG2_CvT$padj),] #sort
-head(resG2_CvT)
-summary(resG2_CvT)
-
-resG2_CvT <- resG2_CvT[!is.na(resG2_CvT$padj),]
-degs_G2_CvTM <- row.names(resG2_CvT[resG2_CvT$padj < 0.05,])
-```
-
-```{r}
-#Gen3
-resG3_CvT <- results(dds, contrast=c("group","controlG3","treatmentG3"), alpha = 0.05)
-resG3_CvT <- resG3_CvT[order(resG3_CvT$padj),] #sort
-head(resG3_CvT)
-summary(resG3_CvT)
-
-resG3_CvT <- resG3_CvT[!is.na(resG3_CvT$padj),]
-degs_G3_CvTM <- row.names(resG3_CvT[resG3_CvT$padj < 0.05,])
-```
-
-```{r}
-#Gen4
-resG4_CvT <- results(dds, contrast=c("group","controlG4","treatmentG4"), alpha = 0.05)
-resG4_CvT <- resG4_CvT[order(resG4_CvT$padj),] #sort
-head(resG4_CvT)
-summary(resG4_CvT)
-
-resG4_CvT <- resG4_CvT[!is.na(resG4_CvT$padj),]
-degs_G4_CvTM <- row.names(resG4_CvT[resG4_CvT$padj < 0.05,])
-```
-
-Make a heatmap of G1 sig genes and how they change across generations:
-
-- Question: How does gene expression change across generations for the genes that are initially differentially expressed in Generation 1 (between different developmental temperatures, 18 vs. 22 C)
-
-- Start by identifying significant genes, then make a dataframe with log fold change for all of the significant genes from G1 from all four different generations (we'll call this log fold change matrix), then remove rows with any same values, and use a heatmap to plot the dataframe and scale it by rows and then by color. Cluster by rows and colors by equal distance.
-
-```{r}
-sig_genes_G1 <- rownames(resG1_CvT[which(resG1_CvT$padj < 0.05 & !is.na(resG1_CvT$padj)), ])
+sig_genes <- rownames(resG1_CvT[which(resG1_CvT$padj < 0.05 & !is.na(resG1_CvT$padj)), ])
 
 # Combine into a data frame
 lfc_mat <- data.frame(

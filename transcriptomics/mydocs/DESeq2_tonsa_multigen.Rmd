@@ -38,7 +38,7 @@ head(countsTableRound)
 
 ```{r}
 #import the sample description table
-conds <- read.delim("metadata.txt", header=TRUE, stringsAsFactors = TRUE, row.names=1)
+conds <- read.table("metadata.txt", header=TRUE, stringsAsFactors = TRUE, row.names=1)
 head(conds)
 ```
 
