@@ -106,7 +106,7 @@ sampleDists <- dist(t(assay(vsd)))
 
 library("RColorBrewer")
 sampleDistMatrix <- as.matrix(sampleDists)
-rownames(sampleDistMatrix) <- paste(vsd$treament, vsd$day_harvest, sep="-")
+rownames(sampleDistMatrix) <- paste(vsd$source_climate, vsd$treatment, sep="-")
 colnames(sampleDistMatrix) <- NULL
 colors <- colorRampPalette( rev(brewer.pal(9, "Blues")) )(255)
 pheatmap(sampleDistMatrix,
@@ -141,7 +141,9 @@ PCAglobal <- ggplot(pcaData, aes(PC1, PC2, color=treatment, shape=source_climate
               ylab(paste0("PC2: ",percentVar[2],"% variance")) + 
               coord_fixed()
 
-ggsave("PCAglobal.png", plot = PCAglobal, width = 7, height = 5, units = "in", dpi = 300)
+PCAglobal
+
+#ggsave("PCAglobal.png", plot = PCAglobal, width = 7, height = 5, units = "in", dpi = 300)
 ```
 
 ```{r}
@@ -161,197 +163,288 @@ ggplot(pcaData, aes(PC1, PC2)) +
 There appears to be some clustering...!!!! But let's try specific contrasts just in case.
 ```{r}
 
-metadata_spruce$day_harvest <- as.character(metadata_spruce$day_harvest)
 dds$treatment <- relevel(dds$treatment, ref = "Control")
 dds$source_climate <- relevel(dds$source_climate, ref = "CoolWet")
 
 dds$group <- factor(paste0(dds$source_climate, dds$treatment))
 design(dds) <- ~ group
 dds <- DESeq(dds)
-resultsNames(dds)
+dds_new <- resultsNames(dds)
 ```
 
-Comparing source_climate across the three different treatments:
+Comparing each of the three treatments between CoolWet and HotDry source climates:
 ```{r}
-### Fix this part
+#Key for labeling treatments for code below: C = control, H = heat, HD = heat; drought
 
-#CoolWet_C_H_HD
-#HotDry_C_H_HD
+#CoolWet:
+coolwetCvsH <- results(dds, contrast=c("group","CoolWetControl","CoolWetHeat"), alpha = 0.05)
 
-#Compare within source climate or do a pairwise comparison between CoolWet and HotDry.
+coolwetCvsDH <- results(dds, contrast=c("group","CoolWetControl","CoolWetDrought; Heat"), alpha = 0.05)
 
-#coolwet_DHvCont <- results(dds, contrast=c("group","CoolWetDrought; Heat","CoolWetControl"), alpha = 0.05)
-#summary(coolwet_DHvCont)
+coolwetHvsDH <- results(dds, contrast=c("group","CoolWetHeat","CoolWetDrought; Heat"), alpha = 0.05)
 
-#coolwet_HvCont <- results(dds, contrast=c("group","CoolWetHeat","CoolWetControl"), alpha = 0.05)
-#summary(coolwet_HvCont)
+#HotDry:
+hotdryCvsH <- results(dds, contrast=c("group","HotDryControl","HotDryHeat"), alpha = 0.05)
 
-#hotdry_Contvcoolwet_Cont <- results(dds, contrast=c("group","HotDryControl","CoolWetControl"), alpha = 0.05)
-#summary(hotdry_Contvcoolwet_Cont)
+hotdryCvsDH <- results(dds, contrast=c("group","HotDryControl","HotDryDrought; Heat"), alpha = 0.05)
 
-#hotdry_DHvcoolwet_Cont <- results(dds, contrast=c("group","HotDryDrought; Heat","CoolWetControl"), alpha = 0.05)
-#summary(hotdry_DHvcoolwet_Cont)
-
-#hotdry_Hvcoolwet_Cont <- results(dds, contrast=c("group","HotDryDrought; Heat","CoolWetControl"), alpha = 0.05)
-#summary(hotdry_Hvcoolwet_Cont)
+hotdryHvsDH <- results(dds, contrast=c("group","HotDryHeat","HotDryDrought; Heat"), alpha = 0.05)
 
 ```
 
-Now we are making an MA plot:
+Now we are making an MA plots:
 
 - Question: What is the relationship between LFC and magnitude of expression?
 ```{r}
-plotMA(coolwet_DHvCont, ylim=c(-5,5))
-plotMA(coolwet_HvCont, ylim=c(-5,5))
-plotMA(hotdry_Contvcoolwet_Cont, ylim=c(-5,5))
-plotMA(hotdry_DHvcoolwet_Cont, ylim=c(-5,5))
-plotMA(hotdry_Hvcoolwet_Cont, ylim=c(-5,5))
+#CoolWet:
+plotMA(coolwetCvsH, ylim=c(-5,5))
+plotMA(coolwetCvsDH, ylim=c(-5,5))
+plotMA(coolwetHvsDH, ylim=c(-5,5))
 
+#HotDry:
+plotMA(hotdryCvsH, ylim=c(-5,5))
+plotMA(hotdryCvsDH, ylim=c(-5,5))
+plotMA(hotdryHvsDH, ylim=c(-5,5))
 ```
 
 Making volcano plots:
 
 - Question: What is the relationship between LFC and significance of DGE?
-
 - First make it into a dataframe and remove NAs, add column to dataframe called "significance" and include adjust parameters showing "up" and "down" regulated genes. Then using ggplot with log fold change on the X axis and adjusted p-value on Y axis. Using the new column of significance to show up and downregulated genes, then giving lines to show log fold change and p-value.
 
+CoolWet across treatment groups:
 ```{r}
+# CoolWet - Control vs. Heat:
+coolwetCvsH_res_df <- as.data.frame(coolwetCvsH) # Make a dataframe
+coolwetCvsH_res_df <- coolwetCvsH_res_df[!is.na(coolwetCvsH_res_df$padj), ] # Remove NAs
+coolwetCvsH_res_df$significance <- "Not Sig" # Add significance column for color mapping
+coolwetCvsH_res_df$significance[coolwetCvsH_res_df$padj < 0.05 & coolwetCvsH_res_df$log2FoldChange > 0] <- "Up"
+coolwetCvsH_res_df$significance[coolwetCvsH_res_df$padj < 0.05 & coolwetCvsH_res_df$log2FoldChange < 0] <- "Down"
 
-### coolwet_DHvCont volcano plot:
-
-res_df <- as.data.frame(coolwet_DHvCont) # Make a dataframe
-res_df <- res_df[!is.na(res_df$padj), ] # Remove NAs
-res_df$significance <- "Not Sig" # Add significance column for color mapping
-res_df$significance[res_df$padj < 0.05 & res_df$log2FoldChange > 0] <- "Up"
-res_df$significance[res_df$padj < 0.05 & res_df$log2FoldChange < 0] <- "Down"
-
-volcano_coolwet_DHvCont <- ggplot(res_df, aes(x = log2FoldChange, y = -log10(padj), color = significance)) +
+volcano_coolwetCvsH <- ggplot(coolwetCvsH_res_df, aes(x = log2FoldChange, y = -log10(padj), color = significance)) +
   geom_point(alpha = 0.7, size = 2) +
   scale_color_manual(values = c("Up" = "blue", "Down" = "red", "Not Sig" = "grey")) +
   geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "black") +
   geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +
   labs(
-    title = "Volcano Plot: Coolwet - Drought; Heat vs Control",
+    title = "Volcano Plot: Coolwet - Control vs. Heat",
     x = expression(log[2]~Fold~Change),
     y = expression(-log[10]~Adjusted~p~value)
   ) +
   theme_bw(base_size = 16) +
   theme(legend.title = element_blank())
 
-volcano_coolwet_DHvCont
+volcano_coolwetCvsH
 
+### CoolWet - Control vs. Drought; Heat:
+coolwetCvsDH_res_df <- as.data.frame(coolwetCvsDH) # Make a dataframe
+coolwetCvsDH_res_df <- coolwetCvsDH_res_df[!is.na(coolwetCvsDH_res_df$padj), ] # Remove NAs
+coolwetCvsDH_res_df$significance <- "Not Sig" # Add significance column for color mapping
+coolwetCvsDH_res_df$significance[coolwetCvsDH_res_df$padj < 0.05 & coolwetCvsDH_res_df$log2FoldChange > 0] <- "Up"
+coolwetCvsDH_res_df$significance[coolwetCvsDH_res_df$padj < 0.05 & coolwetCvsDH_res_df$log2FoldChange < 0] <- "Down"
 
-### coolwet_HvCont volcano plot:
-
-res_df <- as.data.frame(coolwet_HvCont) # Make a dataframe
-res_df <- res_df[!is.na(res_df$padj), ] # Remove NAs
-res_df$significance <- "Not Sig" # Add significance column for color mapping
-res_df$significance[res_df$padj < 0.05 & res_df$log2FoldChange > 0] <- "Up"
-res_df$significance[res_df$padj < 0.05 & res_df$log2FoldChange < 0] <- "Down"
-
-volcano_coolwet_HvCont <- ggplot(res_df, aes(x = log2FoldChange, y = -log10(padj), color = significance)) +
+volcano_coolwetCvsDH <- ggplot(coolwetCvsDH_res_df, aes(x = log2FoldChange, y = -log10(padj), color = significance)) +
   geom_point(alpha = 0.7, size = 2) +
   scale_color_manual(values = c("Up" = "blue", "Down" = "red", "Not Sig" = "grey")) +
   geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "black") +
   geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +
   labs(
-    title = "Volcano Plot: Coolwet - Heat vs Control",
+    title = "Volcano Plot: Coolwet - Control vs. Drought; Heat",
     x = expression(log[2]~Fold~Change),
     y = expression(-log[10]~Adjusted~p~value)
   ) +
   theme_bw(base_size = 16) +
   theme(legend.title = element_blank())
 
-volcano_coolwet_HvCont
+volcano_coolwetCvsDH
 
-### hotdry_Contvcoolwet_Cont volcano plot:
+# CoolWet - Heat vs. Drought; Heat:
+coolwetHvsDH_res_df <- as.data.frame(coolwetHvsDH) # Make a dataframe
+coolwetHvsDH_res_df <- coolwetHvsDH_res_df[!is.na(coolwetHvsDH_res_df$padj), ] # Remove NAs
+coolwetHvsDH_res_df$significance <- "Not Sig" # Add significance column for color mapping
+coolwetHvsDH_res_df$significance[coolwetHvsDH_res_df$padj < 0.05 & coolwetHvsDH_res_df$log2FoldChange > 0] <- "Up"
+coolwetHvsDH_res_df$significance[coolwetHvsDH_res_df$padj < 0.05 & coolwetHvsDH_res_df$log2FoldChange < 0] <- "Down"
 
-res_df <- as.data.frame(hotdry_Contvcoolwet_Cont) # Make a dataframe
-res_df <- res_df[!is.na(res_df$padj), ] # Remove NAs
-res_df$significance <- "Not Sig" # Add significance column for color mapping
-res_df$significance[res_df$padj < 0.05 & res_df$log2FoldChange > 0] <- "Up"
-res_df$significance[res_df$padj < 0.05 & res_df$log2FoldChange < 0] <- "Down"
-
-volcano_hotdry_Contvcoolwet_Cont <- ggplot(res_df, aes(x = log2FoldChange, y = -log10(padj), color = significance)) +
+volcano_coolwetHvsDH <- ggplot(coolwetHvsDH_res_df, aes(x = log2FoldChange, y = -log10(padj), color = significance)) +
   geom_point(alpha = 0.7, size = 2) +
   scale_color_manual(values = c("Up" = "blue", "Down" = "red", "Not Sig" = "grey")) +
   geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "black") +
   geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +
   labs(
-    title = "Volcano Plot: HotDry - Control vs CoolWet - Control",
+    title = "Volcano Plot: CoolWet - Heat vs. Drought; Heat",
     x = expression(log[2]~Fold~Change),
     y = expression(-log[10]~Adjusted~p~value)
   ) +
   theme_bw(base_size = 16) +
   theme(legend.title = element_blank())
 
-volcano_hotdry_Contvcoolwet_Cont
-
-### hotdry_DHvcoolwet_Cont
-
-res_df <- as.data.frame(hotdry_DHvcoolwet_Cont) # Make a dataframe
-res_df <- res_df[!is.na(res_df$padj), ] # Remove NAs
-res_df$significance <- "Not Sig" # Add significance column for color mapping
-res_df$significance[res_df$padj < 0.05 & res_df$log2FoldChange > 0] <- "Up"
-res_df$significance[res_df$padj < 0.05 & res_df$log2FoldChange < 0] <- "Down"
-
-volcano_hotdry_DHvcoolwet_Cont <- ggplot(res_df, aes(x = log2FoldChange, y = -log10(padj), color = significance)) +
-  geom_point(alpha = 0.7, size = 2) +
-  scale_color_manual(values = c("Up" = "blue", "Down" = "red", "Not Sig" = "grey")) +
-  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "black") +
-  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +
-  labs(
-    title = "Volcano Plot: HotDry - Drought; Heat vs CoolWet - Control",
-    x = expression(log[2]~Fold~Change),
-    y = expression(-log[10]~Adjusted~p~value)
-  ) +
-  theme_bw(base_size = 16) +
-  theme(legend.title = element_blank())
-
-volcano_hotdry_DHvcoolwet_Cont
-
-ggsave("volcano_hotdry_DHvcoolwet_Cont.png", plot = volcano_hotdry_DHvcoolwet_Cont, width = 7, height = 5, units = "in", dpi = 300)
-       
-### hotdry_Hvcoolwet_Cont volcano plot:
-
-res_df <- as.data.frame(hotdry_Hvcoolwet_Cont) # Make a dataframe
-res_df <- res_df[!is.na(res_df$padj), ] # Remove NAs
-res_df$significance <- "Not Sig" # Add significance column for color mapping
-res_df$significance[res_df$padj < 0.05 & res_df$log2FoldChange > 0] <- "Up"
-res_df$significance[res_df$padj < 0.05 & res_df$log2FoldChange < 0] <- "Down"
-
-volcano_hotdry_Hvcoolwet_Cont <- ggplot(res_df, aes(x = log2FoldChange, y = -log10(padj), color = significance)) +
-  geom_point(alpha = 0.7, size = 2) +
-  scale_color_manual(values = c("Up" = "blue", "Down" = "red", "Not Sig" = "grey")) +
-  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "black") +
-  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +
-  labs(
-    title = "Volcano Plot: HotDry - Heat vs CoolWet - Control",
-    x = expression(log[2]~Fold~Change),
-    y = expression(-log[10]~Adjusted~p~value)
-  ) +
-  theme_bw(base_size = 16) +
-  theme(legend.title = element_blank())
-
-volcano_hotdry_Hvcoolwet_Cont
-
+volcano_coolwetHvsDH
 ```
 
-Heatmap #1 - top 10 genes sorted by p-value:
+HotDry across treatment groups:
+```{r}
+# HotDry - Control vs. Heat:
+hotdryCvsH_res_df <- as.data.frame(hotdryCvsH) # Make a dataframe
+hotdryCvsH_res_df <- hotdryCvsH_res_df[!is.na(hotdryCvsH_res_df$padj), ] # Remove NAs
+hotdryCvsH_res_df$significance <- "Not Sig" # Add significance column for color mapping
+hotdryCvsH_res_df$significance[hotdryCvsH_res_df$padj < 0.05 & hotdryCvsH_res_df$log2FoldChange > 0] <- "Up"
+hotdryCvsH_res_df$significance[hotdryCvsH_res_df$padj < 0.05 & hotdryCvsH_res_df$log2FoldChange < 0] <- "Down"
 
+volcano_hotdryCvsH <- ggplot(hotdryCvsH_res_df, aes(x = log2FoldChange, y = -log10(padj), color = significance)) +
+  geom_point(alpha = 0.7, size = 2) +
+  scale_color_manual(values = c("Up" = "blue", "Down" = "red", "Not Sig" = "grey")) +
+  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "black") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +
+  labs(
+    title = "Volcano Plot: HotDry - Control vs. Heat",
+    x = expression(log[2]~Fold~Change),
+    y = expression(-log[10]~Adjusted~p~value)
+  ) +
+  theme_bw(base_size = 16) +
+  theme(legend.title = element_blank())
+
+volcano_hotdryCvsH
+
+# HotDry - Control vs. Drought; Heat:
+hotdryCvsDH_res_df <- as.data.frame(hotdryCvsDH) # Make a dataframe
+hotdryCvsDH_res_df <- hotdryCvsDH_res_df[!is.na(hotdryCvsDH_res_df$padj), ] # Remove NAs
+hotdryCvsDH_res_df$significance <- "Not Sig" # Add significance column for color mapping
+hotdryCvsDH_res_df$significance[hotdryCvsDH_res_df$padj < 0.05 & hotdryCvsDH_res_df$log2FoldChange > 0] <- "Up"
+hotdryCvsDH_res_df$significance[hotdryCvsDH_res_df$padj < 0.05 & hotdryCvsDH_res_df$log2FoldChange < 0] <- "Down"
+
+volcano_hotdryCvsDH <- ggplot(hotdryCvsDH_res_df, aes(x = log2FoldChange, y = -log10(padj), color = significance)) +
+  geom_point(alpha = 0.7, size = 2) +
+  scale_color_manual(values = c("Up" = "blue", "Down" = "red", "Not Sig" = "grey")) +
+  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "black") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +
+  labs(
+    title = "Volcano Plot: HotDry - Control vs. Drought; Heat",
+    x = expression(log[2]~Fold~Change),
+    y = expression(-log[10]~Adjusted~p~value)
+  ) +
+  theme_bw(base_size = 16) +
+  theme(legend.title = element_blank())
+
+volcano_hotdryCvsDH
+
+# HotDry - Heat vs. Drought; Heat:
+hotdryHvsDH_res_df <- as.data.frame(hotdryHvsDH) # Make a dataframe
+hotdryHvsDH_res_df <- hotdryHvsDH_res_df[!is.na(hotdryHvsDH_res_df$padj), ] # Remove NAs
+hotdryHvsDH_res_df$significance <- "Not Sig" # Add significance column for color mapping
+hotdryHvsDH_res_df$significance[hotdryHvsDH_res_df$padj < 0.05 & hotdryHvsDH_res_df$log2FoldChange > 0] <- "Up"
+hotdryHvsDH_res_df$significance[hotdryHvsDH_res_df$padj < 0.05 & hotdryHvsDH_res_df$log2FoldChange < 0] <- "Down"
+
+volcano_hotdryHvsDH <- ggplot(hotdryHvsDH_res_df, aes(x = log2FoldChange, y = -log10(padj), color = significance)) +
+  geom_point(alpha = 0.7, size = 2) +
+  scale_color_manual(values = c("Up" = "blue", "Down" = "red", "Not Sig" = "grey")) +
+  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "black") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +
+  labs(
+    title = "Volcano Plot: HotDry - Heat vs. Drought; Heat",
+    x = expression(log[2]~Fold~Change),
+    y = expression(-log[10]~Adjusted~p~value)
+  ) +
+  theme_bw(base_size = 16) +
+  theme(legend.title = element_blank())
+
+volcano_hotdryHvsDH
+```
+
+Heatmap #1 - top 20 genes sorted by p-value for both source climates across treatment groups:
 - Question: For DEGs, what does gene expression variation look like across individual samples among treatment groups?
 
-- In this heatmap, we are only pulling the top 100 genes, regardless of whether they are up or downregulated.
-- Normalizing it by getting rid of top row of genes, making it into a dataframe, plotting it using a heatmap and don't want to cluster by columns.
 ```{r}
-### top 10 genes for coolwet_DHvCont, anything more than 10 looked really squished on the heat map.
-topgenes <- head(rownames(coolwet_DHvCont),10)
-mat <- assay(vsd)[topgenes,]
-mat <- mat - rowMeans(mat)
-df <- as.data.frame(colData(dds)[,c("source_climate","treatment")])
-pheatmap(mat, annotation_col=df)
-pheatmap(mat, annotation_col=df, cluster_cols = F)
+# CoolWet - Control vs. Heat:
+cwCvsH_topgenes <- head(rownames(coolwetCvsH_res_df),10)
+cwCvsH_mat <- assay(vsd)[cwCvsH_topgenes,]
+cwCvsH_mat <- cwCvsH_mat - rowMeans(cwCvsH_mat)
+cwCvsH_df <- as.data.frame(colData(dds)[,c("source_climate","treatment")])
+pheatmap(cwCvsH_mat, annotation_col=cwCvsH_df)
+pheatmap(cwCvsH_mat, annotation_col=cwCvsH_df, cluster_cols = F)
 
+# CoolWet - Control vs. Drought; Heat:
+cwCvsDH_topgenes <- head(rownames(coolwetCvsDH_res_df),10)
+cwCvsDH_mat <- assay(vsd)[cwCvsDH_topgenes,]
+cwCvsDH_mat <- cwCvsDH_mat - rowMeans(cwCvsDH_mat)
+cwCvsDH_df <- as.data.frame(colData(dds)[,c("source_climate","treatment")])
+pheatmap(cwCvsDH_mat, annotation_col=cwCvsDH_df)
+pheatmap(cwCvsDH_mat, annotation_col=cwCvsDH_df, cluster_cols = F)
+
+# CoolWet - Heat vs. Drought; Heat:
+cwHvsDH_topgenes <- head(rownames(coolwetHvsDH_res_df),10)
+cwHvsDH_mat <- assay(vsd)[cwHvsDH_topgenes,]
+cwHvsDH_mat <- cwHvsDH_mat - rowMeans(cwHvsDH_mat)
+cwHvsDH_df <- as.data.frame(colData(dds)[,c("source_climate","treatment")])
+pheatmap(cwHvsDH_mat, annotation_col=cwHvsDH_df)
+pheatmap(cwHvsDH_mat, annotation_col=cwHvsDH_df, cluster_cols = F)
+
+# HotDry - Control vs. Heat:
+hdCvsH_topgenes <- head(rownames(hotdryCvsH_res_df),10)
+hdCvsH_mat <- assay(vsd)[hdCvsH_topgenes,]
+hdCvsH_mat <- hdCvsH_mat - rowMeans(hdCvsH_mat)
+hdCvsH_df <- as.data.frame(colData(dds)[,c("source_climate","treatment")])
+pheatmap(hdCvsH_mat, annotation_col=hdCvsH_df)
+pheatmap(hdCvsH_mat, annotation_col=hdCvsH_df, cluster_cols = F)
+
+# HotDry - Control vs. Drought; Heat:
+hdCvsDH_topgenes <- head(rownames(hotdryCvsDH_res_df),10)
+hdCvsDH_mat <- assay(vsd)[hdCvsDH_topgenes,]
+hdCvsDH_mat <- hdCvsDH_mat - rowMeans(hdCvsDH_mat)
+hdCvsDH_df <- as.data.frame(colData(dds)[,c("source_climate","treatment")])
+pheatmap(hdCvsDH_mat, annotation_col=hdCvsDH_df)
+pheatmap(hdCvsDH_mat, annotation_col=hdCvsDH_df, cluster_cols = F)
+
+# HotDry - Heat vs. Drought; Heat:
+hdHvsDH_topgenes <- head(rownames(hotdryHvsDH_res_df),10)
+hdHvsDH_mat <- assay(vsd)[hdHvsDH_topgenes,]
+hdHvsDH_mat <- cwHvsDH_mat - rowMeans(hdHvsDH_mat)
+hdHvsDH_df <- as.data.frame(colData(dds)[,c("source_climate","treatment")])
+pheatmap(hdHvsDH_mat, annotation_col=hdHvsDH_df)
+pheatmap(hdHvsDH_mat, annotation_col=hdHvsDH_df, cluster_cols = F)
+```
+
+Let’s make plots to explore differentially expressed genes between treatment groups across source climates:
+
+```{r}
+# First step: Identify the DEGs in the contrast for CoolWet - Control vs. Treatment group for each source climate:
+
+#Coolwet - Control vs. Heat
+res_coolwetCvsH <- results(dds, contrast=c("group","CoolWetControl","CoolWetHeat"), alpha = 0.05)
+res_coolwetCvsH <- res_coolwetCvsH[order(res_coolwetCvsH$padj),] #sort
+head(res_coolwetCvsH)
+summary(res_coolwetCvsH)
+
+res_coolwetCvsH <- res_coolwetCvsH[!is.na(res_coolwetCvsH$padj),]
+degs_coolwetCvsH <- row.names(res_coolwetCvsH[res_coolwetCvsH$padj < 0.05,])
+
+#Coolwet - Control vs. Drought; Heat
+res_coolwetCvsDH <- results(dds, contrast=c("group","CoolWetControl","CoolWetDrought; Heat"), alpha =0.05)
+res_coolwetCvsDH <- res_coolwetCvsDH[order(res_coolwetCvsDH$padj),] #sort
+head(res_coolwetCvsDH)
+summary(res_coolwetCvsDH)
+
+res_coolwetCvsDH <- res_coolwetCvsDH[!is.na(res_coolwetCvsDH$padj),]
+degs_coolwetCvsDH <- row.names(res_coolwetCvsDH[res_coolwetCvsDH$padj < 0.05,])
+
+#Coolwet - Heat vs. Drought; Heat
+res_coolwetHvsDH <- results(dds, contrast=c("group","CoolWetHeat","CoolWetDrought; Heat"), alpha = 0.05)
+res_coolwetHvsDH <- res_coolwetHvsDH[order(res_coolwetHvsDH$padj),] #sort
+head(res_coolwetHvsDH)
+summary(res_coolwetHvsDH)
+
+res_coolwetHvsDH <- res_coolwetHvsDH[!is.na(res_coolwetHvsDH$padj),]
+degs_coolwetHvsDH <- row.names(res_coolwetHvsDH[res_coolwetHvsDH$padj < 0.05,])
+```
+### YOU STOPPED HERE!! ###
+```{r}
+#Gen4
+resG4_CvT <- results(dds, contrast=c("group","controlG4","treatmentG4"), alpha = 0.05)
+resG4_CvT <- resG4_CvT[order(resG4_CvT$padj),] #sort
+head(resG4_CvT)
+summary(resG4_CvT)
+
+resG4_CvT <- resG4_CvT[!is.na(resG4_CvT$padj),]
+degs_G4_CvTM <- row.names(resG4_CvT[resG4_CvT$padj < 0.05,])
 ```
 
 Make a heatmap of treatment significant genes and how they change across source_climate:
@@ -361,31 +454,28 @@ Make a heatmap of treatment significant genes and how they change across source_
 - Start by identifying significant genes, then make a dataframe with log fold change for all of the significant genes from treatment types (we'll call this log fold change matrix), then remove rows with any same values, and use a heatmap to plot the dataframe and scale it by rows and then by color. Cluster by rows and colors by equal distance.
 
 LFG of treatment and source climate:
-- Heat map #1 for hotdry_Hvcoolwet_Cont:
 ```{r}
-sig_genes_1 <- rownames(coolwet_DHvCont[which(coolwet_DHvCont$padj < 0.05 & !is.na(coolwet_DHvCont$padj)), ])
+# CoolWet:
+cw_sig_genes <- rownames(coolwet_CvsDH[which(coolwet_CvsDH$padj < 0.05 & !is.na(coolwet_CvsDH$padj)), ])
 
 # Combine into a data frame
-lfc_mat <- data.frame(
-  coolwet_DHvCont = coolwet_DHvCont[sig_genes_1, "log2FoldChange"],
-  coolwet_HvCont = coolwet_HvCont[sig_genes_1, "log2FoldChange"],
-  hotdry_Contvcoolwet_Cont = hotdry_Contvcoolwet_Cont[sig_genes_1, "log2FoldChange"],
-  hotdry_DHvcoolwet_Cont = hotdry_DHvcoolwet_Cont[sig_genes_1, "log2FoldChange"],
-  hotdry_Hvcoolwet_Cont = hotdry_Hvcoolwet_Cont[sig_genes_1, "log2FoldChange"]
-
+lfc_mat_cw <- data.frame(
+  CvsH = coolwet_CvsH[cw_sig_genes, "log2FoldChange"],
+  CvDH = coolwet_CvsDH[cw_sig_genes, "log2FoldChange"],
+  CvDH = coolwet_HvsDH[cw_sig_genes, "log2FoldChange"]
 )
 
 # Remove any rows with missing values (some genes may not be in all result tables)
-lfc_mat <- na.omit(lfc_mat)
+lfc_mat_cw <- na.omit(lfc_mat_cw)
 
-pheatmap(lfc_mat,
+pheatmap(lfc_mat_cw,
          scale = "row",             # scales each gene’s LFCs across generations
          color = colorRampPalette(c("blue", "white", "red"))(50),
          clustering_distance_rows = "euclidean",
          clustering_distance_cols = "euclidean",
          clustering_method = "complete",
          show_rownames = FALSE,
-         main = "LFC of Sig Genes from CoolWet - Drought; Heat and CoolWet - Control")
+         main = "LFC of Sig Genes from CoolWet across treatments")
 ```
 
 - Heat map #2 for coolwet_HvCont:

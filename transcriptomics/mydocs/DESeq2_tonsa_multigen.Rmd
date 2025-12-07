@@ -184,6 +184,7 @@ design(dds) <- ~ group
 dds <- DESeq(dds)
 resultsNames(dds)
 ```
+
 ```{r}
 resG1_CvT <- results(dds, contrast=c("group","controlG1","treatmentG1"), alpha = 0.05)
 
