@@ -531,6 +531,8 @@ colnames(PmGOannot) <- c("gene", "start", "stop", "geneID", "strand", "parent", 
 PmGOannot$geneID <- gsub('ID=', '', PmGOannot$geneID)
 ```
 
+### YOU STOPPED HERE ###
+
 ** Keep on getting this: "Warning :No enrichment can pe performed - there are no feasible GO terms!"
 
 1. Functional enrichment for CoolWet - Control vs. Heat
