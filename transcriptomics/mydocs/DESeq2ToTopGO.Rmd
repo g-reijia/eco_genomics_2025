@@ -133,6 +133,7 @@ combined_plot <- ggarrange(
 # Show combined plot
 combined_plot
 ```
+
 ```{r}
 # Panel D: Wald statistic vs -log10(padj) scatter 
 p4 <- ggplot(res_df, aes(x = pvalue, y = negLog10Padj)) +
