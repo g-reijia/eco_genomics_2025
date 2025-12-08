@@ -524,17 +524,14 @@ Import libraries and data:
 library(topGO)
 library(GO.db)
 
-PmGOannot <- read.table("Pmariana_GO_annotations_sorted_join.txt", header=F, fill = T)
-colnames(PmGOannot)[c(1, 4)] <-c("gene", "geneID")
+z <- read.table("/gpfs1/cl/ecogen/pbio6800/PopulationGenomics/ref_genome/Pmariana/annotation/GO_annotations/Pmariana_GO_annotations_sorted_join.txt", header=F, fill=T)
+PmGOannot <- z %>% mutate(V7=ifelse(V7 %in% "", V2,V7))
+colnames(PmGOannot) <- c("gene", "start", "stop", "geneID", "strand", "parent", "marker")
 
 PmGOannot$geneID <- gsub('ID=', '', PmGOannot$geneID)
-PmGOannot <- PmGOannot %>% dplyr::select(gene, geneID)
 ```
 
-
-### YOU STOPPED HERE ###
-
-***When testing for enrichment, R said "No enrichment can be performed - there are no feasible GO terms!" for each CoolWet treatment? Not sure what that's about
+** Keep on getting this: "Warning :No enrichment can pe performed - there are no feasible GO terms!"
 
 1. Functional enrichment for CoolWet - Control vs. Heat
 ```{r}
@@ -573,7 +570,7 @@ cwCvsH_gene2GO <- lapply(cwCvsH_gene2GO, function(x) unlist(strsplit(x, ";")))
 
 # Create geneList for TopGO: 1 = DEG, 0 = not DEG
 cwCvsH_allgenes <- names(cwCvsH_gene2GO)
-cwCvsH_geneList <- setNames(as.integer(cwCvsH_allgenes %in% cwCvsH_stat$geneID), cwCvsH_allgenes)
+cwCvsH_geneList <- setNames(as.integer(cwCvsH_allgenes %in% cwCvsH_stat$gene), cwCvsH_allgenes)
 
 #Build TopGO pipeline 
 cwCvsH_GOdata <- new("topGOdata",
@@ -593,22 +590,28 @@ cwCvsH_result <- runTest(cwCvsH_GOdata, algorithm = "parentChild", statistic = "
 2. Functional enrichment for CoolWet - Control vs. Drought; Heat
 ```{r}
 # Convert to data frame
+# Convert to data frame
 coolwetCvsDH_df <- as.data.frame(coolwetCvsDH)
 
 # Add geneID column from rownames
 coolwetCvsDH_df$geneID <- rownames(coolwetCvsDH)
 coolwetCvsDH_df <- coolwetCvsDH_df[, c("geneID", setdiff(names(coolwetCvsDH_df), "geneID"))]
 
+# Read GO terms file
+spruce_go <- read.delim("Pmariana_GOannot.tsv", header = TRUE) %>%
+  slice(-c(1,2)) %>%  # remove header rows if present
+  na.omit()  # remove missing GO annotations
+
 coolwetCvsDH_merge <- merge(coolwetCvsDH_df, PmGOannot, by="geneID")
 
 # Identify DEGs that have GO annotations
-cwCvsDH_GO <- coolwetCvsDH_merge[coolwetCvsDH_merge$geneID %in% spruce_go$geneID, ]
+cwCvsDH_GO <- coolwetCvsDH_merge[coolwetCvsDH_merge$gene %in% spruce_go$gene, ]
 
 # Keep only significant DEGs 
 cwCvsDH_GO_sig <- subset(cwCvsDH_GO, padj < 0.05 & abs(log2FoldChange) > 1)
 
 # Merge with GO annotations
-cwCvsDH_stat <- merge(cwCvsDH_GO_sig, cwCvsDH_GO, by = "geneID")
+cwCvsDH_stat <- merge(cwCvsDH_GO_sig, cwCvsDH_GO, by = "gene")
 
 # Create gene2GO list which is used in the topgo function 
 cwCvsDH_gene2GO <- spruce_go %>%
@@ -622,11 +625,11 @@ cwCvsDH_gene2GO <- lapply(cwCvsDH_gene2GO, function(x) unlist(strsplit(x, ";")))
 
 # Create geneList for TopGO: 1 = DEG, 0 = not DEG
 cwCvsDH_allgenes <- names(cwCvsDH_gene2GO)
-cwCvsDH_geneList <- setNames(as.integer(cwCvsDH_allgenes %in% cwCvsDH_stat$geneID), cwCvsDH_allgenes)
+cwCvsDH_geneList <- setNames(as.integer(cwCvsDH_allgenes %in% cwCvsDH_stat$gene), cwCvsDH_allgenes)
 
 #Build TopGO pipeline 
 cwCvsDH_GOdata <- new("topGOdata",
-              description = "CoolWet: Control vs. Drought; Heat DEGs GO enrichment",
+              description = "CoolWet: Control vs. Heat DEGs GO enrichment",
               ontology = "BP",
               allGenes = cwCvsDH_geneList,
               geneSel = function(x) x == 1,
@@ -636,53 +639,4 @@ cwCvsDH_GOdata <- new("topGOdata",
 
 #test for enrichment 
 cwCvsDH_result <- runTest(cwCvsDH_GOdata, algorithm = "parentChild", statistic = "fisher")
-
-```
-
-3. Functional enrichment for CoolWet - Heat vs. Drought; Heat
-```{r}
-# Convert to data frame
-coolwetHvsDH_df <- as.data.frame(coolwetHvsDH)
-
-# Add geneID column from rownames
-coolwetHvsDH_df$geneID <- rownames(coolwetHvsDH)
-coolwetHvsDH_df <- coolwetCvsDH_df[, c("geneID", setdiff(names(coolwetHvsDH_df), "geneID"))]
-
-coolwetHvsDH_merge <- merge(coolwetHvsDH_df, PmGOannot, by="geneID")
-
-# Identify DEGs that have GO annotations
-cwHvsDH_GO <- coolwetHvsDH_merge[coolwetHvsDH_merge$geneID %in% spruce_go$geneID, ]
-
-# Keep only significant DEGs 
-cwHvsDH_GO_sig <- subset(cwHvsDH_GO, padj < 0.05 & abs(log2FoldChange) > 1)
-
-# Merge with GO annotations
-cwHvsDH_stat <- merge(cwHvsDH_GO_sig, cwHvsDH_GO, by = "geneID")
-
-# Create gene2GO list which is used in the topgo function 
-cwHvsDH_gene2GO <- spruce_go %>%
-  filter(!is.na(GO) & GO != "") %>%
-  group_by(geneID) %>%
-  summarise(GO = list(unique(GO)), .groups = "drop") %>%
-  with(setNames(GO, geneID))
-
-# Split semicolon-separated GO terms
-cwHvsDH_gene2GO <- lapply(cwHvsDH_gene2GO, function(x) unlist(strsplit(x, ";")))
-
-# Create geneList for TopGO: 1 = DEG, 0 = not DEG
-cwHvsDH_allgenes <- names(cwHvsDH_gene2GO)
-cwHvsDH_geneList <- setNames(as.integer(cwHvsDH_allgenes %in% cwHvsDH_stat$geneID), cwHvsDH_allgenes)
-
-#Build TopGO pipeline 
-cwHvsDH_GOdata <- new("topGOdata",
-              description = "CoolWet: Control vs. Drought; Heat DEGs GO enrichment",
-              ontology = "BP",
-              allGenes = cwHvsDH_geneList,
-              geneSel = function(x) x == 1,
-              nodeSize = 5,
-              annot = annFUN.gene2GO,
-              gene2GO = cwHvsDH_gene2GO)
-
-#test for enrichment 
-cwHvsDH_result <- runTest(cwHvsDH_GOdata, algorithm = "parentChild", statistic = "fisher")
 ```
