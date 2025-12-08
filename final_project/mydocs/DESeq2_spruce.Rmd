@@ -466,7 +466,7 @@ Make a heatmap of treatment significant genes and how they change across source_
 
 - Question: How does gene expression change across treatments compared to source climate?
 
-- Start by identifying significant genes, then make a dataframe with log fold change for all of the significant genes from treatment types (we'll call this log fold change matrix), then remove rows with any same values, and use a heatmap to plot the dataframe and scale it by rows and then by color. Cluster by rows and colors by equal distance.
+- Start by identifying significant genes, then make a dataframe with log fold change for all of the significant genes from treatment groups (we'll call this log fold change matrix), then remove rows with any same values, and use a heatmap to plot the dataframe and scale it by rows and then by color. Cluster by rows and colors by equal distance.
 
 LFG of CoolWet across treatments:
 ```{r}

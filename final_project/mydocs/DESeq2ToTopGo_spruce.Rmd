@@ -16,6 +16,7 @@ Import libraries and data:
 library(topGO)
 library(GO.db)
 library(tidyverse)
+library(ggplot2)
 
 z <- read.table("/gpfs1/cl/ecogen/pbio6800/PopulationGenomics/ref_genome/Pmariana/annotation/GO_annotations/Pmariana_GO_annotations_sorted_join.txt", header=F, fill=T)
 PmGOannot <- z %>% mutate(V7=ifelse(V7 %in% "", V2,V7))
@@ -24,15 +25,13 @@ colnames(PmGOannot) <- c("gene", "start", "stop", "geneID", "strand", "parent", 
 PmGOannot$geneID <- gsub('ID=', '', PmGOannot$geneID)
 ```
 
-** Keep on getting this: "Warning :No enrichment can pe performed - there are no feasible GO terms!" ??? **
-
 1. Functional enrichment for CoolWet - Control vs. Heat
 ```{r}
 # Convert to data frame
-coolwetCvsH_df <- as.data.frame(coolwetCvsH) # reading in results from DESeq2 into a dataframe 
+coolwetCvsH_df <- as.data.frame(res_coolwetCvsH) # reading in results from DESeq2 into a dataframe 
 
 # Add geneID column from rownames
-coolwetCvsH_df$geneID <- rownames(coolwetCvsH) # pulling out rownames from coolwetCvsH dataframe
+coolwetCvsH_df$geneID <- rownames(res_coolwetCvsH) # pulling out rownames from coolwetCvsH dataframe
 coolwetCvsH_df <- coolwetCvsH_df[, c("geneID", setdiff(names(coolwetCvsH_df), "geneID"))] # change column name to geneID
 
 # Read GO terms file
@@ -60,8 +59,8 @@ cwCvsH_gene2GO <- spruce_go %>%
   summarise(GO = list(unique(GO)), .groups = "drop") %>%
   with(setNames(GO, geneID))
 
-# Split semicolon-separated GO terms
-cwCvsH_gene2GO <- lapply(cwCvsH_gene2GO, function(x) unlist(strsplit(x, ";")))
+# Split comma-separated GO terms
+cwCvsH_gene2GO <- lapply(cwCvsH_gene2GO, function(x) unlist(strsplit(x, ",")))
 
 # Create geneList for TopGO: 1 = DEG, 0 = not DEG
 cwCvsH_allgenes <- names(cwCvsH_gene2GO)
@@ -81,19 +80,14 @@ cwCvsH_GOdata <- new("topGOdata",
 cwCvsH_result <- runTest(cwCvsH_GOdata, algorithm = "parentChild", statistic = "fisher")
 ```
 
-2. Functional enrichment for CoolWet - Control vs. Heat
+2. Functional enrichment for CoolWet - Control vs. Drought; Heat
 ```{r}
 # Convert to data frame
-coolwetCvsDH_df <- as.data.frame(coolwetCvsDH) # reading in results from DESeq2 into a dataframe 
+coolwetCvsDH_df <- as.data.frame(res_coolwetCvsDH) # reading in results from DESeq2 into a dataframe 
 
 # Add geneID column from rownames
-coolwetCvsDH_df$geneID <- rownames(coolwetCvsDH) # pulling out rownames from coolwetCvsH dataframe
+coolwetCvsDH_df$geneID <- rownames(res_coolwetCvsDH) # pulling out rownames from coolwetCvsDH dataframe
 coolwetCvsDH_df <- coolwetCvsDH_df[, c("geneID", setdiff(names(coolwetCvsDH_df), "geneID"))] # change column name to geneID
-
-# Read GO terms file
-spruce_go <- read.delim("Pmariana_GOannot.tsv", header = TRUE) %>% #reading in GO terms file
-  slice(-c(1,2)) %>%  # remove header rows if present
-  na.omit()  # remove missing GO annotations
 
 coolwetCvsDH_merge <- merge(coolwetCvsDH_df, PmGOannot, by = c("geneID", "geneID")) # merging the coolwetCvsH_df with PmGOannot together by geneID
 
@@ -115,8 +109,8 @@ cwCvsDH_gene2GO <- spruce_go %>%
   summarise(GO = list(unique(GO)), .groups = "drop") %>%
   with(setNames(GO, geneID))
 
-# Split semicolon-separated GO terms
-cwCvsDH_gene2GO <- lapply(cwCvsDH_gene2GO, function(x) unlist(strsplit(x, ";")))
+# Split comma-separated GO terms
+cwCvsDH_gene2GO <- lapply(cwCvsDH_gene2GO, function(x) unlist(strsplit(x, ",")))
 
 # Create geneList for TopGO: 1 = DEG, 0 = not DEG
 cwCvsDH_allgenes <- names(cwCvsDH_gene2GO)
@@ -124,7 +118,7 @@ cwCvsDH_geneList <- setNames(as.integer(cwCvsDH_allgenes %in% cwCvsDH_stat$gene)
 
 #Build TopGO pipeline 
 cwCvsDH_GOdata <- new("topGOdata",
-              description = "CoolWet: Control vs. Heat DEGs GO enrichment",
+              description = "CoolWet: Control vs. Drought; Heat DEGs GO enrichment",
               ontology = "BP",
               allGenes = cwCvsDH_geneList,
               geneSel = function(x) x == 1,
@@ -134,4 +128,573 @@ cwCvsDH_GOdata <- new("topGOdata",
 
 #test for enrichment 
 cwCvsDH_result <- runTest(cwCvsDH_GOdata, algorithm = "parentChild", statistic = "fisher")
+```
+
+3. Functional enrichment for CoolWet - Heat vs. Drought; Heat
+```{r}
+# Convert to data frame
+coolwetHvsDH_df <- as.data.frame(res_coolwetHvsDH) # reading in results from DESeq2 into a dataframe 
+
+# Add geneID column from rownames
+coolwetHvsDH_df$geneID <- rownames(res_coolwetHvsDH) # pulling out rownames from coolwetHvsDH dataframe
+coolwetHvsDH_df <- coolwetHvsDH_df[, c("geneID", setdiff(names(coolwetHvsDH_df), "geneID"))] # change column name to geneID
+
+coolwetHvsDH_merge <- merge(coolwetHvsDH_df, PmGOannot, by = c("geneID", "geneID")) # merging the coolwetCvsH_df with PmGOannot together by geneID
+
+# Identify DEGs that have GO annotations
+cwHvsDH_GO <- coolwetHvsDH_merge[coolwetHvsDH_merge$gene %in% spruce_go$geneID, ]
+
+# Keep only significant DEGs 
+cwHvsDH_GO_sig <- subset(cwHvsDH_GO, padj < 0.05 & abs(log2FoldChange) > 1)
+
+# Merge with GO annotations
+# cwCvsH_stat <- merge(cwCvsH_GO_sig, cwCvsH_GO)
+
+cwHvsDH_stat <- merge(cwHvsDH_GO_sig, cwHvsDH_GO) #try to run functional enrichment without subsetting significant DEGs
+
+# Create gene2GO list which is used in the topgo function 
+cwHvsDH_gene2GO <- spruce_go %>%
+  filter(!is.na(GO) & GO != "") %>%
+  group_by(geneID) %>%
+  summarise(GO = list(unique(GO)), .groups = "drop") %>%
+  with(setNames(GO, geneID))
+
+# Split comma-separated GO terms
+cwHvsDH_gene2GO <- lapply(cwHvsDH_gene2GO, function(x) unlist(strsplit(x, ",")))
+
+# Create geneList for TopGO: 1 = DEG, 0 = not DEG
+cwHvsDH_allgenes <- names(cwHvsDH_gene2GO)
+cwHvsDH_geneList <- setNames(as.integer(cwHvsDH_allgenes %in% cwHvsDH_stat$gene), cwHvsDH_allgenes)
+
+#Build TopGO pipeline 
+cwHvsDH_GOdata <- new("topGOdata",
+              description = "CoolWet: Heat vs. Drought; Heat DEGs GO enrichment",
+              ontology = "BP",
+              allGenes = cwHvsDH_geneList,
+              geneSel = function(x) x == 1,
+              nodeSize = 5,
+              annot = annFUN.gene2GO,
+              gene2GO = cwHvsDH_gene2GO)
+
+#test for enrichment 
+cwHvsDH_result <- runTest(cwHvsDH_GOdata, algorithm = "parentChild", statistic = "fisher")
+```
+
+4. Functional enrichment for HotDry - Control vs. Heat
+```{r}
+# Convert to data frame
+hotdryCvsH_df <- as.data.frame(res_hotdryCvsH) # reading in results from DESeq2 into a dataframe 
+
+# Add geneID column from rownames
+hotdryCvsH_df$geneID <- rownames(res_hotdryCvsH) # pulling out rownames from hotdryCvsH dataframe
+hotdryCvsH_df <- hotdryCvsH_df[, c("geneID", setdiff(names(hotdryCvsH_df), "geneID"))] # change column name to geneID
+
+hotdryCvsH_merge <- merge(hotdryCvsH_df, PmGOannot, by = c("geneID", "geneID")) # merging the coolwetCvsH_df with PmGOannot together by geneID
+
+# Identify DEGs that have GO annotations
+hdCvsH_GO <- hotdryCvsH_merge[hotdryCvsH_merge$gene %in% spruce_go$geneID, ]
+
+# Keep only significant DEGs 
+hdCvsH_GO_sig <- subset(hdCvsH_GO, padj < 0.05 & abs(log2FoldChange) > 1)
+
+# Merge with GO annotations
+
+hdCvsH_stat <- merge(hdCvsH_GO_sig, hdCvsH_GO) #try to run functional enrichment without subsetting significant DEGs
+
+# Create gene2GO list which is used in the topgo function 
+hdCvsH_gene2GO <- spruce_go %>%
+  filter(!is.na(GO) & GO != "") %>%
+  group_by(geneID) %>%
+  summarise(GO = list(unique(GO)), .groups = "drop") %>%
+  with(setNames(GO, geneID))
+
+# Split comma-separated GO terms
+hdCvsH_gene2GO <- lapply(hdCvsH_gene2GO, function(x) unlist(strsplit(x, ",")))
+
+# Create geneList for TopGO: 1 = DEG, 0 = not DEG
+hdCvsH_allgenes <- names(hdCvsH_gene2GO)
+hdCvsH_geneList <- setNames(as.integer(hdCvsH_allgenes %in% hdCvsH_stat$gene), hdCvsH_allgenes)
+
+#Build TopGO pipeline 
+hdCvsH_GOdata <- new("topGOdata",
+              description = "CoolWet: Control vs. Heat DEGs GO enrichment",
+              ontology = "BP",
+              allGenes = hdCvsH_geneList,
+              geneSel = function(x) x == 1,
+              nodeSize = 5,
+              annot = annFUN.gene2GO,
+              gene2GO = hdCvsH_gene2GO)
+
+#test for enrichment 
+hdCvsH_result <- runTest(hdCvsH_GOdata, algorithm = "parentChild", statistic = "fisher")
+```
+
+5. Functional enrichment for HotDry - Control vs. Drought; Heat
+```{r}
+# Convert to data frame
+hotdryCvsDH_df <- as.data.frame(res_hotdryCvsDH) # reading in results from DESeq2 into a dataframe 
+
+# Add geneID column from rownames
+hotdryCvsDH_df$geneID <- rownames(res_hotdryCvsDH) # pulling out rownames from hotdryCvsDH dataframe
+hotdryCvsDH_df <- hotdryCvsDH_df[, c("geneID", setdiff(names(hotdryCvsDH_df), "geneID"))] # change column name to geneID
+
+hotdryCvsDH_merge <- merge(hotdryCvsDH_df, PmGOannot, by = c("geneID", "geneID")) # merging the coolwetCvsH_df with PmGOannot together by geneID
+
+# Identify DEGs that have GO annotations
+hdCvsDH_GO <- hotdryCvsDH_merge[hotdryCvsDH_merge$gene %in% spruce_go$geneID, ]
+
+# Keep only significant DEGs 
+hdCvsDH_GO_sig <- subset(hdCvsDH_GO, padj < 0.05 & abs(log2FoldChange) > 1)
+
+# Merge with GO annotations
+
+hdCvsDH_stat <- merge(hdCvsDH_GO_sig, hdCvsDH_GO) #try to run functional enrichment without subsetting significant DEGs
+
+# Create gene2GO list which is used in the topgo function 
+hdCvsDH_gene2GO <- spruce_go %>%
+  filter(!is.na(GO) & GO != "") %>%
+  group_by(geneID) %>%
+  summarise(GO = list(unique(GO)), .groups = "drop") %>%
+  with(setNames(GO, geneID))
+
+# Split comma-separated GO terms
+hdCvsDH_gene2GO <- lapply(hdCvsDH_gene2GO, function(x) unlist(strsplit(x, ",")))
+
+# Create geneList for TopGO: 1 = DEG, 0 = not DEG
+hdCvsDH_allgenes <- names(hdCvsDH_gene2GO)
+hdCvsDH_geneList <- setNames(as.integer(hdCvsDH_allgenes %in% hdCvsDH_stat$gene), hdCvsDH_allgenes)
+
+#Build TopGO pipeline 
+hdCvsDH_GOdata <- new("topGOdata",
+              description = "CoolWet: Control vs. Drought; Heat DEGs GO enrichment",
+              ontology = "BP",
+              allGenes = hdCvsDH_geneList,
+              geneSel = function(x) x == 1,
+              nodeSize = 5,
+              annot = annFUN.gene2GO,
+              gene2GO = hdCvsDH_gene2GO)
+
+#test for enrichment 
+hdCvsDH_result <- runTest(hdCvsDH_GOdata, algorithm = "parentChild", statistic = "fisher")
+```
+
+6. Functional enrichment for HotDry - Heat vs. Drought; Heat
+```{r}
+# Convert to data frame
+hotdryHvsDH_df <- as.data.frame(res_hotdryHvsDH) # reading in results from DESeq2 into a dataframe 
+
+# Add geneID column from rownames
+hotdryHvsDH_df$geneID <- rownames(res_hotdryHvsDH) # pulling out rownames from hotdryHvsDH dataframe
+hotdryHvsDH_df <- hotdryHvsDH_df[, c("geneID", setdiff(names(hotdryHvsDH_df), "geneID"))] # change column name to geneID
+
+hotdryHvsDH_merge <- merge(hotdryHvsDH_df, PmGOannot, by = c("geneID", "geneID"))
+
+# Identify DEGs that have GO annotations
+hdHvsDH_GO <- hotdryHvsDH_merge[hotdryHvsDH_merge$gene %in% spruce_go$geneID, ]
+
+# Keep only significant DEGs 
+hdHvsDH_GO_sig <- subset(hdHvsDH_GO, padj < 0.05 & abs(log2FoldChange) > 1)
+
+# Merge with GO annotations
+
+hdHvsDH_stat <- merge(hdHvsDH_GO_sig, hdHvsDH_GO) #try to run functional enrichment without subsetting significant DEGs
+
+# Create gene2GO list which is used in the topgo function 
+hdHvsDH_gene2GO <- spruce_go %>%
+  filter(!is.na(GO) & GO != "") %>%
+  group_by(geneID) %>%
+  summarise(GO = list(unique(GO)), .groups = "drop") %>%
+  with(setNames(GO, geneID))
+
+# Split comma-separated GO terms
+hdHvsDH_gene2GO <- lapply(hdHvsDH_gene2GO, function(x) unlist(strsplit(x, ",")))
+
+# Create geneList for TopGO: 1 = DEG, 0 = not DEG
+hdHvsDH_allgenes <- names(hdHvsDH_gene2GO)
+hdHvsDH_geneList <- setNames(as.integer(hdHvsDH_allgenes %in% hdHvsDH_stat$gene), hdHvsDH_allgenes)
+
+#Build TopGO pipeline 
+hdHvsDH_GOdata <- new("topGOdata",
+              description = "CoolWet: Heat vs. Drought; Heat DEGs GO enrichment",
+              ontology = "BP",
+              allGenes = hdHvsDH_geneList,
+              geneSel = function(x) x == 1,
+              nodeSize = 5,
+              annot = annFUN.gene2GO,
+              gene2GO = hdHvsDH_gene2GO)
+
+#test for enrichment 
+hdHvsDH_result <- runTest(hdHvsDH_GOdata, algorithm = "parentChild", statistic = "fisher")
+```
+
+Plotting DEGs of each CoolWet (source climate) comparing treatment groups:
+```{r}
+### CoolWet - Control vs. Heat ###
+
+# Convert results to table
+cwCvsH_res_table <- GenTable(cwCvsH_GOdata, classicFisher = cwCvsH_result,
+                      topNodes = length(usedGO(cwCvsH_GOdata))) %>%
+  mutate(classicFisher = as.numeric(classicFisher),
+         Annotated = as.numeric(Annotated),
+         Significant = as.numeric(Significant))
+
+#Plot the filtered results, showing >5 and < 500 gene members.
+
+# Keep GO terms with enough but not too many genes
+filteredGOres_cwCvsH <- cwCvsH_res_table %>%
+  filter(Annotated >= 5 & Annotated < 500) %>%  # adjust as needed
+  group_by(Term) %>%
+  slice_min(classicFisher, n = 1) %>%  # keep only the most significant per Term
+  ungroup() %>%
+  arrange(classicFisher)
+
+cwCvsH_TopGOplot <- function(df, title) {
+  df %>%
+    slice_head(n = 30) %>%
+    ggplot(aes(x = -log10(classicFisher),
+               y = reorder(Term, -log10(classicFisher)),
+               size = Significant,
+               color = -log10(classicFisher))) +
+    geom_point(alpha = 0.8) +
+    scale_color_gradientn(
+      colors = c("pink", "orchid", "purple", "purple4"),
+      name = "-log10(p-value)"
+    ) +
+    scale_size_continuous(name = "# Significant Genes") +
+    xlab("-log10-classicFisher") +
+    ylab("Biological Function") +
+    ggtitle(title) +
+    theme_minimal() +
+    theme(plot.margin = margin(10, 100, 10, 10),
+          axis.text.y = element_text(size = 10, hjust = 1)) +
+    coord_cartesian(clip = "off")
+}
+
+# Generate cwCvsH plot
+cwCvsH_TopGOplot <- cwCvsH_TopGOplot(filteredGOres_cwCvsH, "GO Enrichment for DEGS - CW: C vs. H ")
+cwCvsH_TopGOplot
+
+### CoolWet - Control vs. Drought; Heat ###
+
+# Convert results to table
+cwCvsDH_res_table <- GenTable(cwCvsDH_GOdata, classicFisher = cwCvsDH_result,
+                      topNodes = length(usedGO(cwCvsDH_GOdata))) %>%
+  mutate(classicFisher = as.numeric(classicFisher),
+         Annotated = as.numeric(Annotated),
+         Significant = as.numeric(Significant))
+
+#Plot the filtered results, showing >5 and < 500 gene members.
+
+# Keep GO terms with enough but not too many genes
+filteredGOres_cwCvsDH <- cwCvsDH_res_table %>%
+  filter(Annotated >= 5 & Annotated < 500) %>%  # adjust as needed
+  group_by(Term) %>%
+  slice_min(classicFisher, n = 1) %>%  # keep only the most significant per Term
+  ungroup() %>%
+  arrange(classicFisher)
+
+cwCvsDH_TopGOplot <- function(df, title) {
+  df %>%
+    slice_head(n = 30) %>%
+    ggplot(aes(x = -log10(classicFisher),
+               y = reorder(Term, -log10(classicFisher)),
+               size = Significant,
+               color = -log10(classicFisher))) +
+    geom_point(alpha = 0.8) +
+    scale_color_gradientn(
+      colors = c("lightblue", "cornflowerblue", "blue1", "midnightblue"),
+      name = "-log10(p-value)"
+    ) +
+    scale_size_continuous(name = "# Significant Genes") +
+    xlab("-log10-classicFisher") +
+    ylab("Biological Function") +
+    ggtitle(title) +
+    theme_minimal() +
+    theme(plot.margin = margin(10, 100, 10, 10),
+          axis.text.y = element_text(size = 10, hjust = 1)) +
+    coord_cartesian(clip = "off")
+}
+
+# Generate cwCvsDH plot
+cwCvsDH_TopGOplot <- cwCvsDH_TopGOplot(filteredGOres_cwCvsDH, "GO Enrichment for DEGS - CW: C vs. D; H ")
+cwCvsDH_TopGOplot
+
+### CoolWet - Heat vs. Drought; Heat ###
+
+# Convert results to table
+cwHvsDH_res_table <- GenTable(cwHvsDH_GOdata, classicFisher = cwHvsDH_result,
+                      topNodes = length(usedGO(cwHvsDH_GOdata))) %>%
+  mutate(classicFisher = as.numeric(classicFisher),
+         Annotated = as.numeric(Annotated),
+         Significant = as.numeric(Significant))
+
+#Plot the filtered results, showing >5 and < 500 gene members.
+
+# Keep GO terms with enough but not too many genes
+filteredGOres_cwHvsDH <- cwHvsDH_res_table %>%
+  filter(Annotated >= 5 & Annotated < 500) %>%  # adjust as needed
+  group_by(Term) %>%
+  slice_min(classicFisher, n = 1) %>%  # keep only the most significant per Term
+  ungroup() %>%
+  arrange(classicFisher)
+
+cwHvsDH_TopGOplot <- function(df, title) {
+  df %>%
+    slice_head(n = 30) %>%
+    ggplot(aes(x = -log10(classicFisher),
+               y = reorder(Term, -log10(classicFisher)),
+               size = Significant,
+               color = -log10(classicFisher))) +
+    geom_point(alpha = 0.8) +
+    scale_color_gradientn(
+      colors = c("lightgreen", "darkseagreen3", "yellowgreen", "springgreen4", "darkgreen"),
+      name = "-log10(p-value)"
+    ) +
+    scale_size_continuous(name = "# Significant Genes") +
+    xlab("-log10-classicFisher") +
+    ylab("Biological Function") +
+    ggtitle(title) +
+    theme_minimal() +
+    theme(plot.margin = margin(10, 100, 10, 10),
+          axis.text.y = element_text(size = 10, hjust = 1)) +
+    coord_cartesian(clip = "off")
+}
+
+# Generate cwHvsDH plot
+cwHvsDH_TopGOplot <- cwHvsDH_TopGOplot(filteredGOres_cwHvsDH, "GO Enrichment for DEGS - CW: H vs. D; H ")
+cwHvsDH_TopGOplot
+```
+
+Plotting DEGs of each HotDry (source climate) comparing treatment groups:
+```{r}
+### HotDry - Control vs. Heat ###
+
+# Convert results to table
+hdCvsH_res_table <- GenTable(hdCvsH_GOdata, classicFisher = hdCvsH_result,
+                      topNodes = length(usedGO(hdCvsH_GOdata))) %>%
+  mutate(classicFisher = as.numeric(classicFisher),
+         Annotated = as.numeric(Annotated),
+         Significant = as.numeric(Significant))
+
+#Plot the filtered results, showing >5 and < 500 gene members.
+
+# Keep GO terms with enough but not too many genes
+filteredGOres_hdCvsH <- hdCvsH_res_table %>%
+  filter(Annotated >= 5 & Annotated < 500) %>%  # adjust as needed
+  group_by(Term) %>%
+  slice_min(classicFisher, n = 1) %>%  # keep only the most significant per Term
+  ungroup() %>%
+  arrange(classicFisher)
+
+hdCvsH_TopGOplot <- function(df, title) {
+  df %>%
+    slice_head(n = 30) %>%
+    ggplot(aes(x = -log10(classicFisher),
+               y = reorder(Term, -log10(classicFisher)),
+               size = Significant,
+               color = -log10(classicFisher))) +
+    geom_point(alpha = 0.8) +
+    scale_color_gradientn(
+      colors = c("pink", "orchid", "purple", "purple4"),
+      name = "-log10(p-value)"
+    ) +
+    scale_size_continuous(name = "# Significant Genes") +
+    xlab("-log10-classicFisher") +
+    ylab("Biological Function") +
+    ggtitle(title) +
+    theme_minimal() +
+    theme(plot.margin = margin(10, 100, 10, 10),
+          axis.text.y = element_text(size = 10, hjust = 1)) +
+    coord_cartesian(clip = "off")
+}
+
+# Generate hdCvsH plot
+hdCvsH_TopGOplot <- hdCvsH_TopGOplot(filteredGOres_hdCvsH, "GO Enrichment for DEGS - HD: C vs. H ")
+hdCvsH_TopGOplot
+
+### HotDry - Control vs. Drought; Heat ###
+
+# Convert results to table
+hdCvsDH_res_table <- GenTable(hdCvsDH_GOdata, classicFisher = hdCvsDH_result,
+                      topNodes = length(usedGO(hdCvsDH_GOdata))) %>%
+  mutate(classicFisher = as.numeric(classicFisher),
+         Annotated = as.numeric(Annotated),
+         Significant = as.numeric(Significant))
+
+#Plot the filtered results, showing >5 and < 500 gene members.
+
+# Keep GO terms with enough but not too many genes
+filteredGOres_hdCvsDH <- hdCvsDH_res_table %>%
+  filter(Annotated >= 5 & Annotated < 500) %>%  # adjust as needed
+  group_by(Term) %>%
+  slice_min(classicFisher, n = 1) %>%  # keep only the most significant per Term
+  ungroup() %>%
+  arrange(classicFisher)
+
+hdCvsDH_TopGOplot <- function(df, title) {
+  df %>%
+    slice_head(n = 30) %>%
+    ggplot(aes(x = -log10(classicFisher),
+               y = reorder(Term, -log10(classicFisher)),
+               size = Significant,
+               color = -log10(classicFisher))) +
+    geom_point(alpha = 0.8) +
+    scale_color_gradientn(
+      colors = c("lightblue", "cornflowerblue", "blue1", "midnightblue"),
+      name = "-log10(p-value)"
+    ) +
+    scale_size_continuous(name = "# Significant Genes") +
+    xlab("-log10-classicFisher") +
+    ylab("Biological Function") +
+    ggtitle(title) +
+    theme_minimal() +
+    theme(plot.margin = margin(10, 100, 10, 10),
+          axis.text.y = element_text(size = 10, hjust = 1)) +
+    coord_cartesian(clip = "off")
+}
+
+# Generate hdCvsDH plot
+hdCvsDH_TopGOplot <- hdCvsDH_TopGOplot(filteredGOres_hdCvsDH, "GO Enrichment for DEGS - HD: C vs. D; H ")
+hdCvsDH_TopGOplot
+
+### HotDry - Heat vs. Drought; Heat ###
+
+# Convert results to table
+hdHvsDH_res_table <- GenTable(hdHvsDH_GOdata, classicFisher = hdHvsDH_result,
+                      topNodes = length(usedGO(hdHvsDH_GOdata))) %>%
+  mutate(classicFisher = as.numeric(classicFisher),
+         Annotated = as.numeric(Annotated),
+         Significant = as.numeric(Significant))
+
+#Plot the filtered results, showing >5 and < 500 gene members.
+
+# Keep GO terms with enough but not too many genes
+filteredGOres_hdHvsDH <- hdHvsDH_res_table %>%
+  filter(Annotated >= 5 & Annotated < 500) %>%  # adjust as needed
+  group_by(Term) %>%
+  slice_min(classicFisher, n = 1) %>%  # keep only the most significant per Term
+  ungroup() %>%
+  arrange(classicFisher)
+
+hdHvsDH_TopGOplot <- function(df, title) {
+  df %>%
+    slice_head(n = 30) %>%
+    ggplot(aes(x = -log10(classicFisher),
+               y = reorder(Term, -log10(classicFisher)),
+               size = Significant,
+               color = -log10(classicFisher))) +
+    geom_point(alpha = 0.8) +
+    scale_color_gradientn(
+      colors = c("lightgreen", "darkseagreen3", "yellowgreen", "springgreen4", "darkgreen"),
+      name = "-log10(p-value)"
+    ) +
+    scale_size_continuous(name = "# Significant Genes") +
+    xlab("-log10-classicFisher") +
+    ylab("Biological Function") +
+    ggtitle(title) +
+    theme_minimal() +
+    theme(plot.margin = margin(10, 100, 10, 10),
+          axis.text.y = element_text(size = 10, hjust = 1)) +
+    coord_cartesian(clip = "off")
+}
+
+# Generate hdHvsDH plot
+hdHvsDH_TopGOplot <- hdHvsDH_TopGOplot(filteredGOres_hdHvsDH, "GO Enrichment for DEGS - HD: H vs. D; H ")
+hdHvsDH_TopGOplot
+```
+*** YOU STOPPED HERE ***
+
+Saving  generated plots:
+```{r}
+# Visually comparing DEGs by source climate across each treatment:
+
+#CvsH_TopGOplots <-list(cwCvsH_TopGOplot + hdCvsH_TopGOplot)
+
+#CvsDH_TopGOplots <- list(cwCvsDH_TopGOplot + hdCvsDH_TopGOplot)
+
+#HvsDH_TopGOplots <- list(cdHvsDH_TopGOplot + hdHvsDH_TopGOplot)
+```
+
+Generating ID lists for CoolWet (source climate) by treatment group to be input into REViGO:
+```{r}
+### CoolWet - Control vs. Heat, ID list for REViGO ###
+
+# Select only the columns REVIGO needs
+revigo_input_cwCvsH <- filteredGOres_cwCvsH[, c("GO.ID", "classicFisher")]
+
+sigRes_cwCvsH <- revigo_input_cwCvsH[as.numeric(revigo_input_cwCvsH$classicFisher) < 0.05, ]
+
+# Rename columns for clarity
+colnames(sigRes_cwCvsH) <- c("GO.ID", "pValue")
+
+# Save as txt to upload to REVIGO
+write.table(sigRes_cwCvsH, file = "cwCvsHtopGOsig_for_REVIGO.txt", sep = "\t", row.names = FALSE, quote = FALSE)
+
+### CoolWet - Control vs. Drought; Heat, ID list for REViGO ###
+
+# Select only the columns REVIGO needs
+revigo_input_cwCvsDH <- filteredGOres_cwCvsDH[, c("GO.ID", "classicFisher")]
+
+sigRes_cwCvsDH <- revigo_input_cwCvsDH[as.numeric(revigo_input_cwCvsDH$classicFisher) < 0.05, ]
+
+# Rename columns for clarity
+colnames(sigRes_cwCvsDH) <- c("GO.ID", "pValue")
+
+# Save as txt to upload to REVIGO
+write.table(sigRes_cwCvsDH, file = "cwCvsDHtopGOsig_for_REVIGO.txt", sep = "\t", row.names = FALSE, quote = FALSE)
+
+### CoolWet - Heat vs. Drought; Heat, ID list for REViGO ###
+
+# Select only the columns REVIGO needs
+revigo_input_cwHvsDH <- filteredGOres_cwHvsDH[, c("GO.ID", "classicFisher")]
+
+sigRes_cwHvsDH <- revigo_input_cwHvsDH[as.numeric(revigo_input_cwHvsDH$classicFisher) < 0.05, ]
+
+# Rename columns for clarity
+colnames(sigRes_cwHvsDH) <- c("GO.ID", "pValue")
+
+# Save as txt to upload to REVIGO
+write.table(sigRes_cwHvsDH, file = "cwHvsDHtopGOsig_for_REVIGO.txt", sep = "\t", row.names = FALSE, quote = FALSE)
+```
+
+Generating ID lists for HotDry (source climate) by treatment group to be input into REViGO:
+```{r}
+### HotDry - Control vs. Heat, ID list for REViGO ###
+
+# Select only the columns REVIGO needs
+revigo_input_hdCvsH <- filteredGOres_hdCvsH[, c("GO.ID", "classicFisher")]
+
+sigRes_hdCvsH <- revigo_input_hdCvsH[as.numeric(revigo_input_hdCvsH$classicFisher) < 0.05, ]
+
+# Rename columns for clarity
+colnames(sigRes_hdCvsH) <- c("GO.ID", "pValue")
+
+# Save as txt to upload to REVIGO
+write.table(sigRes_hdCvsH, file = "hdCvsHtopGOsig_for_REVIGO.txt", sep = "\t", row.names = FALSE, quote = FALSE)
+
+### HotDry - Control vs. Drought; Heat, ID list for REViGO ###
+
+# Select only the columns REVIGO needs
+revigo_input_hdCvsDH <- filteredGOres_hdCvsDH[, c("GO.ID", "classicFisher")]
+
+sigRes_hdCvsDH <- revigo_input_hdCvsDH[as.numeric(revigo_input_hdCvsDH$classicFisher) < 0.05, ]
+
+# Rename columns for clarity
+colnames(sigRes_hdCvsDH) <- c("GO.ID", "pValue")
+
+# Save as txt to upload to REVIGO
+write.table(sigRes_hdCvsDH, file = "hdCvsDHtopGOsig_for_REVIGO.txt", sep = "\t", row.names = FALSE, quote = FALSE)
+
+### HotDry - Heat vs. Drought; Heat, ID list for REViGO ###
+
+# Select only the columns REVIGO needs
+revigo_input_hdHvsDH <- filteredGOres_hdHvsDH[, c("GO.ID", "classicFisher")]
+
+sigRes_hdHvsDH <- revigo_input_hdHvsDH[as.numeric(revigo_input_hdHvsDH$classicFisher) < 0.05, ]
+
+# Rename columns for clarity
+colnames(sigRes_hdHvsDH) <- c("GO.ID", "pValue")
+
+# Save as txt to upload to REVIGO
+write.table(sigRes_hdHvsDH, file = "hdHvsDHtopGOsig_for_REVIGO.txt", sep = "\t", row.names = FALSE, quote = FALSE)
 ```
