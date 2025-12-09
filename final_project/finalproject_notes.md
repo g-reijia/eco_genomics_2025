@@ -81,3 +81,35 @@ For some reason neither of my `bbduk_spruce_run1.sh` or `bbduk_spruce_run2.sh` s
 -   Combined reads worked, yay!
 
 -   Tried to index the reference transcriptome but for some reason I am not getting it right. Will need to ask Melissa or Steve what's up with that
+
+#### November 20, 2025
+
+-   Figured out the indexing issues and wrote a bash script to index, map and quantify read, and prepare a counts matrix file to be imported into DESeq2.
+
+-   Each of the scripts can be found in `myscripts/` folder, titled `index_spruce.sh` and `salmon_spruce.sh`.
+
+#### December 2, 2025
+
+-   Began writing DESeq2 monster Rmd script used to visualize reads and variation in the sequences. Visualized global variation in gene expression using PCA, which showed some general clustering of genes from the same source climate.
+
+-   From initial analyses using data from each harvest days (and talking to Steve and Max about it), there were minimal up- and down-regulated genes in days 0 and 5. Decided to subset to only include data from harvest day 10.
+
+-   I could not for the life of me figure out how to read.delim the Pmariana GO annotations file for functional enrichment, so I generated volcano plots to show up- and down-regulated genes using the contrast groups generated from DESeq2 analysis.
+
+#### December 4-8, 2025
+
+-   After looking at the volcano plots for forever and doing our final presentations in class, I received some very helpful feedback from Melissa about manually changing the contrasts instead of utilizing the groups that were generated from DESeq2.
+
+    -   I could either do a comparison of both source climate across each treatment group or do a pairwise comparison of CoolWet vs. HotDry. I decided to do the former.
+
+-   Maddie also helped me properly read in the Pmariana GO annotations file!
+
+-   When I initially ran my functional enrichment, there were so many issues!! When I compared each contrast to one another, I kept on getting a warning message that said "No enrichment can pe performed - there are no feasible GO terms!" for 4 out of the 6 contrasts I was comparing which was strange. I ended up getting help from Maddie, Melissa, and Steve who helped me with the following:
+
+    -   Maddie - helped me properly read in the dataframes I will need for functional enrichment.
+
+    -   Melissa - read over my `DESeq2ToTopGo_spruce.Rmd` file to look at any mistakes in the code. Helped me figure out issues with merging the dataframes.
+
+    -   Steve - read over read over my `DESeq2ToTopGo_spruce.Rmd` file to look at any mistakes in the code and helped me realize that instead of reading in a semi-colon separated file, I was reading in a comma-separated file.
+
+-   The helped I received fixed everything and I got functional enrichment to work! Thanks Maddie, Melissa, and Steve. I was then able to generate .txt files with geneID and GO terms to input into REViGO.
