@@ -17,7 +17,9 @@ library(topGO)
 library(GO.db)
 library(tidyverse)
 library(ggplot2)
-library(patchwork)
+library(scales)
+library(gridExtra)
+library(gridGraphics)
 
 z <- read.table("/gpfs1/cl/ecogen/pbio6800/PopulationGenomics/ref_genome/Pmariana/annotation/GO_annotations/Pmariana_GO_annotations_sorted_join.txt", header=F, fill=T)
 PmGOannot <- z %>% mutate(V7=ifelse(V7 %in% "", V2,V7))
@@ -607,15 +609,15 @@ Saving  generated plots:
 ```{r}
 # Visually comparing DEGs by source climate across each treatment:
 
-CvsH_TopGOplots <-list(cwCvsH_TopGOplot + hdCvsH_TopGOplot)
+CvsH_TopGOplots <-(cwCvsH_TopGOplot + hdCvsH_TopGOplot)
 
 CvsDH_TopGOplots <- list(cwCvsDH_TopGOplot + hdCvsDH_TopGOplot)
 
 HvsDH_TopGOplots <- list(cwHvsDH_TopGOplot + hdHvsDH_TopGOplot)
 
-ggsave("CvsH_TopGOplots.png", plot = CvsH_TopGOplots, width=15, height=6, units = "in", dpi = 300)
-ggsave("CvsDH_TopGOplots.png", plot = CvsDH_TopGOplots, width=15, height=6, units = "in", dpi = 300)
-ggsave("HvsDH_TopGOplots.png", plot = HvsDH_TopGOplots, width=15, height=6, units = "in", dpi = 300)
+combined_DEGsGOplot <-(cwCvsH_TopGOplot + hdCvsH_TopGOplot)/(cwCvsDH_TopGOplot + hdCvsDH_TopGOplot)/ (cwHvsDH_TopGOplot + hdHvsDH_TopGOplot)
+
+ggsave("combined_DEGsGOplot.png", plot = combined_DEGsGOplot, width=15, height=17, units = "in", dpi = 300)
 ```
 
 Generating ID lists for CoolWet (source climate) by treatment group to be input into REViGO:
