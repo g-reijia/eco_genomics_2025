@@ -615,9 +615,9 @@ CvsDH_TopGOplots <- list(cwCvsDH_TopGOplot + hdCvsDH_TopGOplot)
 
 HvsDH_TopGOplots <- list(cwHvsDH_TopGOplot + hdHvsDH_TopGOplot)
 
-combined_DEGsGOplot <-(cwCvsH_TopGOplot + hdCvsH_TopGOplot)/(cwCvsDH_TopGOplot + hdCvsDH_TopGOplot)/ (cwHvsDH_TopGOplot + hdHvsDH_TopGOplot)
+combined_DEGsGOplot <-(cwCvsH_TopGOplot + hdCvsH_TopGOplot)/(cwCvsDH_TopGOplot + hdCvsDH_TopGOplot)/ (cwHvsDH_TopGOplot + hdHvsDH_TopGOplot) + plot_annotation(tag_levels = "A", tag_prefix = "", tag_suffix = ")")
 
-ggsave("combined_DEGsGOplot.png", plot = combined_DEGsGOplot, width=15, height=17, units = "in", dpi = 300)
+ggsave("combined_DEGsGOplot.png", plot = combined_DEGsGOplot, width=18, height=20, units = "in", dpi = 300)
 ```
 
 Generating ID lists for CoolWet (source climate) by treatment group to be input into REViGO:
